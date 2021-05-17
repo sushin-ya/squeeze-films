@@ -5,11 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import 'reset-css';
 import '@fontsource/roboto';
 import '@fontsource/noto-sans-jp';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './app/config/theme';
 
 const rootEl = document.getElementById('root');
 
 function render() {
-  ReactDOM.render(<App />, rootEl);
+  ReactDOM.render(
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>,
+    rootEl
+  );
 }
 
 if (module.hot) {
