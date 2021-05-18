@@ -18,8 +18,8 @@ import {
   Settings,
   PowerSettingsNew,
 } from '@material-ui/icons';
-import squeezeFilmsIcon from '../../../app/images/squeezeFilmsIcon.svg';
-import Frank from '../../../app/images/users/1_frank.jpg';
+import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
+import Frank from '../../app/images/users/1_frank.jpg';
 
 const useStyles = makeStyles((theme) => ({
   icon: {

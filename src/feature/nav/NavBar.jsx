@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import MyMenuList from './myMenuList/MyMenuList';
+import MyMenuList from './MyMenuList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
