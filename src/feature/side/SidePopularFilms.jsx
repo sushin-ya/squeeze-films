@@ -7,9 +7,9 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
+import SidePopularFilmsList from './SidePopularFilmsList';
 import { ThumbUp } from '@material-ui/icons';
 import { popularFilms } from '../../app/api/sampleData';
-import SidePopularFilmsList from './SidePopularFilmsList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
