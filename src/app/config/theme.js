@@ -3,6 +3,11 @@ import orange from '@material-ui/core/colors/orange';
 import cyan from '@material-ui/core/colors/cyan';
 
 const theme = createMuiTheme({
+  breakpoints: {
+    values: {
+      lg: 1200,
+    },
+  },
   palette: {
     primary: {
       main: orange[500],
@@ -12,6 +17,7 @@ const theme = createMuiTheme({
     },
     text: {
       primary: 'rgba(0, 0, 0, 0.6)',
+      secondary: '#33291A',
     },
   },
   typography: {
@@ -47,6 +53,13 @@ const theme = createMuiTheme({
     button: {
       fontSize: '14px',
       fontWeight: 500,
+    },
+  },
+  overrides: {
+    MuiButton: {
+      root: {
+        padding: 0,
+      },
     },
   },
 });

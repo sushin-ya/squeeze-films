@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Icon, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
