@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SidePopularFilms() {
   const classes = useStyles();
-  const films = popularFilms;
+  const films = popularFilms.slice(0, 5);
 
   return (
     <Paper>
