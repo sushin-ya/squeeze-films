@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   AppBar,
-  Avatar,
   Container,
   Divider,
   Grid,
@@ -11,7 +10,6 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import Frank from '../../app/images/users/1_frank.jpg';
 import MyMenuList from './myMenuList/MyMenuList';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,9 +31,6 @@ const useStyles = makeStyles((theme) => ({
   },
   users: {
     flexGrow: 1,
-  },
-  avatar: {
-    marginRight: '8px',
   },
 }));
 
@@ -90,14 +85,6 @@ export default function NavBar() {
             className={`${classes.users} ${classes.marginRight}`}
           >
             Users
-          </Typography>
-          <Avatar alt='Frank' src={Frank} className={classes.avatar} />
-          <Typography
-            variant='subtitle1'
-            color='textPrimary'
-            className={classes.marginRight}
-          >
-            Frank
           </Typography>
           <MyMenuList />
         </Toolbar>

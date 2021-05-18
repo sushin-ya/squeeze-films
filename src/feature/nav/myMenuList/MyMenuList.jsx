@@ -1,19 +1,48 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
+  Avatar,
   Button,
   ClickAwayListener,
   Grow,
   ListItemIcon,
+  makeStyles,
   MenuItem,
   MenuList,
   Paper,
   Popper,
   Typography,
 } from '@material-ui/core';
-import { ArrowRightAlt, KeyboardArrowDown } from '@material-ui/icons';
+import {
+  KeyboardArrowDown,
+  Person,
+  Settings,
+  PowerSettingsNew,
+} from '@material-ui/icons';
 import squeezeFilmsIcon from '../../../app/images/squeezeFilmsIcon.svg';
+import Frank from '../../../app/images/users/1_frank.jpg';
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    minWidth: '24px',
+    marginRight: '8px',
+    '& img': {
+      width: '24px',
+    },
+  },
+  filmIcon: {
+    transform: 'translateY(-2px)',
+  },
+  username: {
+    marginRight: '16px',
+    textTransform: 'none',
+  },
+  avatar: {
+    marginRight: '8px',
+  },
+}));
 
 export default function MyMenuList() {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
@@ -52,6 +81,14 @@ export default function MyMenuList() {
         aria-haspopup='true'
         onClick={handleToggle}
       >
+        <Avatar alt='Frank' src={Frank} className={classes.avatar} />
+        <Typography
+          variant='subtitle1'
+          color='textPrimary'
+          className={classes.username}
+        >
+          Frank
+        </Typography>
         <KeyboardArrowDown />
       </Button>
       <Popper
@@ -60,6 +97,7 @@ export default function MyMenuList() {
         role={undefined}
         transition
         disablePortal
+        placement='top-end'
       >
         {({ TransitionProps, placement }) => (
           <Grow
@@ -77,15 +115,35 @@ export default function MyMenuList() {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <ArrowRightAlt />
+                    <ListItemIcon
+                      className={`${classes.icon} ${classes.filmIcon}`}
+                    >
+                      <img
+                        src={squeezeFilmsIcon}
+                        alt=''
+                        className={classes.squeezeFilmsIcon}
+                      />
                     </ListItemIcon>
                     <Typography variant='inherit'>My Films</Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>My Films</MenuItem>
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon className={classes.icon}>
+                      <Person />
+                    </ListItemIcon>
+                    <Typography variant='inherit'>Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon className={classes.icon}>
+                      <Settings />
+                    </ListItemIcon>
+                    <Typography variant='inherit'>My account</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon className={classes.icon}>
+                      <PowerSettingsNew />
+                    </ListItemIcon>
+                    <Typography variant='inherit'>Logout</Typography>
+                  </MenuItem>
                 </MenuList>
               </ClickAwayListener>
             </Paper>
