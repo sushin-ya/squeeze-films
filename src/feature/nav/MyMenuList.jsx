@@ -19,7 +19,7 @@ import {
   PowerSettingsNew,
 } from '@material-ui/icons';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import Frank from '../../app/images/users/1_frank.jpg';
+import Frank from '../../app/images/users/1_Frank.jpg';
 
 const useStyles = makeStyles((theme) => ({
   icon: {

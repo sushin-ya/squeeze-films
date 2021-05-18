@@ -8,17 +8,13 @@ const useStyles = makeStyles((theme) => ({
   text: {
     flexGrow: 1,
   },
-  button: {
-    background: theme.palette.primary.main,
-    padding: theme.spacing(1),
-  },
   strong: {
     textDecoration: `underline dotted ${theme.palette.primary.main} 2px`,
     fontSize: '18px',
   },
 }));
 
-export default function FilmDashboardNotice() {
+export default function FilmDashboardNotice({ button }) {
   const classes = useStyles();
 
   return (
@@ -32,12 +28,7 @@ export default function FilmDashboardNotice() {
             あなたもリストを作りたい？
             <span className={classes.strong}>Squeeze</span>しましょう！
           </Typography>
-          <Button
-            variant='contained'
-            color='primary'
-            className={classes.button}
-            startIcon={<Add />}
-          >
+          <Button variant='contained' className={button} startIcon={<Add />}>
             Squeeze Films
           </Button>
         </Box>
