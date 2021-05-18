@@ -34,7 +34,7 @@ export default function FilmListItem({ films, button }) {
                       className={classes.avatar}
                     />
                   </Box>
-                  <Typography variant='subtitle1' color='textPrimary'>
+                  <Typography variant='subtitle1' color='textSecondary'>
                     {films.name}
                   </Typography>
                 </Box>

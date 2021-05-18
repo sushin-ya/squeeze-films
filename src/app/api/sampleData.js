@@ -66,3 +66,31 @@ export const sampleData = [
     ],
   },
 ];
+
+export const popularFilms = [
+  {
+    id: 1,
+    photoURL: showshank,
+    title: 'ショーシャンクの空に',
+    release: '1994',
+  },
+  { id: 2, photoURL: godfather, title: 'ゴッド・ファーザー', release: '1972' },
+  { id: 3, photoURL: twelveangrymen, title: '十二の怒れる男', release: '1957' },
+  { id: 4, photoURL: darknight, title: 'ダークナイト', release: '2008' },
+  {
+    id: 5,
+    photoURL: pulpfiction,
+    title: 'パルプ・フィクション',
+    release: '1994',
+  },
+  { id: 6, photoURL: ganman, title: '続・夕陽のガンマン', release: '1996' },
+  { id: 7, photoURL: list, title: 'シンドラーのリスト', release: '1994' },
+  { id: 8, photoURL: fightclub, title: 'ファイトクラブ', release: '1999' },
+  { id: 9, photoURL: inception, title: 'インセプション', release: '2010' },
+  {
+    id: 10,
+    photoURL: loadoftherings,
+    title: 'ロード・オブ・ザ・リング',
+    release: '2001',
+  },
+];

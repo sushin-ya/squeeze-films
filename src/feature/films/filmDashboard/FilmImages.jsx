@@ -20,7 +20,12 @@ export default function FilmImages({ films }) {
       <Box mt={2} mb={2}>
         <div className={classes.grid}>
           {films.map((film) => (
-            <img src={film.photoURL} alt='' className={classes.image} />
+            <img
+              src={film.photoURL}
+              alt=''
+              className={classes.image}
+              key={film.id}
+            />
           ))}
         </div>
       </Box>

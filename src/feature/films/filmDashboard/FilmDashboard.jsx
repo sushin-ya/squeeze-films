@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import FilmDashboardTitle from './FilmDashboardTitle';
 import FilmDashboardNotice from './FilmDashboardNotice';
 import FilmList from './FilmList';
+import SidePopularFilms from '../../side/SidePopularFilms';
 import { sampleData } from '../../../app/api/sampleData';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ export default function FilmDashboard() {
         <FilmList filmList={filmList} button={classes.button} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
-        <Paper className={classes.paper}>xs=4</Paper>
+        <SidePopularFilms />
       </div>
     </div>
   );
