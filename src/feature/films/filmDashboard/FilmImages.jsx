@@ -9,8 +9,7 @@ const useStyles = makeStyles((theme) => ({
     gridRowGap: theme.spacing(2),
   },
   image: {
-    height: '180px',
-    width: '120px',
+    width: '100%',
   },
 }));
 export default function FilmImages({ films }) {
@@ -21,13 +20,7 @@ export default function FilmImages({ films }) {
       <Box mt={2} mb={2}>
         <div className={classes.grid}>
           {films.map((film) => (
-            <div
-              style={{
-                gridColumnStart: `${film.id > 5 ? (film.id % 6) + 1 : film.id}`,
-              }}
-            >
-              <img src={film.photoURL} alt='' className={classes.image} />
-            </div>
+            <img src={film.photoURL} alt='' className={classes.image} />
           ))}
         </div>
       </Box>
