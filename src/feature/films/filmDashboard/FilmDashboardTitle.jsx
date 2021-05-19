@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDashboardTitle({ paper }) {
+export default function FilmDashboardTitle({}) {
   const classes = useStyles();
 
   return (

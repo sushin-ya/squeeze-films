@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import FilmDashboardTitle from './FilmDashboardTitle';
-import FilmDashboardNotice from './FilmDashboardNotice';
-import FilmList from './FilmList';
+import FilmDetailedPageTitle from './FilmDetailedTitle';
+import FilmDetailedPageNotice from './FilmDetailedNotice';
+import FilmDetailedList from './FilmDetailedList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { sampleData } from '../../../app/api/sampleData';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDashboard() {
+export default function FilmDetailedPage() {
   const classes = useStyles();
   // eslint-disable-next-line
   const [filmList, setFilmList] = useState(sampleData);
@@ -28,9 +28,12 @@ export default function FilmDashboard() {
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
-        <FilmDashboardTitle />
-        <FilmDashboardNotice button={classes.button} />
-        <FilmList filmList={filmList} button={classes.button} />
+        <FilmDetailedPageTitle
+          photoURL={filmList[0].photoURL}
+          username={filmList[0].username}
+        />
+        <FilmDetailedPageNotice button={classes.button} />
+        <FilmDetailedList films={filmList[0]} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
