@@ -18,14 +18,14 @@ export default function SidePopularFilmsList({ films }) {
   return (
     <Grid item xs={12}>
       <Box mt={2} mb={2}>
-        {films.map((film) => (
+        {films.map((film, index) => (
           <div key={film.title}>
             <Box mb={2}>
               <div className={classes.grid}>
                 <img src={film.photoURL} alt='' className={classes.image} />
                 <Grid container justify='flex-start' alignItems='center'>
                   <Typography>
-                    {film.id}. {film.title}({film.release})
+                    {index + 1}. {film.title}({film.release})
                   </Typography>
                 </Grid>
               </div>

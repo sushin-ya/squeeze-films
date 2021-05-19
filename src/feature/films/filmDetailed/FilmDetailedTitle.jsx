@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDetailedTitle({ photoURL, name }) {
+export default function FilmDetailedTitle({ photoURL, username }) {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,7 @@ export default function FilmDetailedTitle({ photoURL, name }) {
             className={classes.title}
             color='textSecondary'
           >
-            {name}のオール・タイム・ベスト１０
+            {username}のオール・タイム・ベスト１０
           </Typography>
           <Typography
             variant='subtitle1'

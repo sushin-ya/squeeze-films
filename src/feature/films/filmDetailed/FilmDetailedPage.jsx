@@ -30,7 +30,7 @@ export default function FilmDetailedPage() {
       <div style={{ gridColumnEnd: 'span 8' }}>
         <FilmDetailedPageTitle
           photoURL={filmList[0].photoURL}
-          name={filmList[0].name}
+          username={filmList[0].username}
         />
         <FilmDetailedPageNotice button={classes.button} />
         <FilmDetailedList films={filmList[0]} />

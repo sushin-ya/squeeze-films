@@ -1,4 +1,3 @@
-import './style.css';
 // import HomePage from '../../feature/home/HomePage';
 import NavBar from '../../feature/nav/NavBar';
 // import FilmsDashboard from '../../feature/films/filmDashboard/FilmDashboard';
