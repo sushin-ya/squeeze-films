@@ -1,5 +1,14 @@
-import { makeStyles, Typography } from '@material-ui/core';
+import React from 'react';
+import {
+  IconButton,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  makeStyles,
+} from '@material-ui/core';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import { Draggable } from 'react-beautiful-dnd';
+import { popularFilms } from '../../../app/api/sampleData';
 
 const useStyles = makeStyles((theme) => ({
   film: {
@@ -8,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
     marginTop: theme.spacing(1),
     backgroundColor: 'white',
+  },
+  avatar: {
+    width: '50px',
+  },
+  filmTitle: {
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -22,15 +37,28 @@ export default function FilmFormListItem({ film, index }) {
           ...provided.draggableProps.style,
         };
         return (
-          <Typography
+          <ListItem
             className={classes.film}
             innerRef={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             style={style}
           >
-            {film.content}
-          </Typography>
+            <ListItemAvatar>
+              <img
+                alt=''
+                src={popularFilms[index].photoURL}
+                className={classes.avatar}
+              />
+            </ListItemAvatar>
+            <ListItemText className={classes.filmTitle}>
+              {index + 1}. {popularFilms[index].title}(
+              {popularFilms[index].release})
+            </ListItemText>
+            <IconButton>
+              <RemoveCircleOutlineIcon />
+            </IconButton>
+          </ListItem>
         );
       }}
     </Draggable>

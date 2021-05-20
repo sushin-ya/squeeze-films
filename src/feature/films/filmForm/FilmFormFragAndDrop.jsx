@@ -2,8 +2,17 @@ import initialData from '../../../app/api/initial-data';
 import { useCallback, useState } from 'react';
 import FilmFormList from './FilmFormList';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { Box, makeStyles, Typography } from '@material-ui/core';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    color: theme.palette.text.primary,
+  },
+}));
 
 export default function FilmFormDragAndDrop() {
+  const classes = useStyles();
   const [data, setData] = useState(initialData);
 
   const onDragEnd = useCallback(
@@ -75,11 +84,31 @@ export default function FilmFormDragAndDrop() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      {data.columnOrder.map((columnId) => {
+      {data.columnOrder.map((columnId, index) => {
         const column = data.columns[columnId];
         const films = column.filmIds.map((filmId) => data.films[filmId]);
 
-        return <FilmFormList key={column.id} column={column} films={films} />;
+        if (index === 0) {
+          return (
+            <>
+              <FilmFormList key={column.id} column={column} films={films} />
+              <Box
+                m={2}
+                display='flex'
+                flexDirection='row'
+                justifyContent='center'
+                alignItems='center'
+              >
+                <ArrowDownwardIcon className={classes.icon} />
+                <Typography variant='h5' color='textPrimary'>
+                  Drag &amp; Drop
+                </Typography>
+              </Box>
+            </>
+          );
+        } else {
+          return <FilmFormList key={column.id} column={column} films={films} />;
+        }
       })}
     </DragDropContext>
   );

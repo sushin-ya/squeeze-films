@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import FilmFormInputField from './FilmFormInputField';
 import FilmFormDragAndDrop from './FilmFormFragAndDrop';
@@ -19,8 +19,10 @@ export default function FilmForm() {
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
-        <FilmFormInputField />
-        <FilmFormDragAndDrop />
+        <Box mr={1}>
+          <FilmFormInputField />
+          <FilmFormDragAndDrop />
+        </Box>
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
