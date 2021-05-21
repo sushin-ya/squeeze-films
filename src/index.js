@@ -8,16 +8,22 @@ import '@fontsource/noto-sans-jp';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './app/config/theme';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from './app/store/configureStore';
+
+const store = configureStore();
 
 const rootEl = document.getElementById('root');
 
 function render() {
   ReactDOM.render(
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </Provider>,
     rootEl
   );
 }
