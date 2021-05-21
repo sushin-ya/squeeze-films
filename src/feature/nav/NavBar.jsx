@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   AppBar,
+  Box,
   Container,
   Divider,
   Grid,
@@ -11,15 +12,12 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import MyMenuList from './MyMenuList';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   appBar: {
     paddingLeft: 0,
     paddingRight: 0,
-    color: theme.palette.text.primary,
   },
   topButton: {
     height: '24px',
@@ -32,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   users: {
     flexGrow: 1,
   },
+  link: {
+    color: theme.palette.text.primary,
+  },
 }));
 
 export default function NavBar() {
@@ -41,51 +42,55 @@ export default function NavBar() {
     <AppBar position='static' className={classes.appBar}>
       <Container>
         <Toolbar disableGutters>
-          <Link
-            href='/'
-            onClick={() => {
-              console.log('clicked');
-            }}
-            className={classes.marginRight}
-          >
-            <Grid
-              container
-              direction='row'
-              justify='center'
-              alignItems='center'
+          <Box mr={2}>
+            <Link
+              component={NavLink}
+              to='/'
+              onClick={() => {
+                console.log('clicked');
+              }}
             >
-              <img
-                src={squeezeFilmsIcon}
-                alt=''
-                className={classes.topButton}
-              />
-              <Typography variant='subtitle1' color='textPrimary'>
-                Squeeze Films
+              <Grid
+                container
+                direction='row'
+                justify='center'
+                alignItems='center'
+              >
+                <img
+                  src={squeezeFilmsIcon}
+                  alt=''
+                  className={classes.topButton}
+                />
+                <Typography variant='subtitle1' color='textPrimary'>
+                  Squeeze Films
+                </Typography>
+              </Grid>
+            </Link>
+          </Box>
+          <Divider
+            orientation='vertical'
+            flexItem
+            className={classes.marginRight}
+          />
+          <Link component={NavLink} to='/films' className={classes.link}>
+            <Box mr={2}>
+              <Typography variant='subtitle1' className={classes.title}>
+                Squeezed Films List
               </Typography>
-            </Grid>
+            </Box>
           </Link>
           <Divider
             orientation='vertical'
             flexItem
             className={classes.marginRight}
           />
-          <Typography
-            variant='subtitle1'
-            className={`${classes.title} ${classes.marginRight}`}
+          <Link
+            component={NavLink}
+            to='/films'
+            className={`${classes.link} ${classes.users}`}
           >
-            Squeezed Films List
-          </Typography>
-          <Divider
-            orientation='vertical'
-            flexItem
-            className={classes.marginRight}
-          />
-          <Typography
-            variant='subtitle1'
-            className={`${classes.users} ${classes.marginRight}`}
-          >
-            Users
-          </Typography>
+            <Typography variant='subtitle1'>Users</Typography>
+          </Link>
           <MyMenuList />
         </Toolbar>
       </Container>

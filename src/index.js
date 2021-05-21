@@ -7,14 +7,17 @@ import '@fontsource/roboto';
 import '@fontsource/noto-sans-jp';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './app/config/theme';
+import { BrowserRouter } from 'react-router-dom';
 
 const rootEl = document.getElementById('root');
 
 function render() {
   ReactDOM.render(
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>,
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>,
     rootEl
   );
 }
