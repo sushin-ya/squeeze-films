@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import FilmImages from './FilmImages';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,12 @@ export default function FilmListItem({ films, button }) {
               <FilmImages films={films.films} />
               <Grid item xs={12}>
                 <Box display='flex' justifyContent='flex-end'>
-                  <Button variant='contained' className={button}>
+                  <Button
+                    variant='contained'
+                    className={button}
+                    component={Link}
+                    to='/films/:id'
+                  >
                     Check Films
                   </Button>
                 </Box>

@@ -20,13 +20,20 @@ export default function App() {
 
   return (
     <div className={classes.app}>
-      <NavBar />
       <Route exact path='/' component={HomePage} />
-      <Container maxWidth='lg' className={classes.container}>
-        <Route path='/films' component={FilmsDashboard} />
-        <Route path='/films/:id' component={FilmDetailedPage} />
-        <Route path='/createFilms' component={FilmForm} />
-      </Container>
+      <Route
+        path={'/(.+)'}
+        render={() => (
+          <>
+            <NavBar />
+            <Container maxWidth='lg' className={classes.container}>
+              <Route exact path='/films' component={FilmsDashboard} />
+              <Route path='/films/:id' component={FilmDetailedPage} />
+              <Route path='/createFilms' component={FilmForm} />
+            </Container>
+          </>
+        )}
+      />
     </div>
   );
 }

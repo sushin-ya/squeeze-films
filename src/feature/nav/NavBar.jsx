@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '8px',
     transform: 'translateY(-2px)',
   },
+  top: {
+    '&:hover  h6': {
+      textDecoration: 'underline',
+    },
+  },
   marginRight: {
     marginRight: '16px',
   },
@@ -44,6 +49,7 @@ export default function NavBar() {
         <Toolbar disableGutters>
           <Box mr={2}>
             <Link
+              className={classes.top}
               component={NavLink}
               to='/'
               onClick={() => {

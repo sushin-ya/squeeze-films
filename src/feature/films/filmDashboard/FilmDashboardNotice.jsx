@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
 import { ErrorOutline, Add } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     transform: `translateY(-1px)`,
@@ -28,7 +30,13 @@ export default function FilmDashboardNotice({ button }) {
             あなたもリストを作りたい？
             <span className={classes.strong}>Squeeze</span>しましょう！
           </Typography>
-          <Button variant='contained' className={button} startIcon={<Add />}>
+          <Button
+            variant='contained'
+            className={button}
+            startIcon={<Add />}
+            component={Link}
+            to='/createFilms'
+          >
             Squeeze Films
           </Button>
         </Box>
