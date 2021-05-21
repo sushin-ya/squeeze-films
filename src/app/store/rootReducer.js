@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-// import testReducer from '../../feature/sandbox/testReducer';
+import shelfReducer from '../../feature/shelfs/shelfReducer';
 
 const rootReducer = combineReducers({
-  // test: testReducer,
+  shelf: shelfReducer,
 });
 
 export default rootReducer;

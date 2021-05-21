@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   filmIcon: {
     transform: 'translateY(-2px)',
   },
-  username: {
+  displayName: {
     marginRight: '16px',
     textTransform: 'none',
   },
@@ -85,7 +85,7 @@ export default function SignedInMenu({ signOut }) {
         <Typography
           variant='subtitle1'
           color='textPrimary'
-          className={classes.username}
+          className={classes.displayName}
         >
           Frank
         </Typography>

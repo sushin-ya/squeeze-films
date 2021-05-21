@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import ShelfDetailedTitle from './ShelfDetailedTitle';
 import ShelfDetailedNotice from './ShelfDetailedNotice';
 import ShelfDetailedList from './ShelfDetailedList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { sampleData } from '../../../app/api/sampleData';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,20 +20,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfDetailedPage() {
+export default function ShelfDetailedPage({ match }) {
   const classes = useStyles();
-  // eslint-disable-next-line
-  const [shelfs, setShelfs] = useState(sampleData);
+  const shelf = useSelector((state) =>
+    state.shelf.shelfs.find((s) => s.uid === match.params.id)
+  );
 
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDetailedTitle
-          photoURL={shelfs[0].photoURL}
-          username={shelfs[0].username}
+          photoURL={shelf.photoURL}
+          displayName={shelf.displayName}
         />
         <ShelfDetailedNotice button={classes.button} />
-        <ShelfDetailedList shelf={shelfs[0]} />
+        <ShelfDetailedList shelf={shelf} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />

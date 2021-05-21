@@ -36,7 +36,7 @@ export default function ShelfListItem({ shelf, button }) {
                     />
                   </Box>
                   <Typography variant='subtitle1' color='textSecondary'>
-                    {shelf.username}
+                    {shelf.displayName}
                   </Typography>
                 </Box>
               </Grid>

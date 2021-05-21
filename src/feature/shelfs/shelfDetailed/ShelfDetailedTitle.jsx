@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfDetailedTitle({ photoURL, username }) {
+export default function ShelfDetailedTitle({ photoURL, displayName }) {
   const classes = useStyles();
 
   return (
@@ -36,7 +36,7 @@ export default function ShelfDetailedTitle({ photoURL, username }) {
             className={classes.title}
             color='textSecondary'
           >
-            {username}のオール・タイム・ベスト１０
+            {displayName}のオール・タイム・ベスト１０
           </Typography>
           <Typography
             variant='subtitle1'

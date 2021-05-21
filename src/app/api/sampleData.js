@@ -17,7 +17,7 @@ export const sampleData = [
   {
     id: '1',
     uid: 'frank',
-    username: 'Frank',
+    displayName: 'Frank',
     photoURL: Frank,
     createdAt: '2021-05-19',
     films: [
@@ -106,7 +106,7 @@ export const sampleData = [
   {
     id: '2',
     uid: 'ronald',
-    username: 'Ronald',
+    displayName: 'Ronald',
     photoURL: Ronald,
     createdAt: '2021-05-19',
     films: [
@@ -195,7 +195,7 @@ export const sampleData = [
   {
     id: '3',
     uid: 'crystal',
-    username: 'Crystal',
+    displayName: 'Crystal',
     photoURL: Crystal,
     createdAt: '2021-05-19',
     films: [
