@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Grid, Icon, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -49,6 +50,8 @@ export default function HomePage() {
         variant='outlined'
         endIcon={<ArrowRightAltIcon />}
         className={classes.button}
+        component={Link}
+        to='/films'
       >
         GET STARTED
       </Button>

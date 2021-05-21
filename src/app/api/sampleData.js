@@ -16,6 +16,7 @@ import loadoftherings from '../images/films/10_loadoftherings.jpg';
 export const sampleData = [
   {
     id: '1',
+    uid: 'frank',
     username: 'Frank',
     photoURL: Frank,
     createdAt: '2021-05-19',
@@ -104,8 +105,10 @@ export const sampleData = [
   },
   {
     id: '2',
-    name: 'Ronald',
+    uid: 'ronald',
+    username: 'Ronald',
     photoURL: Ronald,
+    createdAt: '2021-05-19',
     films: [
       {
         id: 11111,
@@ -191,8 +194,10 @@ export const sampleData = [
   },
   {
     id: '3',
-    name: 'Crystal',
+    uid: 'crystal',
+    username: 'Crystal',
     photoURL: Crystal,
+    createdAt: '2021-05-19',
     films: [
       {
         id: 11111,

@@ -1,9 +1,10 @@
-// import HomePage from '../../feature/home/HomePage';
+import HomePage from '../../feature/home/HomePage';
 import NavBar from '../../feature/nav/NavBar';
-// import FilmsDashboard from '../../feature/films/filmDashboard/FilmDashboard';
-// import FilmDetailedPage from '../../feature/films/filmDetailed/FilmDetailedPage';
+import FilmsDashboard from '../../feature/films/filmDashboard/FilmDashboard';
+import FilmDetailedPage from '../../feature/films/filmDetailed/FilmDetailedPage';
 import FilmForm from '../../feature/films/filmForm/FilmForm';
 import { Container, makeStyles } from '@material-ui/core';
+import { Route } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -19,10 +20,20 @@ export default function App() {
 
   return (
     <div className={classes.app}>
-      <NavBar />
-      <Container maxWidth='lg' className={classes.container}>
-        <FilmForm />
-      </Container>
+      <Route exact path='/' component={HomePage} />
+      <Route
+        path={'/(.+)'}
+        render={() => (
+          <>
+            <NavBar />
+            <Container maxWidth='lg' className={classes.container}>
+              <Route exact path='/films' component={FilmsDashboard} />
+              <Route path='/films/:id' component={FilmDetailedPage} />
+              <Route path='/createFilms' component={FilmForm} />
+            </Container>
+          </>
+        )}
+      />
     </div>
   );
 }

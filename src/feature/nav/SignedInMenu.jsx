@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MyMenuList() {
+export default function SignedInMenu({ signOut }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
@@ -138,7 +138,7 @@ export default function MyMenuList() {
                     </ListItemIcon>
                     <Typography variant='inherit'>My account</Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem onClick={() => signOut()}>
                     <ListItemIcon className={classes.icon}>
                       <PowerSettingsNew />
                     </ListItemIcon>
