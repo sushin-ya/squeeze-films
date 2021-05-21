@@ -1,5 +1,4 @@
-import initialData from '../../../app/api/initial-data';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import ShelfFormList from './ShelfFormList';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Box, makeStyles, Typography } from '@material-ui/core';
@@ -11,9 +10,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfFormDragAndDrop() {
+export default function ShelfFormDragAndDrop({ data, setData }) {
   const classes = useStyles();
-  const [data, setData] = useState(initialData);
 
   const onDragEnd = useCallback(
     (result) => {
@@ -79,7 +77,7 @@ export default function ShelfFormDragAndDrop() {
       };
       setData(newData);
     },
-    [data]
+    [data, setData]
   );
 
   return (

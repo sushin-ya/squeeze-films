@@ -13,7 +13,7 @@ export function updateShelf(shelf) {
     payload: shelf,
   };
 }
-export function createShelf(shelfId) {
+export function deleteShelf(shelfId) {
   return {
     type: DELETE_SHELF,
     payload: shelfId,

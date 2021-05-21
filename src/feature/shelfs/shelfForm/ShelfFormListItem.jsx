@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core';
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import { Draggable } from 'react-beautiful-dnd';
-import { popularFilms } from '../../../app/api/sampleData';
 
 const useStyles = makeStyles((theme) => ({
   film: {
@@ -45,15 +44,10 @@ export default function ShelfFormListItem({ film, index }) {
             style={style}
           >
             <ListItemAvatar>
-              <img
-                alt=''
-                src={popularFilms[index].photoURL}
-                className={classes.avatar}
-              />
+              <img alt='' src={film.photoURL} className={classes.avatar} />
             </ListItemAvatar>
             <ListItemText className={classes.filmTitle}>
-              {index + 1}. {popularFilms[index].title}(
-              {popularFilms[index].release})
+              {index + 1}. {film.title}({film.release})
             </ListItemText>
             <IconButton>
               <RemoveCircleOutlineIcon />
