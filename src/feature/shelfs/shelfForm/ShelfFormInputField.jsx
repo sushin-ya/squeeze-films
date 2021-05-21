@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmFormInputField() {
+export default function ShelfFormInputField() {
   const classes = useStyles();
 
   return (

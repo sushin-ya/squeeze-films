@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDashboardNotice({ button }) {
+export default function ShelfDashboardNotice({ button }) {
   const classes = useStyles();
 
   return (
@@ -35,7 +35,7 @@ export default function FilmDashboardNotice({ button }) {
             className={button}
             startIcon={<Add />}
             component={Link}
-            to='/createFilms'
+            to='/createShelf'
           >
             Squeeze Films
           </Button>

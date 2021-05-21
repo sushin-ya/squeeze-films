@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmFormListItem({ film, index }) {
+export default function ShelfFormListItem({ film, index }) {
   const classes = useStyles();
 
   return (

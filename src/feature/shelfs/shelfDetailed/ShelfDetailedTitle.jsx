@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDetailedTitle({ photoURL, username }) {
+export default function ShelfDetailedTitle({ photoURL, username }) {
   const classes = useStyles();
 
   return (

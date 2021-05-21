@@ -1,5 +1,5 @@
 import { Box, List, makeStyles, Paper, Typography } from '@material-ui/core';
-import FilmFormListItem from './FilmFormListItem';
+import ShelfFormListItem from './ShelfFormListItem';
 import { Droppable } from 'react-beautiful-dnd';
 import ListIcon from '@material-ui/icons/List';
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmFormList({ column, films }) {
+export default function ShelfFormList({ column, films }) {
   const classes = useStyles();
 
   return (
@@ -50,7 +50,7 @@ export default function FilmFormList({ column, films }) {
                 style={style}
               >
                 {films.map((film, index) => (
-                  <FilmFormListItem key={film.id} film={film} index={index} />
+                  <ShelfFormListItem key={film.id} film={film} index={index} />
                 ))}
                 {provided.placeholder}
               </List>

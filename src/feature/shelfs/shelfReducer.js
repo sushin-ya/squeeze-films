@@ -1,11 +1,11 @@
 import { sampleData } from '../../app/api/sampleData';
-import { CREATE_SHELF, UPDATE_SHELF, DELETE_SHELF } from './filmConstants';
+import { CREATE_SHELF, UPDATE_SHELF, DELETE_SHELF } from './shelfConstants';
 
 const initialState = {
   shelfs: sampleData,
 };
 
-export default function filmReducer(state = initialState, { type, payload }) {
+export default function shelfReducer(state = initialState, { type, payload }) {
   switch (type) {
     case CREATE_SHELF:
       return {

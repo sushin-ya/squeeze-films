@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmListItem({ films, button }) {
+export default function ShelfListItem({ shelf, button }) {
   const classes = useStyles();
 
   return (
@@ -31,23 +31,23 @@ export default function FilmListItem({ films, button }) {
                   <Box mr={1}>
                     <Avatar
                       alt='Frank'
-                      src={films.photoURL}
+                      src={shelf.photoURL}
                       className={classes.avatar}
                     />
                   </Box>
                   <Typography variant='subtitle1' color='textSecondary'>
-                    {films.username}
+                    {shelf.username}
                   </Typography>
                 </Box>
               </Grid>
-              <FilmImages films={films.films} />
+              <FilmImages films={shelf.films} />
               <Grid item xs={12}>
                 <Box display='flex' justifyContent='flex-end'>
                   <Button
                     variant='contained'
                     className={button}
                     component={Link}
-                    to={`/films/${films.uid}`}
+                    to={`/shelfs/${shelf.uid}`}
                   >
                     Check Films
                   </Button>

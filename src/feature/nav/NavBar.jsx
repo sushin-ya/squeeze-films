@@ -86,7 +86,7 @@ export default function NavBar() {
             flexItem
             className={classes.marginRight}
           />
-          <Link component={NavLink} to='/films' className={classes.link}>
+          <Link component={NavLink} to='/shelfs' className={classes.link}>
             <Box mr={2}>
               <Typography variant='subtitle1' className={classes.title}>
                 Squeezed Films List

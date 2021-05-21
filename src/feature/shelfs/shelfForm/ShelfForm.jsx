@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import FilmFormInputField from './FilmFormInputField';
-import FilmFormDragAndDrop from './FilmFormFragAndDrop';
+import ShelfFormInputField from './ShelfFormInputField';
+import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,15 +13,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmForm() {
+export default function ShelfForm() {
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <Box mr={1}>
-          <FilmFormInputField />
-          <FilmFormDragAndDrop />
+          <ShelfFormInputField />
+          <ShelfFormFragAndDrop />
         </Box>
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>

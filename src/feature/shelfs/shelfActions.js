@@ -1,4 +1,4 @@
-import { CREATE_SHELF, UPDATE_SHELF, DELETE_SHELF } from './filmConstants';
+import { CREATE_SHELF, UPDATE_SHELF, DELETE_SHELF } from './shelfConstants';
 
 export function createShelf(shelf) {
   return {

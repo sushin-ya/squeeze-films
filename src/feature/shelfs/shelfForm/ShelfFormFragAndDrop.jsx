@@ -1,6 +1,6 @@
 import initialData from '../../../app/api/initial-data';
 import { useCallback, useState } from 'react';
-import FilmFormList from './FilmFormList';
+import ShelfFormList from './ShelfFormList';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmFormDragAndDrop() {
+export default function ShelfFormDragAndDrop() {
   const classes = useStyles();
   const [data, setData] = useState(initialData);
 
@@ -91,7 +91,7 @@ export default function FilmFormDragAndDrop() {
         if (index === 0) {
           return (
             <>
-              <FilmFormList key={column.id} column={column} films={films} />
+              <ShelfFormList key={column.id} column={column} films={films} />
               <Box
                 m={2}
                 display='flex'
@@ -107,7 +107,9 @@ export default function FilmFormDragAndDrop() {
             </>
           );
         } else {
-          return <FilmFormList key={column.id} column={column} films={films} />;
+          return (
+            <ShelfFormList key={column.id} column={column} films={films} />
+          );
         }
       })}
     </DragDropContext>

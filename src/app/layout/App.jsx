@@ -1,8 +1,8 @@
 import HomePage from '../../feature/home/HomePage';
 import NavBar from '../../feature/nav/NavBar';
-import FilmsDashboard from '../../feature/films/filmDashboard/FilmDashboard';
-import FilmDetailedPage from '../../feature/films/filmDetailed/FilmDetailedPage';
-import FilmForm from '../../feature/films/filmForm/FilmForm';
+import ShelfDashboard from '../../feature/shelfs/shelfDashboard/ShelfDashboard';
+import ShelfDetailedPage from '../../feature/shelfs/shelfDetailed/ShelfDetailedPage';
+import ShelfForm from '../../feature/shelfs/shelfForm/ShelfForm';
 import { Container, makeStyles } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 
@@ -27,9 +27,9 @@ export default function App() {
           <>
             <NavBar />
             <Container maxWidth='lg' className={classes.container}>
-              <Route exact path='/films' component={FilmsDashboard} />
-              <Route path='/films/:id' component={FilmDetailedPage} />
-              <Route path='/createFilms' component={FilmForm} />
+              <Route exact path='/shelfs' component={ShelfDashboard} />
+              <Route path='/shelfs/:id' component={ShelfDetailedPage} />
+              <Route path='/createShelf' component={ShelfForm} />
             </Container>
           </>
         )}

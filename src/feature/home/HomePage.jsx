@@ -51,7 +51,7 @@ export default function HomePage() {
         endIcon={<ArrowRightAltIcon />}
         className={classes.button}
         component={Link}
-        to='/films'
+        to='/shelfs'
       >
         GET STARTED
       </Button>

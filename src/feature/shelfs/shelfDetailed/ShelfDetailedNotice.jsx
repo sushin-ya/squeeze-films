@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDetailedNotice({ button }) {
+export default function ShelfDetailedNotice({ button }) {
   const classes = useStyles();
 
   return (
