@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   Box,
@@ -11,8 +11,9 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import MyMenuList from './MyMenuList';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import SignedOutMenu from './SignedOutMenu';
+import SignedInMenu from './SignedInMenu';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   marginRight: {
     marginRight: '16px',
   },
-  users: {
+  flexgrow: {
     flexGrow: 1,
   },
   link: {
@@ -42,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
+  const [authenticated, setAuthenticated] = useState(false);
+  const history = useHistory();
+
+  function handleSignOut() {
+    setAuthenticated(false);
+    history.push('/');
+  }
 
   return (
     <AppBar position='static' className={classes.appBar}>
@@ -90,14 +98,26 @@ export default function NavBar() {
             flexItem
             className={classes.marginRight}
           />
-          <Link
-            component={NavLink}
-            to='/films'
-            className={`${classes.link} ${classes.users}`}
-          >
-            <Typography variant='subtitle1'>Users</Typography>
-          </Link>
-          <MyMenuList />
+          {authenticated && (
+            <>
+              <Link component={NavLink} to='/users' className={classes.link}>
+                <Box mr={2}>
+                  <Typography variant='subtitle1'>Users</Typography>
+                </Box>
+              </Link>
+              <Divider
+                orientation='vertical'
+                flexItem
+                className={classes.marginRight}
+              />
+            </>
+          )}
+          <div className={classes.flexgrow}></div>
+          {authenticated ? (
+            <SignedInMenu signOut={handleSignOut} />
+          ) : (
+            <SignedOutMenu setAuthenticated={setAuthenticated} />
+          )}
         </Toolbar>
       </Container>
     </AppBar>

@@ -36,7 +36,7 @@ export default function FilmListItem({ films, button }) {
                     />
                   </Box>
                   <Typography variant='subtitle1' color='textSecondary'>
-                    {films.name}
+                    {films.username}
                   </Typography>
                 </Box>
               </Grid>
@@ -47,7 +47,7 @@ export default function FilmListItem({ films, button }) {
                     variant='contained'
                     className={button}
                     component={Link}
-                    to='/films/:id'
+                    to={`/films/${films.uid}`}
                   >
                     Check Films
                   </Button>
