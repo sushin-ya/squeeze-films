@@ -52,18 +52,11 @@ export default function NavBar() {
   }
 
   return (
-    <AppBar position='static' className={classes.appBar}>
+    <AppBar position='fixed' className={classes.appBar}>
       <Container>
         <Toolbar disableGutters>
           <Box mr={2}>
-            <Link
-              className={classes.top}
-              component={NavLink}
-              to='/'
-              onClick={() => {
-                console.log('clicked');
-              }}
-            >
+            <Link className={classes.top} component={NavLink} to='/'>
               <Grid
                 container
                 direction='row'

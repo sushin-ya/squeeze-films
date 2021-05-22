@@ -35,7 +35,7 @@ export default function ShelfDashboardNotice({ button }) {
             className={button}
             startIcon={<Add />}
             component={Link}
-            to={`/manage/:id`}
+            to={`createShelf`}
           >
             Squeeze Films
           </Button>

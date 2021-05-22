@@ -19,6 +19,9 @@ const theme = createMuiTheme({
       primary: 'rgba(0, 0, 0, 0.6)',
       secondary: '#33291A',
     },
+    background: {
+      default: '#F7F6F5',
+    },
   },
   typography: {
     fontFamily: "'Roboto','Noto Sans JP','Helvetica', 'Arial', sans-serif",
