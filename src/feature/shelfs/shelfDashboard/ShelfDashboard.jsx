@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import FilmDetailedPageTitle from './FilmDetailedTitle';
-import FilmDetailedPageNotice from './FilmDetailedNotice';
-import FilmDetailedList from './FilmDetailedList';
+import ShelfDashboardTitle from './ShelfDashboardTitle';
+import ShelfDashboardNotice from './ShelfDashboardNotice';
+import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { sampleData } from '../../../app/api/sampleData';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,20 +20,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDetailedPage() {
+export default function ShelfDashboard() {
   const classes = useStyles();
-  // eslint-disable-next-line
-  const [filmList, setFilmList] = useState(sampleData);
+  const { shelfs } = useSelector((state) => state.shelf);
 
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
-        <FilmDetailedPageTitle
-          photoURL={filmList[0].photoURL}
-          username={filmList[0].username}
-        />
-        <FilmDetailedPageNotice button={classes.button} />
-        <FilmDetailedList films={filmList[0]} />
+        <ShelfDashboardTitle />
+        <ShelfDashboardNotice button={classes.button} />
+        <ShelfList shelfs={shelfs} button={classes.button} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />

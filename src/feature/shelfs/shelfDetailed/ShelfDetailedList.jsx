@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDetailedList({ films }) {
+export default function ShelfDetailedList({ shelf }) {
   const classes = useStyles();
 
   return (
@@ -28,7 +28,7 @@ export default function FilmDetailedList({ films }) {
         <Box p={2}>
           <Grid item xs={12}>
             <Box mt={2} mb={2}>
-              {films.films.map((film, index) => (
+              {shelf.films.map((film, index) => (
                 <div key={film.title}>
                   <Box mb={2}>
                     <div className={classes.grid}>

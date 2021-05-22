@@ -17,12 +17,12 @@ export const sampleData = [
   {
     id: '1',
     uid: 'frank',
-    username: 'Frank',
+    displayName: 'Frank',
     photoURL: Frank,
     createdAt: '2021-05-19',
     films: [
       {
-        id: 11111,
+        id: '11111',
         title: 'ショーシャンクの空に',
         photoURL: showshank,
         release: '1994',
@@ -30,7 +30,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 22222,
+        id: '22222',
         photoURL: godfather,
         title: 'ゴッド・ファーザー',
         release: '1972',
@@ -38,7 +38,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 33333,
+        id: '33333',
         photoURL: twelveangrymen,
         title: '十二の怒れる男',
         release: '1957',
@@ -46,7 +46,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 44444,
+        id: '44444',
         photoURL: darknight,
         title: 'ダークナイト',
         release: '2008',
@@ -54,7 +54,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 55555,
+        id: '55555',
         photoURL: pulpfiction,
         title: 'パルプ・フィクション',
         release: '1994',
@@ -62,7 +62,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 66666,
+        id: '66666',
         photoURL: ganman,
         title: '続・夕陽のガンマン',
         release: '1996',
@@ -70,7 +70,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 777777,
+        id: '77777',
         photoURL: list,
         title: 'シンドラーのリスト',
         release: '1994',
@@ -78,7 +78,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 88888,
+        id: '88888',
         photoURL: fightclub,
         title: 'ファイトクラブ',
         release: '1999',
@@ -86,7 +86,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 99999,
+        id: '99999',
         photoURL: inception,
         title: 'インセプション',
         release: '2010',
@@ -94,7 +94,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 10101,
+        id: '10101',
         photoURL: loadoftherings,
         title: 'ロード・オブ・ザ・リング',
         release: '2001',
@@ -106,12 +106,12 @@ export const sampleData = [
   {
     id: '2',
     uid: 'ronald',
-    username: 'Ronald',
+    displayName: 'Ronald',
     photoURL: Ronald,
     createdAt: '2021-05-19',
     films: [
       {
-        id: 11111,
+        id: '11111',
         title: 'ショーシャンクの空に',
         photoURL: showshank,
         release: '1994',
@@ -119,7 +119,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 22222,
+        id: '22222',
         photoURL: godfather,
         title: 'ゴッド・ファーザー',
         release: '1972',
@@ -127,7 +127,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 33333,
+        id: '33333',
         photoURL: twelveangrymen,
         title: '十二の怒れる男',
         release: '1957',
@@ -135,7 +135,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 44444,
+        id: '44444',
         photoURL: darknight,
         title: 'ダークナイト',
         release: '2008',
@@ -143,7 +143,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 55555,
+        id: '55555',
         photoURL: pulpfiction,
         title: 'パルプ・フィクション',
         release: '1994',
@@ -151,7 +151,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 66666,
+        id: '66666',
         photoURL: ganman,
         title: '続・夕陽のガンマン',
         release: '1996',
@@ -159,7 +159,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 777777,
+        id: '77777',
         photoURL: list,
         title: 'シンドラーのリスト',
         release: '1994',
@@ -167,7 +167,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 88888,
+        id: '88888',
         photoURL: fightclub,
         title: 'ファイトクラブ',
         release: '1999',
@@ -175,7 +175,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 99999,
+        id: '99999',
         photoURL: inception,
         title: 'インセプション',
         release: '2010',
@@ -183,7 +183,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 10101,
+        id: '10101',
         photoURL: loadoftherings,
         title: 'ロード・オブ・ザ・リング',
         release: '2001',
@@ -195,12 +195,12 @@ export const sampleData = [
   {
     id: '3',
     uid: 'crystal',
-    username: 'Crystal',
+    displayName: 'Crystal',
     photoURL: Crystal,
     createdAt: '2021-05-19',
     films: [
       {
-        id: 11111,
+        id: '11111',
         title: 'ショーシャンクの空に',
         photoURL: showshank,
         release: '1994',
@@ -208,7 +208,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 22222,
+        id: '22222',
         photoURL: godfather,
         title: 'ゴッド・ファーザー',
         release: '1972',
@@ -216,7 +216,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 33333,
+        id: '33333',
         photoURL: twelveangrymen,
         title: '十二の怒れる男',
         release: '1957',
@@ -224,7 +224,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 44444,
+        id: '44444',
         photoURL: darknight,
         title: 'ダークナイト',
         release: '2008',
@@ -232,7 +232,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 55555,
+        id: '55555',
         photoURL: pulpfiction,
         title: 'パルプ・フィクション',
         release: '1994',
@@ -240,7 +240,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 66666,
+        id: '66666',
         photoURL: ganman,
         title: '続・夕陽のガンマン',
         release: '1996',
@@ -248,7 +248,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 777777,
+        id: '77777',
         photoURL: list,
         title: 'シンドラーのリスト',
         release: '1994',
@@ -256,7 +256,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 88888,
+        id: '88888',
         photoURL: fightclub,
         title: 'ファイトクラブ',
         release: '1999',
@@ -264,7 +264,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 99999,
+        id: '99999',
         photoURL: inception,
         title: 'インセプション',
         release: '2010',
@@ -272,7 +272,7 @@ export const sampleData = [
         description: '映画の説明文',
       },
       {
-        id: 10101,
+        id: '10101',
         photoURL: loadoftherings,
         title: 'ロード・オブ・ザ・リング',
         release: '2001',
@@ -285,7 +285,7 @@ export const sampleData = [
 
 export const popularFilms = [
   {
-    id: 11111,
+    id: '11111',
     title: 'ショーシャンクの空に',
     photoURL: showshank,
     release: '1994',
@@ -293,7 +293,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 22222,
+    id: '22222',
     photoURL: godfather,
     title: 'ゴッド・ファーザー',
     release: '1972',
@@ -301,7 +301,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 33333,
+    id: '33333',
     photoURL: twelveangrymen,
     title: '十二の怒れる男',
     release: '1957',
@@ -309,7 +309,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 44444,
+    id: '44444',
     photoURL: darknight,
     title: 'ダークナイト',
     release: '2008',
@@ -317,7 +317,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 55555,
+    id: '55555',
     photoURL: pulpfiction,
     title: 'パルプ・フィクション',
     release: '1994',
@@ -325,7 +325,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 66666,
+    id: '66666',
     photoURL: ganman,
     title: '続・夕陽のガンマン',
     release: '1996',
@@ -333,7 +333,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 777777,
+    id: '77777',
     photoURL: list,
     title: 'シンドラーのリスト',
     release: '1994',
@@ -341,7 +341,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 88888,
+    id: '88888',
     photoURL: fightclub,
     title: 'ファイトクラブ',
     release: '1999',
@@ -349,7 +349,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 99999,
+    id: '99999',
     photoURL: inception,
     title: 'インセプション',
     release: '2010',
@@ -357,7 +357,7 @@ export const popularFilms = [
     description: '映画の説明文',
   },
   {
-    id: 10101,
+    id: '10101',
     photoURL: loadoftherings,
     title: 'ロード・オブ・ザ・リング',
     release: '2001',

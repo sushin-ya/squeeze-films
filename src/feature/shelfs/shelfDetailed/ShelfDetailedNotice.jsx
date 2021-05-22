@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
-import { ErrorOutline, Add } from '@material-ui/icons';
+import { ErrorOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FilmDashboardNotice({ button }) {
+export default function ShelfDetailedNotice({ button, shelfId }) {
   const classes = useStyles();
 
   return (
@@ -27,17 +27,15 @@ export default function FilmDashboardNotice({ button }) {
             <ErrorOutline className={classes.icon} />
           </Box>
           <Typography variant='body1' className={classes.text}>
-            あなたもリストを作りたい？
-            <span className={classes.strong}>Squeeze</span>しましょう！
+            オール・タイム・ベストを最新化しましょう！
           </Typography>
           <Button
             variant='contained'
             className={button}
-            startIcon={<Add />}
             component={Link}
-            to='/createFilms'
+            to={`/manage/${shelfId}`}
           >
-            Squeeze Films
+            Edit Films
           </Button>
         </Box>
       </Paper>
