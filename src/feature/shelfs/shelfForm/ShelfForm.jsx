@@ -134,6 +134,7 @@ export default function ShelfForm() {
               <Button
                 variant='contained'
                 className={classes.button}
+                color='primary'
                 onClick={() => history.push('/shelfs')}
               >
                 <Box p={0.5}>Cancel</Box>

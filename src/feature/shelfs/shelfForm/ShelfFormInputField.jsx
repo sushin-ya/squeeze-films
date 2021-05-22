@@ -18,7 +18,7 @@ export default function ShelfFormInputField() {
       <TextField
         className={classes.label}
         id='outlined-basic'
-        label='Search &amp; click your favorite film to add your all time best squeezed films !!!'
+        label="Let's search for your favorite films !!!"
         variant='outlined'
         fullWidth
         InputProps={{
