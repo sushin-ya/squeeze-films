@@ -5,6 +5,7 @@ import ShelfDetailedNotice from './ShelfDetailedNotice';
 import ShelfDetailedList from './ShelfDetailedList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,10 +21,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfDetailedPage({ match }) {
+export default function ShelfDetailedPage() {
   const classes = useStyles();
+  const params = useParams();
   const shelf = useSelector((state) =>
-    state.shelf.shelfs.find((s) => s.uid === match.params.id)
+    state.shelf.shelfs.find((s) => s.uid === params.id)
   );
 
   return (
@@ -33,7 +35,7 @@ export default function ShelfDetailedPage({ match }) {
           photoURL={shelf.photoURL}
           displayName={shelf.displayName}
         />
-        <ShelfDetailedNotice button={classes.button} />
+        <ShelfDetailedNotice button={classes.button} shelfId={shelf.uid} />
         <ShelfDetailedList shelf={shelf} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>

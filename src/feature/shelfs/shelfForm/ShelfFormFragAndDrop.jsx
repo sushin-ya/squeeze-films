@@ -88,8 +88,8 @@ export default function ShelfFormDragAndDrop({ data, setData }) {
 
         if (index === 0) {
           return (
-            <>
-              <ShelfFormList key={column.id} column={column} films={films} />
+            <div key={column.id}>
+              <ShelfFormList column={column} films={films} />
               <Box
                 m={2}
                 display='flex'
@@ -102,7 +102,7 @@ export default function ShelfFormDragAndDrop({ data, setData }) {
                   Drag &amp; Drop
                 </Typography>
               </Box>
-            </>
+            </div>
           );
         } else {
           return (

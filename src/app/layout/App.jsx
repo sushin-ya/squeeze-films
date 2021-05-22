@@ -29,7 +29,7 @@ export default function App() {
             <Container maxWidth='lg' className={classes.container}>
               <Route exact path='/shelfs' component={ShelfDashboard} />
               <Route path='/shelfs/:id' component={ShelfDetailedPage} />
-              <Route path='/createShelf' component={ShelfForm} />
+              <Route path='/manage/:id' component={ShelfForm} />
             </Container>
           </>
         )}

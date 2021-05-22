@@ -3,9 +3,11 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ShelfFormInputField from './ShelfFormInputField';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
+import { useSelector, useDispatch } from 'react-redux';
+import { createShelf, deleteShelf, updateShelf } from '../shelfActions';
+import { useParams, useHistory } from 'react-router-dom';
 import initialData from './initial-data';
-import { useDispatch } from 'react-redux';
-import { createShelf } from '../shelfActions';
+import templateData from './template-data';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,12 +27,24 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#265858',
     },
   },
+  delete: {
+    backgroundColor: '#F44336',
+    '&:hover': {
+      backgroundColor: '#C6382E',
+    },
+  },
 }));
 
-export default function ShelfForm({ history }) {
+export default function ShelfForm() {
   const classes = useStyles();
+  const history = useHistory();
+  const params = useParams();
+  const dispatch = useDispatch();
+  const selectedShelf = useSelector((state) =>
+    state.shelf.shelfs.find((s) => s.uid === params.id)
+  );
 
-  const initialShelf = {
+  const initialShelf = selectedShelf ?? {
     id: '4',
     uid: 'test1',
     displayName: 'Test1',
@@ -38,11 +52,35 @@ export default function ShelfForm({ history }) {
     createdAt: '2021-05-21',
     films: [],
   };
-  const [data, setData] = useState(initialData);
   const [myShelf, setMyShelf] = useState(initialShelf);
-  const dispatch = useDispatch();
 
-  function handleSetMyShelf() {
+  let newTmpData = undefined;
+  if (selectedShelf) {
+    const tmpData = templateData;
+    const newFilms = selectedShelf.films.reduce(
+      (newFilms, data) => ({
+        ...newFilms,
+        [`${data.id}`]: data,
+      }),
+      {}
+    );
+    const newFilmIds = selectedShelf.films.map((film) => String(film.id));
+    newTmpData = {
+      ...tmpData,
+      films: newFilms,
+      columns: {
+        ...tmpData.columns,
+        allTimeBest: {
+          ...tmpData.columns.allTimeBest,
+          filmIds: newFilmIds,
+        },
+      },
+    };
+  }
+  const init = newTmpData ?? initialData;
+  const [data, setData] = useState(init);
+
+  function handleFormSubmit() {
     const filmList = Object.entries(data.films).map(([key, value]) => value);
     const myFilmIds = data.columns['allTimeBest'].filmIds;
     const myFilmList = filmList.filter((film) => myFilmIds.includes(film.id));
@@ -51,7 +89,15 @@ export default function ShelfForm({ history }) {
       films: [...myFilmList],
     };
     setMyShelf(newMyShelf);
-    dispatch(createShelf(newMyShelf));
+
+    selectedShelf
+      ? dispatch(updateShelf(newMyShelf))
+      : dispatch(createShelf(newMyShelf));
+    history.push('/shelfs');
+  }
+
+  function handleFormDelete(myShelfId) {
+    dispatch(deleteShelf(myShelfId));
     history.push('/shelfs');
   }
 
@@ -72,18 +118,27 @@ export default function ShelfForm({ history }) {
             <Button
               variant='contained'
               className={`${classes.button} ${classes.success}`}
-              onClick={() => handleSetMyShelf(data)}
+              onClick={() => handleFormSubmit(data)}
             >
               <Box p={0.5}>Submit</Box>
             </Button>
-            <Button
-              variant='contained'
-              className={classes.button}
-              color='primary'
-              onClick={() => history.push('/shelfs')}
-            >
-              <Box p={0.5}>Cancel</Box>
-            </Button>
+            {selectedShelf ? (
+              <Button
+                variant='contained'
+                className={`${classes.button} ${classes.delete}`}
+                onClick={() => handleFormDelete(myShelf.id)}
+              >
+                <Box p={0.5}>Delete</Box>
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                className={classes.button}
+                onClick={() => history.push('/shelfs')}
+              >
+                <Box p={0.5}>Cancel</Box>
+              </Button>
+            )}
           </Box>
         </Box>
       </div>

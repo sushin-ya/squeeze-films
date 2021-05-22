@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
 import { ErrorOutline } from '@material-ui/icons';
+import { Link } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   icon: {
     transform: `translateY(-1px)`,
@@ -14,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfDetailedNotice({ button }) {
+export default function ShelfDetailedNotice({ button, shelfId }) {
   const classes = useStyles();
 
   return (
@@ -27,7 +29,12 @@ export default function ShelfDetailedNotice({ button }) {
           <Typography variant='body1' className={classes.text}>
             オール・タイム・ベストを最新化しましょう！
           </Typography>
-          <Button variant='contained' className={button}>
+          <Button
+            variant='contained'
+            className={button}
+            component={Link}
+            to={`/manage/${shelfId}`}
+          >
             Edit Films
           </Button>
         </Box>

@@ -23,7 +23,7 @@ export default function shelfReducer(state = initialState, { type, payload }) {
     case DELETE_SHELF:
       return {
         ...state,
-        shelfs: [...state.shelfs.filter((shelf) => shelf.id !== payload.id)],
+        shelfs: [...state.shelfs.filter((shelf) => shelf.id !== payload)],
       };
     default:
       return state;
