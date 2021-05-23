@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PopularPageTitle from './PopularPageTitle';
 import PopularFilmList from './PopularFilmList';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPopularFilm } from './popularFIlmReducer';
+import { fetchPopularFilm } from './popularFilmReducer';
 
 const useStyles = makeStyles((theme) => ({
   container: {
