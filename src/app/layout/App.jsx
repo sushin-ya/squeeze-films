@@ -3,6 +3,7 @@ import NavBar from '../../feature/nav/NavBar';
 import ShelfDashboard from '../../feature/shelfs/shelfDashboard/ShelfDashboard';
 import ShelfDetailedPage from '../../feature/shelfs/shelfDetailed/ShelfDetailedPage';
 import ShelfForm from '../../feature/shelfs/shelfForm/ShelfForm';
+import Films from '../../feature/films/Films';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 
@@ -31,6 +32,7 @@ export default function App() {
                   path={['/createShelf', '/manage/:id']}
                   component={ShelfForm}
                 />
+                <Route path='/films' component={Films} />
               </Container>
             </Box>
           </>
