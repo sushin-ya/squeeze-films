@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'grid',
     gridTemplateColumns: '15% 85%',
     gridColumnGap: theme.spacing(2),
-    gridRowGap: theme.spacing(1),
+    gridRowGap: theme.spacing(2),
   },
   image: {
     width: '100%',
@@ -17,9 +17,12 @@ const useStyles = makeStyles((theme) => ({
   description: {
     width: '90%',
   },
+  descriptionText: {
+    width: '90%',
+  },
 }));
 
-export default function ShelfDetailedList({ shelf }) {
+export default function PopularFilmList({ shelf }) {
   const classes = useStyles();
 
   return (
@@ -29,9 +32,9 @@ export default function ShelfDetailedList({ shelf }) {
           <Grid item xs={12}>
             <Box mt={2} mb={2}>
               {shelf &&
-                shelf.films.map((film, index) => (
+                shelf.map((film, index) => (
                   <div key={film.title}>
-                    <Box mb={2}>
+                    <Box mb={5}>
                       <div className={classes.grid}>
                         <img
                           src={film.photoURL}
@@ -66,6 +69,27 @@ export default function ShelfDetailedList({ shelf }) {
                                 <Typography>監督：{film.director}</Typography>
                                 <Typography>公開：{film.release}年</Typography>
                               </Box>
+                              {film.description && (
+                                <>
+                                  <Box mt={2}>
+                                    <Typography
+                                      variant='body1'
+                                      color='textPrimary'
+                                    >
+                                      あらすじ：
+                                    </Typography>
+                                  </Box>
+                                  <Typography
+                                    variant='body1'
+                                    color='textPrimary'
+                                    className={classes.descriptionText}
+                                  >
+                                    {film.description.length > 118
+                                      ? `${film.description.slice(0, 118)}...`
+                                      : film.description}
+                                  </Typography>
+                                </>
+                              )}
                             </Grid>
                           </Grid>
                         </Box>
