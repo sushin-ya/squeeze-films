@@ -45,7 +45,7 @@ export function fetchPopularFilm() {
       const newFilms = films.map((film, index) => {
         return {
           id: film.id,
-          photoURL: `https://image.tmdb.org/t/p/w342${film.poster_path}`,
+          photoURL: `https://image.tmdb.org/t/p/w500${film.poster_path}`,
           title: film.title,
           release: getYear(film.release_date),
           director: directorName[index],
