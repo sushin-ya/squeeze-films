@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     width: '90%',
   },
   descriptionText: {
-    width: '70%',
+    width: '90%',
   },
 }));
 
@@ -69,20 +69,27 @@ export default function PopularFilmList({ shelf }) {
                                 <Typography>監督：{film.director}</Typography>
                                 <Typography>公開：{film.release}年</Typography>
                               </Box>
-                              <Box mt={2}>
-                                <Typography variant='body1' color='textPrimary'>
-                                  あらすじ：
-                                </Typography>
-                              </Box>
-                              <Typography
-                                variant='body1'
-                                color='textPrimary'
-                                className={classes.descriptionText}
-                              >
-                                あららららららららあああああああああああああああああああ
-                                ああああああああああああああららららららららあああああああ
-                                あああああああああああああああああ
-                              </Typography>
+                              {film.description && (
+                                <>
+                                  <Box mt={2}>
+                                    <Typography
+                                      variant='body1'
+                                      color='textPrimary'
+                                    >
+                                      あらすじ：
+                                    </Typography>
+                                  </Box>
+                                  <Typography
+                                    variant='body1'
+                                    color='textPrimary'
+                                    className={classes.descriptionText}
+                                  >
+                                    {film.description.length > 118
+                                      ? `${film.description.slice(0, 118)}...`
+                                      : film.description}
+                                  </Typography>
+                                </>
+                              )}
                             </Grid>
                           </Grid>
                         </Box>
