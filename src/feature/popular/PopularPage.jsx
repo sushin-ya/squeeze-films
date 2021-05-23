@@ -16,7 +16,7 @@ export default function PopularPage() {
   const { popularFilms } = useSelector((state) => state.popular);
   const dispatch = useDispatch();
 
-  console.log([popularFilms], popularFilms);
+  // console.log([popularFilms], popularFilms);
 
   useEffect(() => {
     dispatch(fetchPopularFilm());
