@@ -3,7 +3,7 @@ import NavBar from '../../feature/nav/NavBar';
 import ShelfDashboard from '../../feature/shelfs/shelfDashboard/ShelfDashboard';
 import ShelfDetailedPage from '../../feature/shelfs/shelfDetailed/ShelfDetailedPage';
 import ShelfForm from '../../feature/shelfs/shelfForm/ShelfForm';
-import FilmSuggestionForm from '../../feature/films/FilmSuggestionForm';
+import FilmSuggestionForm from '../../feature/sandbox/FilmSuggestionForm';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import PopularPage from '../../feature/popular/PopularPage';
@@ -34,7 +34,7 @@ export default function App() {
                   path={['/createShelf', '/manage/:id']}
                   component={ShelfForm}
                 />
-                <Route path='/films' component={FilmSuggestionForm} />
+                <Route path='/sandbox' component={FilmSuggestionForm} />
               </Container>
             </Box>
           </>

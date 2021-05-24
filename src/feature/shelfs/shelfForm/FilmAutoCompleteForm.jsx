@@ -43,7 +43,7 @@ async function getSuggestions(value) {
   }
 }
 
-export default function FlimAutoCompleteForm() {
+export default function FlimAutoCompleteForm({ setData }) {
   const classes = useStyles();
 
   const [inputValue, setInputValue] = useState('');
@@ -63,6 +63,7 @@ export default function FlimAutoCompleteForm() {
     } else if (event && event.type === 'click') {
       console.log(event);
       console.log(value);
+      // setData
       setInputValue('');
       setSuggestions([]);
     }
