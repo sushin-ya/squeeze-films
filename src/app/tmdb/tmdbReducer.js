@@ -5,6 +5,7 @@ import {
 } from '../async/asyncReducer';
 import axios from 'axios';
 import getYear from '../common/utility';
+import { toast } from 'react-toastify';
 
 const FETCH_POPULAR_FILM = 'FETCH_POPULAR_FILM';
 const FETCH_SUGGESTED_FILM = 'FETCH_SUGGESTED_FILM';
@@ -105,11 +106,11 @@ export function fetchSuggestedFilm(value) {
           description: film.overview,
         };
       });
-
       dispatch({ type: FETCH_SUGGESTED_FILM, payload: newFilms });
       dispatch(asyncActionFinish());
     } catch (error) {
       dispatch(asyncActionError(error));
+      toast.error(error);
     }
   };
 }
