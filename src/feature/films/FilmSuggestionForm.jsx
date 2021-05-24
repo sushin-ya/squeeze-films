@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Autosuggest from 'react-autosuggest';
 import FilmSuggestionCard from './FilmSuggestionCard';
+import FlimAutoCompleteForm from './FilmAutoCompleteForm';
 
 async function getSuggestions(value) {
   const inputValue = value.trim().toLowerCase();
@@ -22,11 +23,10 @@ async function getSuggestions(value) {
           const temp = {
             id: film.id,
             title: film.title,
-            img: `https://image.tmdb.org/t/p/w200${film.poster_path}`,
-            year:
-              film.release_date === ''
-                ? '0000'
-                : film.release_date.substring(0, 4),
+            img:
+              film.poster_path &&
+              `https://image.tmdb.org/t/p/w200${film.poster_path}`,
+            year: film.release_date && film.release_date.slice(0, 4),
           };
           return temp;
         });
@@ -79,14 +79,17 @@ export default function FilmSuggestionForm() {
   }
 
   return (
-    <Autosuggest
-      suggestions={suggestions}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      onSuggestionSelected={onSuggestionSelected}
-      getSuggestionValue={getSuggestionValue}
-      renderSuggestion={renderSuggestion}
-      inputProps={inputProps}
-    />
+    <>
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        onSuggestionSelected={onSuggestionSelected}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+      />
+      <FlimAutoCompleteForm />
+    </>
   );
 }
