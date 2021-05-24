@@ -34,36 +34,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfForm() {
-  const classes = useStyles();
-  const history = useHistory();
-  const params = useParams();
-  const dispatch = useDispatch();
-  const selectedShelf = useSelector((state) =>
-    state.shelf.shelfs.find((s) => s.uid === params.id)
-  );
-
-  const initialShelf = selectedShelf ?? {
-    id: '4',
-    uid: 'test1',
-    displayName: 'Test1',
-    photoURL: null,
-    createdAt: '2021-05-21',
-    films: [],
-  };
-  const [myShelf, setMyShelf] = useState(initialShelf);
-
+function initialData(shelf) {
   let newTmpData = undefined;
   const tmpData = templateData;
-  if (selectedShelf) {
-    const newFilms = selectedShelf.films.reduce(
+  if (shelf) {
+    const newFilms = shelf.films.reduce(
       (newFilms, data) => ({
         ...newFilms,
         [`${data.id}`]: data,
       }),
       {}
     );
-    const newFilmIds = selectedShelf.films.map((film) => String(film.id));
+    const newFilmIds = shelf.films.map((film) => String(film.id));
     newTmpData = {
       ...tmpData,
       films: newFilms,
@@ -76,12 +58,68 @@ export default function ShelfForm() {
       },
     };
   }
-  const init = newTmpData ?? tmpData;
-  const [data, setData] = useState(init);
+  return newTmpData ?? tmpData;
+}
 
-  function handleFormSubmit() {
-    const filmList = Object.entries(data.films).map(([key, value]) => value);
-    const myFilmIds = data.columns['allTimeBest'].filmIds;
+export default function ShelfForm() {
+  const classes = useStyles();
+  const history = useHistory();
+  const params = useParams();
+  const dispatch = useDispatch();
+  const selectedShelf = useSelector((state) =>
+    state.shelf.shelfs.find((s) => s.uid === params.id)
+  );
+  const tmdbFilms = useSelector((state) => state.tmdb.tmdbFilms);
+
+  const initialShelf = selectedShelf ?? {
+    id: '4',
+    uid: 'test1',
+    displayName: 'Test1',
+    photoURL: null,
+    createdAt: '2021-05-21',
+    films: [],
+  };
+  const [myShelf, setMyShelf] = useState(initialShelf);
+  const [data, setData] = useState(initialData(selectedShelf));
+
+  function handleSetData(films) {
+    const film = {
+      id: '10101',
+      photoURL: null,
+      title: 'ロード・オブ・ザ・リング',
+      release: '2001',
+      director: 'ピーター・ジャクソン',
+      description: '映画の説明文',
+    };
+
+    const draggableId = film.id;
+    const droppableId = 'candidate';
+    const column = data.columns[droppableId];
+    const newfilmIds = Array.from(column.filmIds);
+    newfilmIds.splice(0, 0, draggableId);
+
+    const newColumn = {
+      ...column,
+      filmIds: newfilmIds,
+    };
+
+    const newData = {
+      ...data,
+      columns: {
+        ...data.columns,
+        [newColumn.id]: newColumn,
+      },
+    };
+
+    setData(newData);
+    return;
+  }
+
+  function handleFormSubmit(updatedData) {
+    const filmList = Object.entries(updatedData.films).map(
+      ([key, value]) => value
+    );
+    const myFilmIds = updatedData.columns['allTimeBest'].filmIds;
     const myFilmList = filmList.filter((film) => myFilmIds.includes(film.id));
     const newMyShelf = {
       ...myShelf,
@@ -104,7 +142,7 @@ export default function ShelfForm() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <Box mr={1}>
-          <FlimAutoCompleteForm setData={setData} />
+          <FlimAutoCompleteForm setData={handleSetData} />
           <ShelfFormFragAndDrop data={data} setData={setData} />
           <Box
             mt={2}

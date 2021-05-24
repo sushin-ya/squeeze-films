@@ -63,7 +63,7 @@ export default function FlimAutoCompleteForm({ setData }) {
     } else if (event && event.type === 'click') {
       console.log(event);
       console.log(value);
-      // setData
+      setData(value);
       setInputValue('');
       setSuggestions([]);
     }
