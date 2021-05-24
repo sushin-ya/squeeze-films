@@ -35,10 +35,22 @@ async function getSuggestions(value) {
 }
 
 export default function FlimAutoCompleteForm() {
+  const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
 
-  function onInputChangeHandler(event, value, reason) {
-    onSuggestionsFetchRequested(value);
+  function onInputChangeHandler(event, value) {
+    if (!event) {
+      return;
+    }
+
+    if (event && event.type === 'change') {
+      setInputValue(value);
+      onSuggestionsFetchRequested(value);
+    } else if (event && event.type === 'click') {
+      console.log(event);
+      console.log(value);
+      setInputValue('');
+    }
   }
 
   function onSuggestionsFetchRequested(value) {
@@ -48,11 +60,11 @@ export default function FlimAutoCompleteForm() {
   return (
     <div style={{ width: 300 }}>
       <Autocomplete
+        inputValue={inputValue}
         id='free-solo-demo'
         freeSolo
-        onInputChange={(event, value, reason) =>
-          onInputChangeHandler(event, value, reason)
-        }
+        blurOnSelect
+        onInputChange={(event, value) => onInputChangeHandler(event, value)}
         options={suggestions.map((option) => option.title)}
         renderInput={(params) => (
           <TextField
