@@ -83,6 +83,8 @@ export default function ShelfForm() {
   const [data, setData] = useState(initialData(selectedShelf));
 
   function handleSetData(films) {
+    console.log(films);
+
     const film = {
       id: '10101',
       photoURL: null,
