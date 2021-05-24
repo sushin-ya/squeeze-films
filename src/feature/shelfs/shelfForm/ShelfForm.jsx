@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import ShelfFormInputField from './ShelfFormInputField';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
 import { createShelf, deleteShelf, updateShelf } from '../shelfActions';
 import { useParams, useHistory } from 'react-router-dom';
 import initialData from './initial-data';
 import templateData from './template-data';
+import FlimAutoCompleteForm from './FilmAutoCompleteForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -105,7 +105,7 @@ export default function ShelfForm() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <Box mr={1}>
-          <ShelfFormInputField />
+          <FlimAutoCompleteForm />
           <ShelfFormFragAndDrop data={data} setData={setData} />
           <Box
             mt={2}
