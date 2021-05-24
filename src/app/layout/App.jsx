@@ -7,6 +7,7 @@ import FilmSuggestionForm from '../../feature/sandbox/FilmSuggestionForm';
 import { Box, Container, makeStyles } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import PopularPage from '../../feature/popular/PopularPage';
+import { ToastContainer } from 'react-toastify';
 
 const useStyles = makeStyles({
   background: {
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <>
+      <ToastContainer position='bottom-right' hideProgressBar />
       <Route exact path='/' component={HomePage} />
       <Route
         path={'/(.+)'}

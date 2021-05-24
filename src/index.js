@@ -7,6 +7,7 @@ import '@fontsource/roboto';
 import '@fontsource/noto-sans-jp';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './app/config/theme';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureStore } from './app/store/configureStore';
