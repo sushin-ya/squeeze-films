@@ -17,8 +17,6 @@ export default function ShelfFormDragAndDrop({ data, setData }) {
     (result) => {
       const { destination, source, draggableId } = result;
 
-      console.log(result);
-
       if (!destination) {
         return;
       }

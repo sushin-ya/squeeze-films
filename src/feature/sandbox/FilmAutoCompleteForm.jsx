@@ -47,8 +47,6 @@ export default function FlimAutoCompleteForm() {
       setInputValue(value);
       onSuggestionsFetchRequested(value);
     } else if (event && event.type === 'click') {
-      console.log(event);
-      console.log(value);
       setInputValue('');
     }
   }

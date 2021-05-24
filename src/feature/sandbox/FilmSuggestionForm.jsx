@@ -73,7 +73,6 @@ export default function FilmSuggestionForm() {
 
   function onSuggestionSelected(event, { suggestion, method }) {
     if (method === 'click' || method === 'enter') {
-      console.log(suggestion);
       setValue('');
     }
   }

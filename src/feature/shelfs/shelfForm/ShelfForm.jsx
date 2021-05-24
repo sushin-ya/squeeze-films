@@ -69,7 +69,6 @@ export default function ShelfForm() {
   const selectedShelf = useSelector((state) =>
     state.shelf.shelfs.find((s) => s.uid === params.id)
   );
-  const tmdbFilms = useSelector((state) => state.tmdb.tmdbFilms);
 
   const initialShelf = selectedShelf ?? {
     id: '4',
@@ -82,19 +81,8 @@ export default function ShelfForm() {
   const [myShelf, setMyShelf] = useState(initialShelf);
   const [data, setData] = useState(initialData(selectedShelf));
 
-  function handleSetData(films) {
-    console.log(films);
-
-    const film = {
-      id: '10101',
-      photoURL: null,
-      title: 'ロード・オブ・ザ・リング',
-      release: '2001',
-      director: 'ピーター・ジャクソン',
-      description: '映画の説明文',
-    };
-
-    const draggableId = film.id;
+  function handleSetData(film) {
+    const draggableId = String(film.id);
     const droppableId = 'candidate';
     const column = data.columns[droppableId];
     const newfilmIds = Array.from(column.filmIds);
@@ -111,6 +99,10 @@ export default function ShelfForm() {
         ...data.columns,
         [newColumn.id]: newColumn,
       },
+      films: {
+        ...data.films,
+        [String(film.id)]: film,
+      },
     };
 
     setData(newData);
@@ -122,7 +114,10 @@ export default function ShelfForm() {
       ([key, value]) => value
     );
     const myFilmIds = updatedData.columns['allTimeBest'].filmIds;
-    const myFilmList = filmList.filter((film) => myFilmIds.includes(film.id));
+    const myFilmList = myFilmIds.reduce(
+      (acc, cur) => [...acc, filmList.filter((film) => film.id === cur)[0]],
+      []
+    );
     const newMyShelf = {
       ...myShelf,
       films: [...myFilmList],

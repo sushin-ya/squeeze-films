@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import axios from 'axios';
 import { makeStyles } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  clearSuggestedFilm,
+  fetchSuggestedFilm,
+} from '../../../app/tmdb/tmdbReducer';
 
 const useStyles = makeStyles((theme) => ({
   label: {
@@ -12,42 +16,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-async function getSuggestions(value) {
-  const inputLength = value.length;
-
-  if (inputLength === 0) {
-    return [];
-  } else {
-    const suggestionValue = await axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&query=${value}&language=ja-JP`
-      )
-      .then((res) => {
-        return res.data.results;
-      })
-      .then((results) => {
-        const suggestionFilms = results.map((film) => {
-          const temp = {
-            id: film.id,
-            title: film.title,
-            img:
-              film.poster_path &&
-              `https://image.tmdb.org/t/p/w200${film.poster_path}`,
-            year: film.release_date && film.release_date.slice(0, 4),
-          };
-          return temp;
-        });
-        return suggestionFilms;
-      });
-    return suggestionValue;
-  }
-}
-
 export default function FlimAutoCompleteForm({ setData }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const tmdbFilms = useSelector((state) => state.tmdb.tmdbFilms);
+
+  useEffect(() => {
+    setSuggestions(tmdbFilms);
+  }, [tmdbFilms]);
+
+  useEffect(() => {
+    if (inputValue === '') {
+      setSuggestions([]);
+      dispatch(clearSuggestedFilm());
+    }
+  }, [inputValue, dispatch]);
 
   function onInputChangeHandler(event, value) {
     if (!event) {
@@ -59,19 +45,27 @@ export default function FlimAutoCompleteForm({ setData }) {
       onSuggestionsFetchRequested(value);
     } else if (event && event.type === 'click' && value === '') {
       setInputValue('');
-      setSuggestions([]);
     } else if (event && event.type === 'click') {
       const suggestionData = suggestions.filter(
         (suggestion) => suggestion.title === value
       )[0];
       setData(suggestionData);
       setInputValue('');
-      setSuggestions([]);
     }
   }
 
   function onSuggestionsFetchRequested(value) {
-    getSuggestions(value).then((res) => setSuggestions(res));
+    getSuggestions(value);
+  }
+
+  function getSuggestions(value) {
+    const inputLength = value.length;
+
+    if (inputLength === 0) {
+      return [];
+    } else {
+      dispatch(fetchSuggestedFilm(value));
+    }
   }
 
   return (
