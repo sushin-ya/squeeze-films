@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import ShelfFormInputField from './ShelfFormInputField';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
 import { createShelf, deleteShelf, updateShelf } from '../shelfActions';
 import { useParams, useHistory } from 'react-router-dom';
-import initialData from './initial-data';
 import templateData from './template-data';
+import FlimAutoCompleteForm from './FilmAutoCompleteForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,6 +34,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function initialData(shelf) {
+  let newTmpData = undefined;
+  const tmpData = templateData;
+  if (shelf) {
+    const newFilms = shelf.films.reduce(
+      (newFilms, data) => ({
+        ...newFilms,
+        [`${data.id}`]: data,
+      }),
+      {}
+    );
+    const newFilmIds = shelf.films.map((film) => String(film.id));
+    newTmpData = {
+      ...tmpData,
+      films: newFilms,
+      columns: {
+        ...tmpData.columns,
+        allTimeBest: {
+          ...tmpData.columns.allTimeBest,
+          filmIds: newFilmIds,
+        },
+      },
+    };
+  }
+  return newTmpData ?? tmpData;
+}
+
 export default function ShelfForm() {
   const classes = useStyles();
   const history = useHistory();
@@ -53,37 +79,45 @@ export default function ShelfForm() {
     films: [],
   };
   const [myShelf, setMyShelf] = useState(initialShelf);
+  const [data, setData] = useState(initialData(selectedShelf));
 
-  let newTmpData = undefined;
-  if (selectedShelf) {
-    const tmpData = templateData;
-    const newFilms = selectedShelf.films.reduce(
-      (newFilms, data) => ({
-        ...newFilms,
-        [`${data.id}`]: data,
-      }),
-      {}
-    );
-    const newFilmIds = selectedShelf.films.map((film) => String(film.id));
-    newTmpData = {
-      ...tmpData,
-      films: newFilms,
+  function handleSetData(film) {
+    const draggableId = String(film.id);
+    const droppableId = 'candidate';
+    const column = data.columns[droppableId];
+    const newfilmIds = Array.from(column.filmIds);
+    newfilmIds.splice(0, 0, draggableId);
+
+    const newColumn = {
+      ...column,
+      filmIds: newfilmIds,
+    };
+
+    const newData = {
+      ...data,
       columns: {
-        ...tmpData.columns,
-        allTimeBest: {
-          ...tmpData.columns.allTimeBest,
-          filmIds: newFilmIds,
-        },
+        ...data.columns,
+        [newColumn.id]: newColumn,
+      },
+      films: {
+        ...data.films,
+        [String(film.id)]: film,
       },
     };
-  }
-  const init = newTmpData ?? initialData;
-  const [data, setData] = useState(init);
 
-  function handleFormSubmit() {
-    const filmList = Object.entries(data.films).map(([key, value]) => value);
-    const myFilmIds = data.columns['allTimeBest'].filmIds;
-    const myFilmList = filmList.filter((film) => myFilmIds.includes(film.id));
+    setData(newData);
+    return;
+  }
+
+  function handleFormSubmit(updatedData) {
+    const filmList = Object.entries(updatedData.films).map(
+      ([key, value]) => value
+    );
+    const myFilmIds = updatedData.columns['allTimeBest'].filmIds;
+    const myFilmList = myFilmIds.reduce(
+      (acc, cur) => [...acc, filmList.filter((film) => film.id === cur)[0]],
+      []
+    );
     const newMyShelf = {
       ...myShelf,
       films: [...myFilmList],
@@ -105,7 +139,7 @@ export default function ShelfForm() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <Box mr={1}>
-          <ShelfFormInputField />
+          <FlimAutoCompleteForm setData={handleSetData} />
           <ShelfFormFragAndDrop data={data} setData={setData} />
           <Box
             mt={2}

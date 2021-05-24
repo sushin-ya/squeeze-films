@@ -106,7 +106,7 @@ export default function ShelfFormDragAndDrop({ data, setData }) {
           );
         } else {
           return (
-            <ShelfFormList key={column.id} column={column} films={films}colr />
+            <ShelfFormList key={column.id} column={column} films={films} colr />
           );
         }
       })}
