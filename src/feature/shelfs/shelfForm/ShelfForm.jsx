@@ -140,16 +140,16 @@ export default function ShelfForm() {
       };
       setMyShelf(newMyShelf);
       selectedShelf
-        ? updateShelfToFirestore(newMyShelf)
-        : addShelfToFirestore(newMyShelf);
+        ? await updateShelfToFirestore(newMyShelf)
+        : await addShelfToFirestore(newMyShelf);
       history.push('/shelfs');
     } catch (error) {
       toast.error(error.message);
     }
   }
 
-  function handleFormDelete(myShelfId) {
-    deleteShelfInFirestore(myShelfId);
+  async function handleFormDelete(myShelfId) {
+    await deleteShelfInFirestore(myShelfId);
     history.push('/shelfs');
   }
 
