@@ -143,13 +143,9 @@ export default function ShelfForm() {
         films: [...myFilmList],
       };
       setMyShelf(newMyShelf);
-      // console.log('[selected]', selectedShelf);
-      // console.log('[newMyShelf]', newMyShelf);
-
       selectedShelf
         ? await updateShelfToFirestore(newMyShelf)
         : await addShelfToFirestore(newMyShelf);
-      console.log('[update done]', newMyShelf);
       history.push('/shelfs');
     } catch (error) {
       toast.error(error.message);

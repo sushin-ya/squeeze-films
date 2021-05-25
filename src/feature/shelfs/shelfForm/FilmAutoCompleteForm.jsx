@@ -45,7 +45,15 @@ export default function FlimAutoCompleteForm({ setData }) {
       onSuggestionsFetchRequested(value);
     } else if (event && event.type === 'click' && value === '') {
       setInputValue('');
-    } else if (event && event.type === 'click') {
+    }
+  }
+
+  function onChangeHandler(event, value) {
+    if (!event) {
+      return;
+    }
+
+    if (event && event.type === 'click') {
       const suggestionData = suggestions.filter(
         (suggestion) => suggestion.title === value
       )[0];
@@ -74,6 +82,7 @@ export default function FlimAutoCompleteForm({ setData }) {
       id='free-solo-demo'
       freeSolo
       blurOnSelect
+      onChange={(event, value) => onChangeHandler(event, value)}
       onInputChange={(event, value) => onInputChangeHandler(event, value)}
       options={suggestions.map((option) => option.title)}
       renderInput={(params) => (
