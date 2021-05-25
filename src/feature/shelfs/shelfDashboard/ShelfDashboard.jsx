@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector } from 'react-redux';
+import {
+  dataFromSnapshot,
+  getShelfsFromFirestore,
+} from '../../../app/firestore/firestoreService';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,6 +27,18 @@ const useStyles = makeStyles((theme) => ({
 export default function ShelfDashboard() {
   const classes = useStyles();
   const { shelfs } = useSelector((state) => state.shelf);
+
+  useEffect(() => {
+    const unsubscribe = getShelfsFromFirestore({
+      next: (snapshot) =>
+        console.log(
+          snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
+        ),
+      error: (error) => console.log(error),
+    });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <div className={classes.container}>
