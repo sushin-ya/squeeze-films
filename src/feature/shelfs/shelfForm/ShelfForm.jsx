@@ -3,10 +3,17 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
-import { createShelf, deleteShelf, updateShelf } from '../shelfActions';
+import {
+  createShelf,
+  deleteShelf,
+  listenToShelfs,
+  updateShelf,
+} from '../shelfActions';
 import { useParams, useHistory } from 'react-router-dom';
 import templateData from './template-data';
 import FlimAutoCompleteForm from './FilmAutoCompleteForm';
+import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
+import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -80,6 +87,13 @@ export default function ShelfForm() {
   };
   const [myShelf, setMyShelf] = useState(initialShelf);
   const [data, setData] = useState(initialData(selectedShelf));
+
+  useFirestoreDoc({
+    shouldExecute: !!params.id,
+    query: () => listenToShelfFromFirestore(params.id),
+    data: (event) => dispatch(listenToShelfs([event])),
+    deps: [params.id, dispatch],
+  });
 
   function handleSetData(film) {
     const draggableId = String(film.id);

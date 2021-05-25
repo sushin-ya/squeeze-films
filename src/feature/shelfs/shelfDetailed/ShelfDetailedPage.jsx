@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { listenToShelfs } from '../shelfActions';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { listenToShelfFromFIrestore } from '../../../app/firestore/firestoreService';
+import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
 import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +35,7 @@ export default function ShelfDetailedPage() {
   const { error } = useSelector((state) => state.async);
 
   useFirestoreDoc({
-    query: () => listenToShelfFromFIrestore(params.id),
+    query: () => listenToShelfFromFirestore(params.id),
     data: (shelf) => dispatch(listenToShelfs([shelf])),
     deps: [params.id, dispatch],
   });

@@ -24,6 +24,6 @@ export function listenToShelfsFromFirestore() {
   return db.collection('shelfs');
 }
 
-export function listenToShelfFromFIrestore(shelfId) {
+export function listenToShelfFromFirestore(shelfId) {
   return db.collection('shelfs').doc(shelfId);
 }
