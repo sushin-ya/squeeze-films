@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PopularPageTitle from './PopularPageTitle';
 import PopularFilmList from './PopularFilmList';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPopularFilm } from './popularFilmReducer';
+import { fetchPopularFilm } from '../../app/tmdb/tmdbReducer';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PopularPage() {
   const classes = useStyles();
-  const { popularFilms } = useSelector((state) => state.popular);
+  const { tmdbFilms } = useSelector((state) => state.tmdb);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function PopularPage() {
   return (
     <div className={classes.container}>
       <PopularPageTitle />
-      <PopularFilmList shelf={popularFilms} />
+      <PopularFilmList shelf={tmdbFilms} />
     </div>
   );
 }

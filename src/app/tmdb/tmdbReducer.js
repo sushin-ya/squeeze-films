@@ -15,6 +15,39 @@ const initialState = {
   tmdbFilms: [],
 };
 
+async function directorNameSearch(films) {
+  const directorPromises = films.map(async (film) => {
+    const dirct = await axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${film.id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ja-JP&page=1`
+      )
+      .then((res) => {
+        return res.data.crew;
+      })
+      .then((crew) => {
+        const dir = crew.filter((person) => person.job === 'Director');
+        return dir[0];
+      });
+    return dirct;
+  });
+
+  const directors = await Promise.all(directorPromises).then((res) => res);
+  return directors.map((d) => (d === undefined ? '' : d.name));
+}
+
+function setNewFilms(films, directorName) {
+  return films.map((film, index) => {
+    return {
+      id: String(film.id),
+      photoURL: `https://image.tmdb.org/t/p/w500${film.poster_path}`,
+      title: film.title,
+      release: getYear(film.release_date),
+      director: directorName[index],
+      description: film.overview,
+    };
+  });
+}
+
 export function fetchPopularFilm() {
   return async function (dispatch) {
     dispatch(asyncActionStart());
@@ -27,36 +60,12 @@ export function fetchPopularFilm() {
           return res.data.results;
         });
 
-      const directorPromises = films.map(async (film) => {
-        const dirct = await axios
-          .get(
-            `https://api.themoviedb.org/3/movie/${film.id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ja-JP&page=1`
-          )
-          .then((res) => {
-            return res.data.crew;
-          })
-          .then((crew) => {
-            const dir = crew.filter((person) => person.job === 'Director');
-            return dir[0];
-          });
-        return dirct;
+      const directorName = directorNameSearch(films);
+      const newFilms = setNewFilms(films, directorName);
+      dispatch({
+        type: FETCH_POPULAR_FILM,
+        payload: newFilms,
       });
-
-      const directors = await Promise.all(directorPromises).then((res) => res);
-      const directorName = directors.map((d) => d.name);
-
-      const newFilms = films.map((film, index) => {
-        return {
-          id: String(film.id),
-          photoURL: `https://image.tmdb.org/t/p/w500${film.poster_path}`,
-          title: film.title,
-          release: getYear(film.release_date),
-          director: directorName[index],
-          description: film.overview,
-        };
-      });
-
-      dispatch({ type: FETCH_POPULAR_FILM, payload: newFilms });
       dispatch(asyncActionFinish());
     } catch (error) {
       dispatch(asyncActionError(error));
@@ -76,36 +85,9 @@ export function fetchSuggestedFilm(value) {
           return res.data.results;
         });
 
-      const directorPromises = films.map(async (film) => {
-        const dirct = await axios
-          .get(
-            `https://api.themoviedb.org/3/movie/${film.id}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ja-JP&page=1`
-          )
-          .then((res) => {
-            return res.data.crew;
-          })
-          .then((crew) => {
-            const dir = crew.filter((person) => person.job === 'Director')[0];
-            return dir;
-          });
-        return dirct;
-      });
+      const directorName = directorNameSearch(films);
+      const newFilms = setNewFilms(films, directorName);
 
-      const directors = await Promise.all(directorPromises).then((res) => res);
-      const directorName = directors.map((d) =>
-        d === undefined ? '' : d.name
-      );
-
-      const newFilms = films.map((film, index) => {
-        return {
-          id: String(film.id),
-          photoURL: `https://image.tmdb.org/t/p/w500${film.poster_path}`,
-          title: film.title,
-          release: getYear(film.release_date),
-          director: directorName[index],
-          description: film.overview,
-        };
-      });
       dispatch({ type: FETCH_SUGGESTED_FILM, payload: newFilms });
       dispatch(asyncActionFinish());
     } catch (error) {
