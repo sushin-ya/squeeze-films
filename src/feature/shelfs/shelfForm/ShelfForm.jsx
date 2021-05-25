@@ -128,7 +128,7 @@ export default function ShelfForm() {
     return;
   }
 
-  async function handleFormSubmit(updatedData) {
+  async function handleFormSubmit(updatedData, myShelf) {
     try {
       const filmList = Object.entries(updatedData.films).map(
         ([key, value]) => value
@@ -143,6 +143,9 @@ export default function ShelfForm() {
         films: [...myFilmList],
       };
       setMyShelf(newMyShelf);
+      // console.log('[selected]', selectedShelf);
+      // console.log('[newMyShelf]', newMyShelf);
+
       selectedShelf
         ? await updateShelfToFirestore(newMyShelf)
         : await addShelfToFirestore(newMyShelf);
@@ -230,6 +233,7 @@ export default function ShelfForm() {
         handleClose={handleSubmitConfirmClose}
         handleSubmit={handleFormSubmit}
         data={data}
+        myShelf={myShelf}
         isUpdate={!!selectedShelf}
       />
     </div>
