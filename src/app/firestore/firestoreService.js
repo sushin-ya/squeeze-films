@@ -27,3 +27,15 @@ export function listenToShelfsFromFirestore() {
 export function listenToShelfFromFirestore(shelfId) {
   return db.collection('shelfs').doc(shelfId);
 }
+
+export function addShelfToFirestore(shelf) {
+  return db.collection('shelfs').add({ ...shelf });
+}
+
+export function updateShelfToFirestore(shelf) {
+  return db.collection('shelfs').doc(shelf.id).update(shelf);
+}
+
+export function deleteShelfInFirestore(shelfId) {
+  return db.collection('shelfs').doc(shelfId).delete();
+}

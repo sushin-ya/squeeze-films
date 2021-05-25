@@ -3,17 +3,18 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  createShelf,
-  deleteShelf,
-  listenToShelfs,
-  updateShelf,
-} from '../shelfActions';
+import { listenToShelfs } from '../shelfActions';
 import { useParams, useHistory } from 'react-router-dom';
 import templateData from './template-data';
 import FlimAutoCompleteForm from './FilmAutoCompleteForm';
-import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
+import {
+  addShelfToFirestore,
+  deleteShelfInFirestore,
+  listenToShelfFromFirestore,
+  updateShelfToFirestore,
+} from '../../../app/firestore/firestoreService';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -123,29 +124,32 @@ export default function ShelfForm() {
     return;
   }
 
-  function handleFormSubmit(updatedData) {
-    const filmList = Object.entries(updatedData.films).map(
-      ([key, value]) => value
-    );
-    const myFilmIds = updatedData.columns['allTimeBest'].filmIds;
-    const myFilmList = myFilmIds.reduce(
-      (acc, cur) => [...acc, filmList.filter((film) => film.id === cur)[0]],
-      []
-    );
-    const newMyShelf = {
-      ...myShelf,
-      films: [...myFilmList],
-    };
-    setMyShelf(newMyShelf);
-
-    selectedShelf
-      ? dispatch(updateShelf(newMyShelf))
-      : dispatch(createShelf(newMyShelf));
-    history.push('/shelfs');
+  async function handleFormSubmit(updatedData) {
+    try {
+      const filmList = Object.entries(updatedData.films).map(
+        ([key, value]) => value
+      );
+      const myFilmIds = updatedData.columns['allTimeBest'].filmIds;
+      const myFilmList = myFilmIds.reduce(
+        (acc, cur) => [...acc, filmList.filter((film) => film.id === cur)[0]],
+        []
+      );
+      const newMyShelf = {
+        ...myShelf,
+        films: [...myFilmList],
+      };
+      setMyShelf(newMyShelf);
+      selectedShelf
+        ? updateShelfToFirestore(newMyShelf)
+        : addShelfToFirestore(newMyShelf);
+      history.push('/shelfs');
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 
   function handleFormDelete(myShelfId) {
-    dispatch(deleteShelf(myShelfId));
+    deleteShelfInFirestore(myShelfId);
     history.push('/shelfs');
   }
 
