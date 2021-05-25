@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { listenToShelfs } from '../shelfActions';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { listenToShelfFromFIrestore } from '../../../app/firestore/firestoreService';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -31,12 +32,15 @@ export default function ShelfDetailedPage() {
   const shelf = useSelector((state) =>
     state.shelf.shelfs.find((s) => s.uid === params.id)
   );
+  const { error } = useSelector((state) => state.async);
 
   useFirestoreDoc({
     query: () => listenToShelfFromFIrestore(params.id),
     data: (shelf) => dispatch(listenToShelfs([shelf])),
     deps: [params.id, dispatch],
   });
+
+  if (error) return <Redirect to='/error' />;
 
   return (
     <div className={classes.container}>
