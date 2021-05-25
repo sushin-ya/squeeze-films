@@ -15,6 +15,8 @@ import {
 } from '../../../app/firestore/firestoreService';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { toast } from 'react-toastify';
+import ConfirmDelete from './ConfirmDelete';
+import ConfirmCreate from './ConfirmCreate';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -71,6 +73,8 @@ function initialData(shelf) {
 
 export default function ShelfForm() {
   const classes = useStyles();
+  const [submitConfirmOpen, setSubmitConfirmOpen] = useState(false);
+  const [delteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const history = useHistory();
   const params = useParams();
   const dispatch = useDispatch();
@@ -142,6 +146,7 @@ export default function ShelfForm() {
       selectedShelf
         ? await updateShelfToFirestore(newMyShelf)
         : await addShelfToFirestore(newMyShelf);
+      console.log('[update done]', newMyShelf);
       history.push('/shelfs');
     } catch (error) {
       toast.error(error.message);
@@ -152,6 +157,22 @@ export default function ShelfForm() {
     await deleteShelfInFirestore(myShelfId);
     history.push('/shelfs');
   }
+
+  const handleDeleteConfirmOpen = () => {
+    setDeleteConfirmOpen(true);
+  };
+
+  const handleDeleteConfirmClose = () => {
+    setDeleteConfirmOpen(false);
+  };
+
+  const handleSubmitConfirmOpen = () => {
+    setSubmitConfirmOpen(true);
+  };
+
+  const handleSubmitConfirmClose = () => {
+    setSubmitConfirmOpen(false);
+  };
 
   return (
     <div className={classes.container}>
@@ -170,7 +191,8 @@ export default function ShelfForm() {
             <Button
               variant='contained'
               className={`${classes.button} ${classes.success}`}
-              onClick={() => handleFormSubmit(data)}
+              // onClick={() => handleFormSubmit(data)}
+              onClick={() => handleSubmitConfirmOpen()}
             >
               <Box p={0.5}>Submit</Box>
             </Button>
@@ -178,7 +200,7 @@ export default function ShelfForm() {
               <Button
                 variant='contained'
                 className={`${classes.button} ${classes.delete}`}
-                onClick={() => handleFormDelete(myShelf.id)}
+                onClick={() => handleDeleteConfirmOpen()}
               >
                 <Box p={0.5}>Delete</Box>
               </Button>
@@ -198,6 +220,19 @@ export default function ShelfForm() {
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
       </div>
+      <ConfirmDelete
+        confirmOpen={delteConfirmOpen}
+        handleClose={handleDeleteConfirmClose}
+        handleDelete={handleFormDelete}
+        myShelfId={myShelf.id}
+      />
+      <ConfirmCreate
+        confirmOpen={submitConfirmOpen}
+        handleClose={handleSubmitConfirmClose}
+        handleSubmit={handleFormSubmit}
+        data={data}
+        isUpdate={!!selectedShelf}
+      />
     </div>
   );
 }
