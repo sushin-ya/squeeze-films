@@ -24,7 +24,7 @@ export function fetchPopularFilm() {
           `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=ja-JP&page=1`
         )
         .then((res) => {
-          return res.data.results.slice(0, 5);
+          return res.data.results;
         });
 
       const directorPromises = films.map(async (film) => {

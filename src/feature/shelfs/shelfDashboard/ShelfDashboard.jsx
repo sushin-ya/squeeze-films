@@ -4,7 +4,10 @@ import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { listenToShelfs } from '../shelfActions';
+import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
+import { listenToShelfsFromFirestore } from '../../../app/firestore/firestoreService';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -22,7 +25,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDashboard() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { shelfs } = useSelector((state) => state.shelf);
+
+  useFirestoreCollection({
+    query: () => listenToShelfsFromFirestore(),
+    data: (shelfs) => dispatch(listenToShelfs(shelfs)),
+    deps: [dispatch],
+  });
 
   return (
     <div className={classes.container}>

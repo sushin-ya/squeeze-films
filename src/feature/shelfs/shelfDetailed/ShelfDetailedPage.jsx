@@ -4,8 +4,12 @@ import ShelfDetailedTitle from './ShelfDetailedTitle';
 import ShelfDetailedNotice from './ShelfDetailedNotice';
 import ShelfDetailedList from './ShelfDetailedList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { listenToShelfs } from '../shelfActions';
+import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
+import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,10 +27,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDetailedPage() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const params = useParams();
   const shelf = useSelector((state) =>
     state.shelf.shelfs.find((s) => s.uid === params.id)
   );
+  const { error } = useSelector((state) => state.async);
+
+  useFirestoreDoc({
+    query: () => listenToShelfFromFirestore(params.id),
+    data: (shelf) => dispatch(listenToShelfs([shelf])),
+    deps: [params.id, dispatch],
+  });
+
+  if (error) return <Redirect to='/error' />;
 
   return (
     <div className={classes.container}>

@@ -1,4 +1,16 @@
-import { CREATE_SHELF, UPDATE_SHELF, DELETE_SHELF } from './shelfConstants';
+import {
+  CREATE_SHELF,
+  UPDATE_SHELF,
+  DELETE_SHELF,
+  FETCH_SHELF,
+} from './shelfConstants';
+
+export function listenToShelfs(shelfs) {
+  return {
+    type: FETCH_SHELF,
+    payload: shelfs,
+  };
+}
 
 export function createShelf(shelf) {
   return {

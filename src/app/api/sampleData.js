@@ -1,4 +1,4 @@
-import Frank from '../images/users/1_Frank.jpg';
+// import Frank from '../images/users/1_Frank.jpg';
 import Ronald from '../images/users/2_Ronald.jpg';
 import Crystal from '../images/users/3_Crystal.jpg';
 
@@ -18,7 +18,7 @@ export const sampleData = [
     id: '1',
     uid: 'frank',
     displayName: 'Frank',
-    photoURL: Frank,
+    photoURL: 'https://randomuser.me/api/portraits/men/15.jpg',
     createdAt: '2021-05-19',
     films: [
       {

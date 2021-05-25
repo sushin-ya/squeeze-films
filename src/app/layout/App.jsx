@@ -8,6 +8,7 @@ import { Box, Container, makeStyles } from '@material-ui/core';
 import { Route } from 'react-router-dom';
 import PopularPage from '../../feature/popular/PopularPage';
 import { ToastContainer } from 'react-toastify';
+import ErrorComponent from '../common/error/ErrorComponent';
 
 const useStyles = makeStyles({
   background: {
@@ -37,6 +38,7 @@ export default function App() {
                   component={ShelfForm}
                 />
                 <Route path='/sandbox' component={FilmSuggestionForm} />
+                <Route path='/error' component={ErrorComponent} />
               </Container>
             </Box>
           </>
