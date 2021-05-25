@@ -191,7 +191,6 @@ export default function ShelfForm() {
             <Button
               variant='contained'
               className={`${classes.button} ${classes.success}`}
-              // onClick={() => handleFormSubmit(data)}
               onClick={() => handleSubmitConfirmOpen()}
             >
               <Box p={0.5}>Submit</Box>
