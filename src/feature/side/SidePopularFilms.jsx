@@ -10,6 +10,7 @@ import {
 import SidePopularFilmsList from './SidePopularFilmsList';
 import { ThumbUp } from '@material-ui/icons';
 import { popularFilms } from '../../app/api/sampleData';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,12 @@ export default function SidePopularFilms() {
             <SidePopularFilmsList films={films} />
             <Grid item xs={12}>
               <Box display='flex' justifyContent='flex-end'>
-                <Button variant='contained' className={classes.button}>
+                <Button
+                  variant='contained'
+                  className={classes.button}
+                  component={Link}
+                  to={`/popular`}
+                >
                   Check Films
                 </Button>
               </Box>
