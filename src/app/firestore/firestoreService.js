@@ -23,3 +23,7 @@ export function dataFromSnapshot(snapshot) {
 export function listenToShelfsFromFirestore() {
   return db.collection('shelfs');
 }
+
+export function listenToShelfFromFIrestore(shelfId) {
+  return db.collection('shelfs').doc(shelfId);
+}
