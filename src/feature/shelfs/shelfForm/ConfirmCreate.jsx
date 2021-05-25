@@ -13,6 +13,7 @@ export default function ConfirmCreate({
   handleClose,
   handleSubmit,
   data,
+  myShelf,
   isUpdate,
 }) {
   return (
@@ -33,7 +34,7 @@ export default function ConfirmCreate({
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => handleSubmit(data)} color='primary'>
+        <Button onClick={() => handleSubmit(data, myShelf)} color='primary'>
           決定
         </Button>
         <Button onClick={handleClose} color='primary' autoFocus>
