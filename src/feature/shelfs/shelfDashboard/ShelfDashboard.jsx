@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  dataFromSnapshot,
-  getShelfsFromFirestore,
-} from '../../../app/firestore/firestoreService';
 import { listenToShelfs } from '../shelfActions';
+import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
+import { listenToShelfsFromFirestore } from '../../../app/firestore/firestoreService';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,20 +28,12 @@ export default function ShelfDashboard() {
   const dispatch = useDispatch();
   const { shelfs } = useSelector((state) => state.shelf);
 
-  useEffect(() => {
-    const unsubscribe = getShelfsFromFirestore({
-      next: (snapshot) =>
-        dispatch(
-          listenToShelfs(
-            snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
-          )
-        ),
-      error: (error) => console.log(error),
-    });
+  useFirestoreCollection({
+    query: () => listenToShelfsFromFirestore(),
+    data: (shelfs) => dispatch(listenToShelfs(shelfs)),
+    deps: [dispatch],
+  });
 
-    return unsubscribe;
-  }, [dispatch]);
-  
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>

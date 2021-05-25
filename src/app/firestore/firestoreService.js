@@ -20,6 +20,6 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
-export function getShelfsFromFirestore(observer) {
-  return db.collection('shelfs').onSnapshot(observer);
+export function listenToShelfsFromFirestore() {
+  return db.collection('shelfs');
 }
