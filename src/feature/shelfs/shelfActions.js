@@ -5,7 +5,7 @@ import {
   FETCH_SHELF,
 } from './shelfConstants';
 
-export function listenToEvents(shelfs) {
+export function listenToShelfs(shelfs) {
   return {
     type: FETCH_SHELF,
     payload: shelfs,

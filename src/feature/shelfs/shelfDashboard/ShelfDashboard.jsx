@@ -4,11 +4,12 @@ import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   dataFromSnapshot,
   getShelfsFromFirestore,
 } from '../../../app/firestore/firestoreService';
+import { listenToShelfs } from '../shelfActions';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,20 +27,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDashboard() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { shelfs } = useSelector((state) => state.shelf);
 
   useEffect(() => {
     const unsubscribe = getShelfsFromFirestore({
       next: (snapshot) =>
-        console.log(
-          snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
+        dispatch(
+          listenToShelfs(
+            snapshot.docs.map((docSnapshot) => dataFromSnapshot(docSnapshot))
+          )
         ),
       error: (error) => console.log(error),
     });
 
     return unsubscribe;
-  }, []);
-
+  }, [dispatch]);
+  
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
