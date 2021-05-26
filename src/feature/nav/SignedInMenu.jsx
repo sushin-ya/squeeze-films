@@ -22,7 +22,8 @@ import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { singOutFirebase } from '../../app/firestore/firebaseService';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -50,6 +51,7 @@ export default function SignedInMenu() {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -96,7 +98,7 @@ export default function SignedInMenu() {
       >
         <Avatar
           alt='avater'
-          src={currentUser.photoURL}
+          src={currentUser.photoURL || '/assets/user.png'}
           className={classes.avatar}
         />
         <Typography
@@ -131,7 +133,9 @@ export default function SignedInMenu() {
                   id='menu-list-grow'
                   onKeyDown={handleListKeyDown}
                 >
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => history.push(`/shelfs/${currentUser.id}`)}
+                  >
                     <ListItemIcon
                       className={`${classes.icon} ${classes.filmIcon}`}
                     >
@@ -143,13 +147,19 @@ export default function SignedInMenu() {
                     </ListItemIcon>
                     <Typography variant='inherit'>My Films</Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() => history.push(`/users/${currentUser?.id}`)}
+                  >
                     <ListItemIcon className={classes.icon}>
                       <Person />
                     </ListItemIcon>
                     <Typography variant='inherit'>Profile</Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem
+                    onClick={() =>
+                      dispatch(openModal({ modalType: 'AccountForm' }))
+                    }
+                  >
                     <ListItemIcon className={classes.icon}>
                       <Settings />
                     </ListItemIcon>
