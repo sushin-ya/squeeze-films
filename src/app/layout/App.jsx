@@ -9,6 +9,7 @@ import { Route } from 'react-router-dom';
 import PopularPage from '../../feature/popular/PopularPage';
 import { ToastContainer } from 'react-toastify';
 import ErrorComponent from '../common/error/ErrorComponent';
+import ModalManager from '../common/modals/ModalManager';
 
 const useStyles = makeStyles({
   background: {
@@ -21,6 +22,7 @@ export default function App() {
 
   return (
     <>
+      <ModalManager />
       <ToastContainer position='bottom-right' hideProgressBar />
       <Route exact path='/' component={HomePage} />
       <Route
