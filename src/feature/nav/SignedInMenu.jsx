@@ -19,10 +19,10 @@ import {
   PowerSettingsNew,
 } from '@material-ui/icons';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import Frank from '../../app/images/users/1_Frank.jpg';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { singOutFirebase } from '../../app/firestore/firebaseService';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -46,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignedInMenu() {
   const classes = useStyles();
+  const { currentUser } = useSelector((state) => state.auth);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const history = useHistory();
@@ -93,13 +94,17 @@ export default function SignedInMenu() {
         aria-haspopup='true'
         onClick={handleToggle}
       >
-        <Avatar alt='Frank' src={Frank} className={classes.avatar} />
+        <Avatar
+          alt='avater'
+          src={currentUser.photoURL}
+          className={classes.avatar}
+        />
         <Typography
           variant='subtitle1'
           color='textPrimary'
           className={classes.displayName}
         >
-          Frank
+          {currentUser.email}
         </Typography>
         <KeyboardArrowDown />
       </Button>

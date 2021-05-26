@@ -1,7 +1,8 @@
-import { Box, Button, makeStyles } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
+import { socialLogin } from '../../app/firestore/firebaseService';
 // import { socialLogin } from '../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ export default function SocialLogin() {
 
   function handleSocialLogin(provider) {
     dispatch(closeModal());
-    // socialLogin(provider);
+    socialLogin(provider);
   }
 
   return (
@@ -40,12 +41,14 @@ export default function SocialLogin() {
       <Button
         variant='contained'
         className={`${classes.button} ${classes.facebook}`}
+        onClick={() => handleSocialLogin('facebook')}
       >
         LOGIN with Facebook
       </Button>
       <Button
         variant='contained'
         className={`${classes.button} ${classes.google}`}
+        onClick={() => handleSocialLogin('google')}
       >
         LOGIN with Google
       </Button>

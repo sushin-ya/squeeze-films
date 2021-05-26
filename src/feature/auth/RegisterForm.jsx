@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import {
   Avatar,
-  Box,
   Button,
   Grid,
   LinearProgress,
