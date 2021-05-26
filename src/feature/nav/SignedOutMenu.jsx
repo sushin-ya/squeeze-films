@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Button, makeStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { openModal } from '../../app/common/modals/modalReducer';
 
@@ -21,18 +20,11 @@ export default function SignedOutMenu() {
         <Button
           onClick={() => dispatch(openModal({ modalType: 'LoginForm' }))}
           variant='outlined'
-          component={Link}
-          to='/login'
         >
           Login
         </Button>
       </Box>
-      <Button
-        variant='outlined'
-        className={classes.signup}
-        component={Link}
-        to='/signup'
-      >
+      <Button variant='outlined' className={classes.signup}>
         Sign up
       </Button>
     </>

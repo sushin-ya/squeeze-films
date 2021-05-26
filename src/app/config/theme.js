@@ -67,6 +67,7 @@ const theme = createMuiTheme({
     MuiFormLabel: {
       root: {
         color: 'rgba(0, 0, 0, 0.6)',
+        marginLeft: '4px',
       },
     },
   },
