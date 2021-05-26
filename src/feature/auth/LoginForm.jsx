@@ -16,6 +16,7 @@ import { TextField } from 'formik-material-ui';
 import { Lock } from '@material-ui/icons';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { signInWithEmail } from '../../app/firestore/firebaseService';
+import SocialLogin from './SocialLogin';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -144,7 +145,7 @@ export default function LoginForm() {
                     {errors.auth}
                   </Typography>
                 )}
-                <Box mb={4}>
+                <Box mb={1}>
                   <Button
                     variant='contained'
                     color='primary'
@@ -156,6 +157,8 @@ export default function LoginForm() {
                   </Button>
                 </Box>
               </Form>
+              <Typography variant='h6'>Or</Typography>
+              <SocialLogin />
             </Paper>
           )}
         </Formik>
