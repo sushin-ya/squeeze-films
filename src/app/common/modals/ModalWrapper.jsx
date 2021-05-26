@@ -6,7 +6,7 @@ import { closeModal } from './modalReducer';
 export default function ModalWrapper({ children }) {
   const dispatch = useDispatch();
   return (
-    <Modal open={open} onClose={() => dispatch(closeModal())}>
+    <Modal open={true} onClose={() => dispatch(closeModal())}>
       {children}
     </Modal>
   );
