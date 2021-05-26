@@ -16,6 +16,7 @@ import { TextField } from 'formik-material-ui';
 import { Lock } from '@material-ui/icons';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { registerInFirebase } from '../../app/firestore/firebaseService';
+import SocialLogin from './SocialLogin';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -50,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '2px',
   },
   button: {
-    margin: theme.spacing(0, 1),
+    margin: theme.spacing(0, 2),
     padding: theme.spacing(1),
-    width: `calc(100% - ${theme.spacing(2)}px)`,
+    width: `calc(100% - ${theme.spacing(4)}px)`,
     color: '#FFFFFF',
   },
   errors: {
@@ -173,18 +174,18 @@ export default function RegisterForm() {
                       {errors.auth}
                     </Typography>
                   )}
-                  <Box mb={4}>
-                    <Button
-                      variant='contained'
-                      color='primary'
-                      disabled={isSubmitting}
-                      onClick={submitForm}
-                      className={classes.button}
-                    >
-                      Register
-                    </Button>
-                  </Box>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    disabled={isSubmitting}
+                    onClick={submitForm}
+                    className={classes.button}
+                  >
+                    Register
+                  </Button>
                 </Form>
+                <Typography variant='h6'>Or</Typography>
+                <SocialLogin />
               </Paper>
             );
           }}
