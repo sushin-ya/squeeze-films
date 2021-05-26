@@ -4,7 +4,9 @@ import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import {
   Avatar,
+  Box,
   Button,
+  Grid,
   LinearProgress,
   makeStyles,
   Paper,
@@ -16,13 +18,14 @@ import { closeModal } from '../../app/common/modals/modalReducer';
 import { signInWithEmail } from '../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
+  grid: {
+    height: '100vh',
+  },
   paper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '400px',
     width: '360px',
-    margin: `calc((100vh - 400px)/2) calc((100vw - 360px)/2) calc((100vh - 400px)/2) calc((100vw - 360px)/2) `,
     pointerEvents: 'auto',
   },
   avatar: {
@@ -36,19 +39,22 @@ const useStyles = makeStyles((theme) => ({
     width: '100%', // Fix IE 11 issue.
     color: theme.palette.text.primary,
     marginTop: theme.spacing(1),
-    '& div': {
+    '&  div': {
       width: `calc(100% - ${theme.spacing(2)}px)`,
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      color: theme.palette.text.primary.main,
     },
     '& label': {},
   },
   button: {
-    margin: theme.spacing(0, 2),
+    margin: theme.spacing(0, 1),
     padding: theme.spacing(1),
-    width: `calc(100% - ${theme.spacing(4)}px)`,
+    width: `calc(100% - ${theme.spacing(2)}px)`,
     color: '#FFFFFF',
+  },
+  errors: {
+    marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
 }));
 
@@ -59,7 +65,15 @@ export default function LoginForm() {
   const Wrapper = React.forwardRef(({ children }, ref) => {
     return (
       <div ref={ref} tabIndex={-1} style={{ pointerEvents: 'none' }}>
-        {children}
+        <Grid
+          container
+          direction='column'
+          justify='center'
+          alignItems='center'
+          className={classes.grid}
+        >
+          {children}
+        </Grid>
       </div>
     );
   });
@@ -92,12 +106,12 @@ export default function LoginForm() {
               setSubmitting(false);
               dispatch(closeModal());
             } catch (error) {
-              setErrors({ auth: 'Problem with username or password' });
+              setErrors({ auth: error.message });
               setSubmitting(false);
             }
           }}
         >
-          {({ submitForm, isSubmitting }) => (
+          {({ submitForm, isSubmitting, errors }) => (
             <Paper className={classes.paper}>
               <Avatar className={classes.avatar}>
                 <Lock />
@@ -125,15 +139,22 @@ export default function LoginForm() {
                 />
                 {isSubmitting && <LinearProgress />}
                 <br />
-                <Button
-                  variant='contained'
-                  color='primary'
-                  disabled={isSubmitting}
-                  onClick={submitForm}
-                  className={classes.button}
-                >
-                  SIGN IN
-                </Button>
+                {errors.auth && (
+                  <Typography color='error' className={classes.errors}>
+                    {errors.auth}
+                  </Typography>
+                )}
+                <Box mb={4}>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    disabled={isSubmitting}
+                    onClick={submitForm}
+                    className={classes.button}
+                  >
+                    SIGN IN
+                  </Button>
+                </Box>
               </Form>
             </Paper>
           )}

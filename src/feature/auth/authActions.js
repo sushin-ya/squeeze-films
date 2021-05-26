@@ -16,6 +16,7 @@ export function verifyAuth() {
         dispatch(signInUser(user));
         // dispatch({ type: APP_LOADED });
       } else {
+        console.log('verifyAuth signOutUser');
         dispatch(signOutUser());
         // dispatch({ type: APP_LOADED });
       }

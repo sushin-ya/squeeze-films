@@ -1,4 +1,5 @@
 import firebase from '../config/firebase';
+import { setUserProfileData } from './firestoreService';
 // import { setUserProfileData } from "./firestoreService";
 // import { toast } from 'react-toastify';
 
@@ -20,7 +21,7 @@ export async function registerInFirebase(creds) {
     await result.user.updateProfile({
       displayName: creds.displayName,
     });
-    // return await setUserProfileData(result.user);
+    return await setUserProfileData(result.user);
   } catch (error) {
     throw error;
   }
