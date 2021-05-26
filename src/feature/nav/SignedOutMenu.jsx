@@ -24,7 +24,11 @@ export default function SignedOutMenu() {
           Login
         </Button>
       </Box>
-      <Button variant='outlined' className={classes.signup}>
+      <Button
+        variant='outlined'
+        className={classes.signup}
+        onClick={() => dispatch(openModal({ modalType: 'RegisterForm' }))}
+      >
         Sign up
       </Button>
     </>

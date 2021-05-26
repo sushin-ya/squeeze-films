@@ -74,6 +74,9 @@ export default function LoginForm() {
           }}
           validate={(values) => {
             const errors = {};
+            if (!values.password) {
+              errors.password = 'Required';
+            }
             if (!values.email) {
               errors.email = 'Required';
             } else if (
