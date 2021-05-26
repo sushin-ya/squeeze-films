@@ -13,7 +13,7 @@ import {
 import { TextField } from 'formik-material-ui';
 import { Lock } from '@material-ui/icons';
 import { closeModal } from '../../app/common/modals/modalReducer';
-import { signInUser } from './authActions';
+import { signInWithEmail } from '../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -83,9 +83,9 @@ export default function LoginForm() {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting, setErrors }) => {
+          onSubmit={async (values, { setSubmitting, setErrors }) => {
             try {
-              dispatch(signInUser(values));
+              await signInWithEmail(values);
               setSubmitting(false);
               dispatch(closeModal());
             } catch (error) {
