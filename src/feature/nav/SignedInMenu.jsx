@@ -20,6 +20,9 @@ import {
 } from '@material-ui/icons';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import Frank from '../../app/images/users/1_Frank.jpg';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { singOutFirebase } from '../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -41,10 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignedInMenu({ signOut }) {
+export default function SignedInMenu() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const history = useHistory();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -70,9 +74,17 @@ export default function SignedInMenu({ signOut }) {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
+
+  async function handleSingOut() {
+    try {
+      history.push('/');
+      await singOutFirebase();
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
   return (
     <div>
       <Button
@@ -138,7 +150,7 @@ export default function SignedInMenu({ signOut }) {
                     </ListItemIcon>
                     <Typography variant='inherit'>My account</Typography>
                   </MenuItem>
-                  <MenuItem onClick={() => signOut()}>
+                  <MenuItem onClick={handleSingOut}>
                     <ListItemIcon className={classes.icon}>
                       <PowerSettingsNew />
                     </ListItemIcon>

@@ -39,3 +39,15 @@ export function updateShelfToFirestore(shelf) {
 export function deleteShelfInFirestore(shelfId) {
   return db.collection('shelfs').doc(shelfId).delete();
 }
+
+export function setUserProfileData(user) {
+  return db
+    .collection('users')
+    .doc(user.uid)
+    .set({
+      displayName: user.displayName,
+      email: user.email,
+      photoURL: user.photoURL || null,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+}

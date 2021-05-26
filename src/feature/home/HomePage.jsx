@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { Link } from 'react-router-dom';
 
@@ -33,7 +32,7 @@ export default function HomePage() {
     >
       <Grid container direction='row' justify='center' alignItems='center'>
         <img
-          src={squeezeFilmsIcon}
+          src='/assets/logo.svg'
           alt=''
           className={classes.squeezeFilmsIcon}
         />

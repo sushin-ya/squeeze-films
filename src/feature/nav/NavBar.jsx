@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   AppBar,
   Box,
@@ -11,9 +11,10 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -43,13 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
-  const [authenticated, setAuthenticated] = useState(false);
-  const history = useHistory();
-
-  function handleSignOut() {
-    setAuthenticated(false);
-    history.push('/');
-  }
+  const { authenticated } = useSelector((state) => state.auth);
 
   return (
     <AppBar position='fixed' className={classes.appBar}>
@@ -106,11 +101,7 @@ export default function NavBar() {
             </>
           )}
           <div className={classes.flexgrow}></div>
-          {authenticated ? (
-            <SignedInMenu signOut={handleSignOut} />
-          ) : (
-            <SignedOutMenu setAuthenticated={setAuthenticated} />
-          )}
+          {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
         </Toolbar>
       </Container>
     </AppBar>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Button, makeStyles } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   signup: {
@@ -9,17 +10,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignedOutMenu({ setAuthenticated }) {
+export default function SignedOutMenu() {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <>
       <Box mr={1}>
         <Button
-          onClick={() => setAuthenticated(true)}
+          onClick={() => dispatch(openModal({ modalType: 'LoginForm' }))}
           variant='outlined'
-          component={Link}
-          to='/login'
         >
           Login
         </Button>
@@ -27,8 +27,7 @@ export default function SignedOutMenu({ setAuthenticated }) {
       <Button
         variant='outlined'
         className={classes.signup}
-        component={Link}
-        to='/signup'
+        onClick={() => dispatch(openModal({ modalType: 'RegisterForm' }))}
       >
         Sign up
       </Button>
