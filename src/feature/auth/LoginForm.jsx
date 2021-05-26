@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { Lock } from '@material-ui/icons';
+import { closeModal } from '../../app/common/modals/modalReducer';
+import { signInWithEmail } from '../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     height: '400px',
     width: '360px',
     margin: `calc((100vh - 400px)/2) calc((100vw - 360px)/2) calc((100vh - 400px)/2) calc((100vw - 360px)/2) `,
+    pointerEvents: 'auto',
   },
   avatar: {
     marginTop: theme.spacing(3),
@@ -80,12 +83,15 @@ export default function LoginForm() {
             }
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              console.log('submit');
+          onSubmit={async (values, { setSubmitting, setErrors }) => {
+            try {
+              await signInWithEmail(values);
               setSubmitting(false);
-              alert(JSON.stringify(values, null, 2));
-            }, 500);
+              dispatch(closeModal());
+            } catch (error) {
+              setErrors({ auth: 'Problem with username or password' });
+              setSubmitting(false);
+            }
           }}
         >
           {({ submitForm, isSubmitting }) => (
