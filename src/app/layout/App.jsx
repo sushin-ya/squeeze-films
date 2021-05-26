@@ -10,6 +10,8 @@ import PopularPage from '../../feature/popular/PopularPage';
 import { ToastContainer } from 'react-toastify';
 import ErrorComponent from '../common/error/ErrorComponent';
 import ModalManager from '../common/modals/ModalManager';
+import { useSelector } from 'react-redux';
+import LoadingComponent from './LoadingComponent';
 
 const useStyles = makeStyles({
   background: {
@@ -19,6 +21,9 @@ const useStyles = makeStyles({
 
 export default function App() {
   const classes = useStyles();
+  const { initialized } = useSelector((state) => state.async);
+
+  if (!initialized) return <LoadingComponent content='Loading app...' />;
 
   return (
     <>
