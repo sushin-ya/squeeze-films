@@ -1,11 +1,17 @@
 import { SIGN_IN_USER, SIGN_OUT_USER } from './authConstants';
 import firebase from '../../app/config/firebase';
 import { APP_LOADED } from '../../app/async/asyncReducer';
+import { signInWithEmail } from '../../app/firestore/firebaseService';
 
-export function signInUser(user) {
-  return {
-    type: SIGN_IN_USER,
-    payload: user,
+export function signInUser(creds) {
+  console.log(creds);
+  return async function (dispatch) {
+    try {
+      const result = await signInWithEmail(creds);
+      dispatch({ type: SIGN_IN_USER, payload: result.user });
+    } catch (error) {
+      throw error;
+    }
   };
 }
 

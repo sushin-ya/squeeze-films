@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
 
@@ -44,12 +44,6 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar() {
   const classes = useStyles();
   const [authenticated, setAuthenticated] = useState(false);
-  const history = useHistory();
-
-  function handleSignOut() {
-    setAuthenticated(false);
-    history.push('/');
-  }
 
   return (
     <AppBar position='fixed' className={classes.appBar}>
@@ -107,7 +101,7 @@ export default function NavBar() {
           )}
           <div className={classes.flexgrow}></div>
           {authenticated ? (
-            <SignedInMenu signOut={handleSignOut} />
+            <SignedInMenu />
           ) : (
             <SignedOutMenu setAuthenticated={setAuthenticated} />
           )}
