@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AppBar,
   Box,
+  Button,
   Container,
   Divider,
   Grid,
@@ -15,6 +16,7 @@ import { NavLink } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
 import { useSelector } from 'react-redux';
+import { Add } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     color: theme.palette.text.primary,
+  },
+  button: {
+    color: '#FFFFFF',
+    background: '#33291A',
+    padding: theme.spacing(1),
   },
 }));
 
@@ -88,7 +95,26 @@ export default function NavBar() {
           />
           {authenticated && (
             <>
-              <Link component={NavLink} to='/users' className={classes.link}>
+              <Button
+                variant='contained'
+                className={classes.button}
+                startIcon={<Add />}
+                component={NavLink}
+                to={`/createShelf`}
+              >
+                Squeeze Films
+              </Button>
+              <Box mr={2} />
+              <Divider
+                orientation='vertical'
+                flexItem
+                className={classes.marginRight}
+              />
+              <Link
+                className={classes.link}
+                component={NavLink}
+                to={`/profile`}
+              >
                 <Box mr={2}>
                   <Typography variant='subtitle1'>Users</Typography>
                 </Box>
@@ -101,6 +127,7 @@ export default function NavBar() {
             </>
           )}
           <div className={classes.flexgrow}></div>
+
           {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
         </Toolbar>
       </Container>
