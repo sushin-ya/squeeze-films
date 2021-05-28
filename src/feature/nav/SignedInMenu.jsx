@@ -134,7 +134,7 @@ export default function SignedInMenu() {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem
-                    onClick={() => history.push(`/shelfs/${currentUser.id}`)}
+                    onClick={() => history.push(`/shelfs/${currentUser.uid}`)}
                   >
                     <ListItemIcon
                       className={`${classes.icon} ${classes.filmIcon}`}
@@ -148,7 +148,7 @@ export default function SignedInMenu() {
                     <Typography variant='inherit'>My Films</Typography>
                   </MenuItem>
                   <MenuItem
-                    onClick={() => history.push(`/users/${currentUser?.id}`)}
+                    onClick={() => history.push(`/profile/${currentUser.uid}`)}
                   >
                     <ListItemIcon className={classes.icon}>
                       <Person />
@@ -156,9 +156,10 @@ export default function SignedInMenu() {
                     <Typography variant='inherit'>Profile</Typography>
                   </MenuItem>
                   <MenuItem
-                    onClick={() =>
-                      dispatch(openModal({ modalType: 'AccountForm' }))
-                    }
+                    onClick={() => {
+                      setOpen(false);
+                      return dispatch(openModal({ modalType: 'AccountForm' }));
+                    }}
                   >
                     <ListItemIcon className={classes.icon}>
                       <Settings />

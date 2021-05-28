@@ -12,6 +12,8 @@ import ErrorComponent from '../common/error/ErrorComponent';
 import ModalManager from '../common/modals/ModalManager';
 import { useSelector } from 'react-redux';
 import LoadingComponent from './LoadingComponent';
+import ProfileList from '../../feature/profile/profilePage/ProfileList';
+import ProfilePage from '../../feature/profile/profilePage/ProfilePage';
 
 const useStyles = makeStyles({
   background: {
@@ -39,6 +41,8 @@ export default function App() {
               <Container maxWidth='lg'>
                 <Route exact path='/shelfs' component={ShelfDashboard} />
                 <Route path='/shelfs/:id' component={ShelfDetailedPage} />
+                <Route exact path='/profile' component={ProfileList} />
+                <Route path='/profile/:id' component={ProfilePage} />
                 <Route path='/popular' component={PopularPage} />
                 <Route
                   path={['/createShelf', '/manage/:id']}
