@@ -9,6 +9,11 @@ import React from 'react';
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+    width: '100vw',
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    zIndex: '1500',
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.text.primary,
   },
@@ -25,8 +30,8 @@ export default function LoadingComponent({ content = 'Loading...' }) {
       alignItems='center'
       className={classes.root}
     >
-      <CircularProgress color='textPrimary' />
-      <Typography color='textPrimary'>{content}</Typography>
+      <CircularProgress color='inherit' />
+      <Typography>{content}</Typography>
     </Grid>
   );
 }

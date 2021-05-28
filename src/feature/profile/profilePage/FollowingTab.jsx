@@ -4,6 +4,7 @@ import React from 'react';
 const useStyles = makeStyles((theme) => ({}));
 
 export default function FollowingTab({ value, index }) {
+  // eslint-disable-next-line
   const classes = useStyles();
 
   return (
