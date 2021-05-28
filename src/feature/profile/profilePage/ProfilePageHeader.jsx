@@ -62,8 +62,12 @@ export default function ProfilePageHeader({ photoURL, displayName }) {
                     justify='center'
                     alignItems='center'
                   >
-                    <Typography variant='h3'>10</Typography>
-                    <Typography variant='subtitle1'>Followers</Typography>
+                    <Typography variant='h3' color='textSecondary'>
+                      10
+                    </Typography>
+                    <Typography variant='subtitle1' color='textSecondary'>
+                      Followers
+                    </Typography>
                   </Grid>
                 </Box>
               </Grid>
@@ -74,8 +78,12 @@ export default function ProfilePageHeader({ photoURL, displayName }) {
                   justify='center'
                   alignItems='center'
                 >
-                  <Typography variant='h3'>5</Typography>
-                  <Typography variant='subtitle1'>Followings</Typography>
+                  <Typography variant='h3' color='textSecondary'>
+                    5
+                  </Typography>
+                  <Typography variant='subtitle1' color='textSecondary'>
+                    Followings
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>

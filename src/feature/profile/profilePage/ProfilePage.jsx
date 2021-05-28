@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import SideSimilarProfiles from '../../side/SideSimilarProfiles';
-import ProfilePageMain from './ProfilePageContent';
-import ProfilePageTop from './ProfilePageHeader';
+import ProfilePageContent from './ProfilePageContent';
+import ProfilePageHeader from './ProfilePageHeader';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,11 +26,12 @@ export default function ProfilePage() {
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
-        <ProfilePageTop
+        <ProfilePageHeader
           displayName={currentUser.displayName}
           photoURL={currentUser.photoURL}
         />
-        <ProfilePageMain />
+        <Box mb={2} />
+        <ProfilePageContent />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SideSimilarProfiles />
