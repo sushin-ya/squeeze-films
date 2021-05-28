@@ -46,10 +46,10 @@ export default function ShelfDetailedPage() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDetailedTitle
-          photoURL={shelf.photoURL}
-          displayName={shelf.displayName}
+          photoURL={shelf?.photoURL}
+          displayName={shelf?.displayName || 'No Name'}
         />
-        <ShelfDetailedNotice button={classes.button} shelfId={shelf.uid} />
+        <ShelfDetailedNotice button={classes.button} shelfId={shelf?.id} />
         <ShelfDetailedList shelf={shelf} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
