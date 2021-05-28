@@ -52,18 +52,9 @@ export default function ProfilePage() {
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
-        <ProfilePageHeader
-          displayName={profile[0].displayName}
-          photoURL={profile[0].photoURL}
-        />
+        <ProfilePageHeader profile={profile[0]} />
         <Box mb={2} />
-        <ProfilePageContent
-          displayName={profile[0].displayName}
-          selfIntroduction={
-            profile[0].selfIntroduction || 'no selfIntroduciton'
-          }
-          createdAt={profile[0].createdAt.toDateString()}
-        />
+        <ProfilePageContent profile={profile[0]} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SideSimilarProfiles />

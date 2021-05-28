@@ -1,6 +1,7 @@
-import { Box, makeStyles, Typography } from '@material-ui/core';
-import React from 'react';
+import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
 import PersonIcon from '@material-ui/icons/Person';
+import ProfileForm from '../ProfileForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,16 +20,14 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: `underline solid ${theme.palette.primary.main} 1px`,
     textUnderlineOffset: '4px',
   },
+  textBox: {
+    minHeight: '200px',
+  },
 }));
 
-export default function AboutTab({
-  value,
-  index,
-  displayName,
-  selfIntroduction,
-  createdAt,
-}) {
+export default function AboutTab({ value, index, profile }) {
   const classes = useStyles();
+  const [editMode, setEditMode] = useState(false);
 
   return (
     <div
@@ -45,40 +44,38 @@ export default function AboutTab({
             />
             <Typography
               variant='h5'
-              style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
+              style={{ gridColumnStart: 2, gridColumnEnd: 11 }}
               color='textSecondary'
             >
-              About {displayName}
+              About {profile.displayName}
             </Typography>
-            <Typography
-              variant='body1'
-              style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
-              className={classes.title}
+            <Button
+              variant='outlined'
+              onClick={() => setEditMode(!editMode)}
+              style={{ gridColumnStart: 11, gridColumnEnd: 13 }}
             >
-              <Box mb={1}>selfIntroduction</Box>
-            </Typography>
-            <Typography
-              variant='body1'
-              style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
-            >
-              <Box mb={2}>
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
-                {selfIntroduction}
+              {editMode ? 'Cancel' : 'Edit'}
+            </Button>
+            {editMode ? (
+              <Box style={{ gridColumnStart: 1, gridColumnEnd: 13 }}>
+                <ProfileForm profile={profile} />
               </Box>
-            </Typography>
-            <Typography
-              variant='body1'
-              style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
-            >
-              Member since : {createdAt}
-            </Typography>
+            ) : (
+              <Box style={{ gridColumnStart: 2, gridColumnEnd: 12 }}>
+                <Typography variant='body1' className={classes.title}>
+                  selfIntroduction
+                </Typography>
+                <Box mb={2} />
+                <Box className={classes.textBox}>
+                  <Typography variant='body1'>
+                    {profile.selfIntroduction}
+                  </Typography>
+                </Box>
+                <Typography variant='body1'>
+                  Member since : {profile.createdAt.toDateString()}
+                </Typography>
+              </Box>
+            )}
           </div>
         </Box>
       )}

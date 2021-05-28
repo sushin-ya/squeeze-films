@@ -18,11 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePageContent({
-  displayName,
-  selfIntroduction,
-  createdAt,
-}) {
+export default function ProfilePageContent({ profile }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -40,13 +36,7 @@ export default function ProfilePageContent({
           <Tab label='Following' {...a11yProps(3)} />
         </Tabs>
       </AppBar>
-      <AboutTab
-        value={value}
-        index={0}
-        displayName={displayName}
-        selfIntroduction={selfIntroduction}
-        createdAt={createdAt}
-      />
+      <AboutTab value={value} index={0} profile={profile} />
       <PhotosTab value={value} index={1} />
       <FollowersTab value={value} index={2} />
       <FollowingTab value={value} index={3} />

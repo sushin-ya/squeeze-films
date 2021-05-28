@@ -31,21 +31,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePageHeader({ photoURL, displayName }) {
+export default function ProfilePageHeader({ profile }) {
   const classes = useStyles();
 
   return (
     <Paper>
       <Box p={2}>
         <div className={classes.container}>
-          <Avatar alt='avatar' src={photoURL} className={classes.avatar} />
+          <Avatar
+            alt='avatar'
+            src={profile.photoURL}
+            className={classes.avatar}
+          />
           <Typography
             variant='h3'
             style={{ gridColumnStart: 2, gridColumnEnd: 9 }}
             className={classes.displayName}
             color='textSecondary'
           >
-            {displayName}
+            {profile.displayName}
           </Typography>
           <Box style={{ gridColumnStart: 9, gridColumnEnd: 13 }}>
             <Grid
