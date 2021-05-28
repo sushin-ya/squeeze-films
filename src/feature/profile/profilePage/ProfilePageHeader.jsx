@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePageHeader({ profile }) {
+export default function ProfilePageHeader({ profile, isCurrentUser }) {
   const classes = useStyles();
 
   return (
@@ -91,14 +91,18 @@ export default function ProfilePageHeader({ profile }) {
                 </Grid>
               </Grid>
             </Grid>
-            <Box mb={1} />
-            <Button
-              variant='contained'
-              className={classes.button}
-              color='primary'
-            >
-              <Box p={0.5}>Follow</Box>
-            </Button>
+            {!isCurrentUser && (
+              <>
+                <Box mb={1} />
+                <Button
+                  variant='contained'
+                  className={classes.button}
+                  color='primary'
+                >
+                  <Box p={0.5}>Follow</Box>
+                </Button>
+              </>
+            )}
           </Box>
         </div>
       </Box>
