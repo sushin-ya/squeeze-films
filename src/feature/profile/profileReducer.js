@@ -6,7 +6,7 @@ import {
   // LISTEN_TO_FOLLOWINGS,
   LISTEN_TO_SELECTED_USER_PROFILE,
   // LISTEN_TO_USER_EVENTS,
-  // LISTEN_TO_USER_PHOTOS,
+  LISTEN_TO_USER_PHOTOS,
   // SET_FOLLOW_USER,
   // SET_UNFOLLOW_USER,
 } from './profileConstents';
@@ -14,7 +14,7 @@ import {
 const initialState = {
   currentUserProfile: null,
   selectedUserProfile: null,
-  // photos: [],
+  photos: [],
   // profileEvents: [],
   // followers: [],
   // followings: [],
@@ -37,11 +37,11 @@ export default function profileReducer(
         ...state,
         selectedUserProfile: payload,
       };
-    // case LISTEN_TO_USER_PHOTOS:
-    //   return {
-    //     ...state,
-    //     photos: payload,
-    //   };
+    case LISTEN_TO_USER_PHOTOS:
+      return {
+        ...state,
+        photos: payload,
+      };
     // case LISTEN_TO_USER_EVENTS:
     //   return {
     //     ...state,

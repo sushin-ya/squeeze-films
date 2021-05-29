@@ -8,7 +8,7 @@ import {
   Box,
 } from '@material-ui/core';
 import { Field, Form, Formik } from 'formik';
-import { updateUserProfile } from '../../app/firestore/firestoreService';
+import { updateUserProfile } from '../../../app/firestore/firestoreService';
 import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({

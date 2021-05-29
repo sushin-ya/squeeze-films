@@ -1,7 +1,7 @@
 import { Box, Button, makeStyles, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import PersonIcon from '@material-ui/icons/Person';
-import ProfileForm from '../ProfileForm';
+import ProfileForm from './ProfileForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     textDecoration: `underline solid ${theme.palette.primary.main} 1px`,
     textUnderlineOffset: '4px',
-  },
-  textBox: {
-    minHeight: '200px',
   },
 }));
 
@@ -66,7 +63,7 @@ export default function AboutTab({ value, index, profile }) {
                   selfIntroduction
                 </Typography>
                 <Box mb={2} />
-                <Box className={classes.textBox}>
+                <Box>
                   <Typography variant='body1'>
                     {profile.selfIntroduction}
                   </Typography>

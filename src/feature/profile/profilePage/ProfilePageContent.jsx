@@ -37,7 +37,7 @@ export default function ProfilePageContent({ profile }) {
         </Tabs>
       </AppBar>
       <AboutTab value={value} index={0} profile={profile} />
-      <PhotosTab value={value} index={1} />
+      <PhotosTab value={value} index={1} profile={profile} />
       <FollowersTab value={value} index={2} />
       <FollowingTab value={value} index={3} />
     </div>

@@ -70,6 +70,11 @@ const theme = createMuiTheme({
         marginLeft: '4px',
       },
     },
+    MuiCardActions: {
+      root: {
+        padding: 0,
+      },
+    },
   },
 });
 
