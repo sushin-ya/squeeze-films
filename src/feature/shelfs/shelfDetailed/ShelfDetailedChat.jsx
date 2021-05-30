@@ -26,9 +26,12 @@ const useStyles = makeStyles((theme) => ({
   date: {
     fontSize: '12px',
   },
+  fullwidth: {
+    width: '100%',
+  },
 }));
 
-export default function ShelfDetailedChat() {
+export default function ShelfDetailedChat({ shelfId }) {
   const classes = useStyles();
   const { authenticated } = useSelector((state) => state.auth);
   const [showReplyForm, setShowReplyForm] = useState({
@@ -84,7 +87,13 @@ export default function ShelfDetailedChat() {
       </Paper>
       {authenticated && (
         <Paper>
-          <ShelfDetailedChatForm />
+          <Box p={2}>
+            <ShelfDetailedChatForm
+              shelfId={shelfId}
+              parentId={0}
+              closeForm={handleCloseReplyForm}
+            />
+          </Box>
           {sampleChat.map((comment) => (
             <Box p={2} key={comment.id}>
               <Grid
@@ -99,7 +108,7 @@ export default function ShelfDetailedChat() {
                   src={comment.photoURL || '/assets/user.png'}
                   className={classes.avatar}
                 />
-                <Box ml={1}>
+                <Box ml={1} mr={2} className={classes.fullwidth}>
                   <Grid
                     container
                     item
@@ -149,10 +158,13 @@ export default function ShelfDetailedChat() {
                     </Typography>
                     {showReplyForm.open &&
                       showReplyForm.commentId === comment.id && (
-                        <ShelfDetailedChatForm
-                          parentId={comment.id}
-                          closeForm={handleCloseReplyForm}
-                        />
+                        <Box p={1} className={classes.fullwidth}>
+                          <ShelfDetailedChatForm
+                            shelfId={shelfId}
+                            parentId={comment.id}
+                            closeForm={handleCloseReplyForm}
+                          />
+                        </Box>
                       )}
                   </Grid>
                 </Box>
@@ -173,7 +185,7 @@ export default function ShelfDetailedChat() {
                           src={child.photoURL || '/assets/user.png'}
                           className={classes.avatar}
                         />
-                        <Box ml={1}>
+                        <Box ml={1} mr={2} className={classes.fullwidth}>
                           <Grid
                             container
                             item
@@ -223,10 +235,13 @@ export default function ShelfDetailedChat() {
                             </Typography>
                             {showReplyForm.open &&
                               showReplyForm.childId === child.id && (
-                                <ShelfDetailedChatForm
-                                  parentId={child.id}
-                                  closeForm={handleCloseReplyForm}
-                                />
+                                <Box p={1} className={classes.fullwidth}>
+                                  <ShelfDetailedChatForm
+                                    shelfId={shelfId}
+                                    parentId={child.id}
+                                    closeForm={handleCloseReplyForm}
+                                  />
+                                </Box>
                               )}
                           </Grid>
                         </Box>
