@@ -81,7 +81,6 @@ export default function ShelfDetailedChat({ shelfId }) {
             />
           </Box>
           {createDataTree(comments).map((comment) => {
-            console.log(comment.id);
             return (
               <Box p={2} key={comment.id}>
                 <Grid

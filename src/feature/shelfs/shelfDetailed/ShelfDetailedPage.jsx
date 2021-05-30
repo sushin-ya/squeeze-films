@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { CircularProgress, makeStyles } from '@material-ui/core';
 import ShelfDetailedTitle from './ShelfDetailedTitle';
 import ShelfDetailedNotice from './ShelfDetailedNotice';
 import ShelfDetailedList from './ShelfDetailedList';
@@ -31,17 +31,23 @@ export default function ShelfDetailedPage() {
   const dispatch = useDispatch();
   const params = useParams();
   const shelf = useSelector((state) =>
-    state.shelf.shelfs.find((s) => s.uid === params.id)
+    state.shelf.shelfs.find((s) => s.id === params.id)
   );
+  const shelfs = useSelector((state) => state.shelf.shelfs);
   const { error } = useSelector((state) => state.async);
 
+  console.log(shelfs);
+  console.log(params.id);
+
   useFirestoreDoc({
-    query: () => listenToShelfFromFirestore(shelf.id),
+    query: () => listenToShelfFromFirestore(params.id),
     data: (shelf) => dispatch(listenToShelfs([shelf])),
     deps: [params.id, dispatch],
   });
 
   if (error) return <Redirect to='/error' />;
+
+  if (!shelf) return <CircularProgress />;
 
   return (
     <div className={classes.container}>

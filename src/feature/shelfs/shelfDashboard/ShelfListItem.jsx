@@ -47,7 +47,7 @@ export default function ShelfListItem({ shelf, button }) {
                     variant='contained'
                     className={button}
                     component={Link}
-                    to={`/shelfs/${shelf.uid}`}
+                    to={`/shelfs/${shelf.id}`}
                   >
                     Check Films
                   </Button>
