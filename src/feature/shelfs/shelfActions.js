@@ -3,6 +3,7 @@ import {
   UPDATE_SHELF,
   DELETE_SHELF,
   FETCH_SHELF,
+  LISTEN_TO_SHELF_CHAT,
 } from './shelfConstants';
 
 export function listenToShelfs(shelfs) {
@@ -29,5 +30,12 @@ export function deleteShelf(shelfId) {
   return {
     type: DELETE_SHELF,
     payload: shelfId,
+  };
+}
+
+export function listenToShelfChat(comments) {
+  return {
+    type: LISTEN_TO_SHELF_CHAT,
+    payload: comments,
   };
 }

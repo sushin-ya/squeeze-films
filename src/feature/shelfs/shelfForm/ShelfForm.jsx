@@ -81,13 +81,12 @@ export default function ShelfForm() {
   const selectedShelf = useSelector((state) =>
     state.shelf.shelfs.find((s) => s.uid === params.id)
   );
+  const { currentUser } = useSelector((state) => state.auth);
 
   const initialShelf = selectedShelf ?? {
-    id: '4',
-    uid: 'test1',
-    displayName: 'Test1',
-    photoURL: null,
-    createdAt: '2021-05-21',
+    uid: currentUser.uid,
+    displayName: currentUser.displayName,
+    photoURL: currentUser.photoURL,
     films: [],
   };
   const [myShelf, setMyShelf] = useState(initialShelf);

@@ -29,7 +29,13 @@ export function listenToShelfFromFirestore(shelfId) {
 }
 
 export function addShelfToFirestore(shelf) {
-  return db.collection('shelfs').add({ ...shelf });
+  const user = firebase.auth().currentUser;
+  return db.collection('shelfs').add({ 
+    ...shelf,
+    uid: user.uid,
+    displayName: user.displayName,
+    photoURL:user.photoURL,
+   });
 }
 
 export function updateShelfToFirestore(shelf) {

@@ -10,6 +10,7 @@ import { listenToShelfs } from '../shelfActions';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
 import { Redirect } from 'react-router-dom';
+import ShelfDetailedChat from './ShelfDetailedChat';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -35,7 +36,7 @@ export default function ShelfDetailedPage() {
   const { error } = useSelector((state) => state.async);
 
   useFirestoreDoc({
-    query: () => listenToShelfFromFirestore(params.id),
+    query: () => listenToShelfFromFirestore(shelf.id),
     data: (shelf) => dispatch(listenToShelfs([shelf])),
     deps: [params.id, dispatch],
   });
@@ -49,12 +50,13 @@ export default function ShelfDetailedPage() {
           photoURL={shelf?.photoURL}
           displayName={shelf?.displayName || 'No Name'}
         />
-        <ShelfDetailedNotice button={classes.button} shelfId={shelf?.id} />
+        <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />
         <ShelfDetailedList shelf={shelf} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
       </div>
+      <ShelfDetailedChat shelfId={shelf.id} />
     </div>
   );
 }

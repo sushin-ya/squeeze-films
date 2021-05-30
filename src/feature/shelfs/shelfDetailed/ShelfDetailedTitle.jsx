@@ -29,7 +29,7 @@ export default function ShelfDetailedTitle({ photoURL, displayName }) {
     <Paper>
       <Box p={2}>
         <div className={classes.container}>
-          <Avatar alt='Frank' src={photoURL} className={classes.avatar} />
+          <Avatar alt='avatar' src={photoURL} className={classes.avatar} />
           <Typography
             variant='h3'
             style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
