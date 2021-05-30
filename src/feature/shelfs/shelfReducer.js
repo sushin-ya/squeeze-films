@@ -1,4 +1,3 @@
-import { sampleData } from '../../app/api/sampleData';
 import {
   CREATE_SHELF,
   UPDATE_SHELF,
@@ -9,7 +8,7 @@ import {
 } from './shelfConstants';
 
 const initialState = {
-  shelfs: sampleData,
+  shelfs: [],
   comments: [],
 };
 

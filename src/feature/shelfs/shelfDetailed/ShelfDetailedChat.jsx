@@ -16,6 +16,7 @@ import { getShelfChatRef } from '../../../app/firestore/firebaseService';
 import { listenToShelfChat } from '../shelfActions';
 import { CLEAR_COMMENT } from '../shelfConstants';
 import { firebaseObjectToArray } from '../../../app/firestore/firebaseService';
+import { createDataTree } from '../../../app/common/utility';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -79,164 +80,167 @@ export default function ShelfDetailedChat({ shelfId }) {
               closeForm={handleCloseReplyForm}
             />
           </Box>
-          {comments.map((comment) => (
-            <Box p={2} key={comment.id}>
-              <Grid
-                container
-                direction='row'
-                justify='flex-start'
-                alignItems='flex-start'
-                wrap='nowrap'
-              >
-                <Avatar
-                  alt='avatar'
-                  src={comment.photoURL || '/assets/user.png'}
-                  className={classes.avatar}
-                />
-                <Box ml={1} mr={2} className={classes.fullwidth}>
-                  <Grid
-                    container
-                    item
-                    direction='column'
-                    justify='flex-start'
-                    alignItems='flex-start'
-                  >
+          {createDataTree(comments).map((comment) => {
+            console.log(comment.id);
+            return (
+              <Box p={2} key={comment.id}>
+                <Grid
+                  container
+                  direction='row'
+                  justify='flex-start'
+                  alignItems='flex-start'
+                  wrap='nowrap'
+                >
+                  <Avatar
+                    alt='avatar'
+                    src={comment.photoURL || '/assets/user.png'}
+                    className={classes.avatar}
+                  />
+                  <Box ml={1} mr={2} className={classes.fullwidth}>
                     <Grid
                       container
                       item
-                      direction='row'
+                      direction='column'
                       justify='flex-start'
-                      alignItems='center'
+                      alignItems='flex-start'
                     >
-                      <Typography variant='subtitle1'>
-                        {comment.displayName}
-                      </Typography>
-                      <Box ml={1}>
-                        <Typography
-                          variant='body1'
-                          color='secondary'
-                          className={classes.date}
-                        >
-                          {formatDistance(comment.date, new Date())}
-                        </Typography>
-                      </Box>
-                      <Button
-                        size='small'
-                        variant='text'
-                        onClick={() =>
-                          setShowReplyForm({
-                            open: true,
-                            commentId: comment.id,
-                          })
-                        }
-                      >
-                        reply
-                      </Button>
-                    </Grid>
-                    <Typography variant='body1'>
-                      {comment.text.split('\n').map((text, i) => (
-                        <span key={i}>
-                          {text}
-                          <br />
-                        </span>
-                      ))}
-                    </Typography>
-                    {showReplyForm.open &&
-                      showReplyForm.commentId === comment.id && (
-                        <Box p={1} className={classes.fullwidth}>
-                          <ShelfDetailedChatForm
-                            shelfId={shelfId}
-                            parentId={comment.id}
-                            closeForm={handleCloseReplyForm}
-                          />
-                        </Box>
-                      )}
-                  </Grid>
-                </Box>
-              </Grid>
-              {comment.childNodes.length > 0 && (
-                <Grid>
-                  {comment.childNodes.reverse().map((child) => (
-                    <Box p={3} key={child.id}>
                       <Grid
                         container
+                        item
                         direction='row'
                         justify='flex-start'
-                        alignItems='flex-start'
-                        wrap='nowrap'
+                        alignItems='center'
                       >
-                        <Avatar
-                          alt='avatar'
-                          src={child.photoURL || '/assets/user.png'}
-                          className={classes.avatar}
-                        />
-                        <Box ml={1} mr={2} className={classes.fullwidth}>
-                          <Grid
-                            container
-                            item
-                            direction='column'
-                            justify='flex-start'
-                            alignItems='flex-start'
+                        <Typography variant='subtitle1'>
+                          {comment.displayName}
+                        </Typography>
+                        <Box ml={1}>
+                          <Typography
+                            variant='body1'
+                            color='secondary'
+                            className={classes.date}
                           >
+                            {formatDistance(comment.date, new Date())}
+                          </Typography>
+                        </Box>
+                        <Button
+                          size='small'
+                          variant='text'
+                          onClick={() =>
+                            setShowReplyForm({
+                              open: true,
+                              commentId: comment.id,
+                            })
+                          }
+                        >
+                          reply
+                        </Button>
+                      </Grid>
+                      <Typography variant='body1'>
+                        {comment.text.split('\n').map((text, i) => (
+                          <span key={i}>
+                            {text}
+                            <br />
+                          </span>
+                        ))}
+                      </Typography>
+                      {showReplyForm.open &&
+                        showReplyForm.commentId === comment.id && (
+                          <Box p={1} className={classes.fullwidth}>
+                            <ShelfDetailedChatForm
+                              shelfId={shelfId}
+                              parentId={comment.id}
+                              closeForm={handleCloseReplyForm}
+                            />
+                          </Box>
+                        )}
+                    </Grid>
+                  </Box>
+                </Grid>
+                {comment.childNodes.length > 0 && (
+                  <Grid>
+                    {comment.childNodes.reverse().map((child) => (
+                      <Box p={3} key={child.id}>
+                        <Grid
+                          container
+                          direction='row'
+                          justify='flex-start'
+                          alignItems='flex-start'
+                          wrap='nowrap'
+                        >
+                          <Avatar
+                            alt='avatar'
+                            src={child.photoURL || '/assets/user.png'}
+                            className={classes.avatar}
+                          />
+                          <Box ml={1} mr={2} className={classes.fullwidth}>
                             <Grid
                               container
                               item
-                              direction='row'
+                              direction='column'
                               justify='flex-start'
-                              alignItems='center'
+                              alignItems='flex-start'
                             >
-                              <Typography variant='subtitle1'>
-                                {child.displayName}
-                              </Typography>
-                              <Box ml={1}>
-                                <Typography
-                                  variant='body1'
-                                  color='secondary'
-                                  className={classes.date}
-                                >
-                                  {formatDistance(child.date, new Date())}
-                                </Typography>
-                              </Box>
-                              <Button
-                                size='small'
-                                variant='text'
-                                onClick={() =>
-                                  setShowReplyForm({
-                                    open: true,
-                                    childId: child.id,
-                                  })
-                                }
+                              <Grid
+                                container
+                                item
+                                direction='row'
+                                justify='flex-start'
+                                alignItems='center'
                               >
-                                reply
-                              </Button>
-                            </Grid>
-                            <Typography variant='body1'>
-                              {child.text.split('\n').map((text, i) => (
-                                <span key={i}>
-                                  {text}
-                                  <br />
-                                </span>
-                              ))}
-                            </Typography>
-                            {showReplyForm.open &&
-                              showReplyForm.childId === child.id && (
-                                <Box p={1} className={classes.fullwidth}>
-                                  <ShelfDetailedChatForm
-                                    shelfId={shelfId}
-                                    parentId={child.id}
-                                    closeForm={handleCloseReplyForm}
-                                  />
+                                <Typography variant='subtitle1'>
+                                  {child.displayName}
+                                </Typography>
+                                <Box ml={1}>
+                                  <Typography
+                                    variant='body1'
+                                    color='secondary'
+                                    className={classes.date}
+                                  >
+                                    {formatDistance(child.date, new Date())}
+                                  </Typography>
                                 </Box>
-                              )}
-                          </Grid>
-                        </Box>
-                      </Grid>
-                    </Box>
-                  ))}
-                </Grid>
-              )}
-            </Box>
-          ))}
+                                <Button
+                                  size='small'
+                                  variant='text'
+                                  onClick={() =>
+                                    setShowReplyForm({
+                                      open: true,
+                                      childId: child.id,
+                                    })
+                                  }
+                                >
+                                  reply
+                                </Button>
+                              </Grid>
+                              <Typography variant='body1'>
+                                {child.text.split('\n').map((text, i) => (
+                                  <span key={i}>
+                                    {text}
+                                    <br />
+                                  </span>
+                                ))}
+                              </Typography>
+                              {showReplyForm.open &&
+                                showReplyForm.childId === child.id && (
+                                  <Box p={1} className={classes.fullwidth}>
+                                    <ShelfDetailedChatForm
+                                      shelfId={shelfId}
+                                      parentId={child.id}
+                                      closeForm={handleCloseReplyForm}
+                                    />
+                                  </Box>
+                                )}
+                            </Grid>
+                          </Box>
+                        </Grid>
+                      </Box>
+                    ))}
+                  </Grid>
+                )}
+              </Box>
+            );
+          })}
         </Paper>
       )}
       <Box mb={20} />

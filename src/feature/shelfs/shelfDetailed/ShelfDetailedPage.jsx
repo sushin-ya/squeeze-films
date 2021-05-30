@@ -47,8 +47,8 @@ export default function ShelfDetailedPage() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDetailedTitle
-          photoURL={shelf.photoURL}
-          displayName={shelf.displayName || 'No Name'}
+          photoURL={shelf?.photoURL}
+          displayName={shelf?.displayName || 'No Name'}
         />
         <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />
         <ShelfDetailedList shelf={shelf} />
