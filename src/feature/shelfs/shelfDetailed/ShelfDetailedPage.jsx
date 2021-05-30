@@ -10,6 +10,7 @@ import { listenToShelfs } from '../shelfActions';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
 import { Redirect } from 'react-router-dom';
+import ShelfDetailedChat from './ShelfDetailedChat';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,6 +56,7 @@ export default function ShelfDetailedPage() {
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
       </div>
+      <ShelfDetailedChat />
     </div>
   );
 }
