@@ -56,7 +56,7 @@ export default function ShelfDetailedPage() {
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
       </div>
-      <ShelfDetailedChat />
+      <ShelfDetailedChat shelfId={shelf.id} />
     </div>
   );
 }

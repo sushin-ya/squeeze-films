@@ -2,6 +2,14 @@ import firebase from '../config/firebase';
 import { setUserProfileData } from './firestoreService';
 import { toast } from 'react-toastify';
 
+export function firebaseObjectToArray(snapshot) {
+  if (snapshot) {
+    return Object.entries(snapshot).map((e) =>
+      Object.assign({}, e[1], { id: e[0] })
+    );
+  }
+}
+
 export function signInWithEmail(creds) {
   return firebase
     .auth()
@@ -63,7 +71,7 @@ export function deleteFromFirebaseStorage(filename) {
   return photoRef.delete();
 }
 
-export function addEventChatComment(shelfId, values) {
+export function addShelfChatComment(shelfId, values) {
   const user = firebase.auth().currentUser;
   const newComment = {
     displayName: user.displayName,
@@ -76,6 +84,6 @@ export function addEventChatComment(shelfId, values) {
   return firebase.database().ref(`chat/${shelfId}`).push(newComment);
 }
 
-export function getEventChatRef(shelfId) {
+export function getShelfChatRef(shelfId) {
   return firebase.database().ref(`chat/${shelfId}`).orderByKey();
 }

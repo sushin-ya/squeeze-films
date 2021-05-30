@@ -2,3 +2,5 @@ export const CREATE_SHELF = 'CREATE_SHELF';
 export const UPDATE_SHELF = 'UPDATE_SHELF';
 export const DELETE_SHELF = 'DELETE_SHELF';
 export const FETCH_SHELF = 'FETCH_SHELF';
+export const LISTEN_TO_SHELF_CHAT = 'LISTEN_TO_SHELF_CHAT';
+export const CLEAR_COMMENT = 'CLEAR_COMMENT';

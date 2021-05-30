@@ -8,9 +8,14 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ShelfDetailedChatForm from './ShelfDetailedChatForm';
 import { formatDistance } from 'date-fns';
+import { useEffect } from 'react/cjs/react.development';
+import { getShelfChatRef } from '../../../app/firestore/firebaseService';
+import { listenToShelfChat } from '../shelfActions';
+import { CLEAR_COMMENT } from '../shelfConstants';
+import { firebaseObjectToArray } from '../../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -33,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDetailedChat({ shelfId }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const { comments } = useSelector((state) => state.shelf);
   const { authenticated } = useSelector((state) => state.auth);
   const [showReplyForm, setShowReplyForm] = useState({
     open: false,
@@ -42,41 +49,19 @@ export default function ShelfDetailedChat({ shelfId }) {
   function handleCloseReplyForm() {
     setShowReplyForm({ open: false, commentId: null });
   }
-  const sampleChat = [
-    {
-      childNodes: [],
-      date: 1622358938365,
-      displayName: 'Taiana',
-      id: '-Maw7CAsndeoR72_Dx9N',
-      parentId: 0,
-      photoURL:
-        'https://firebasestorage.googleapis.com/v0/b/reventscourse-4cb6b.appspot.com/o/P3iCjGTF2fXZ7GVE0AKtUjzFWC83%2Fuser_images%2Fcklptb2zw00013g65hnflj36y.jpeg?alt=media&token=5a2c827b-69b2-4f5b-926f-498d319ae665',
-      text: 'orem Ipsum is simply dummy te PageMaker\n te PageMaker te PageMaker te PageMaker  including veMaker including ve',
-      uid: 'P3iCjGTF2fXZ7GVE0AKtUjzFWC83',
-    },
-    {
-      childNodes: [
-        {
-          date: 1622356779083,
-          displayName: 'Taiana',
-          id: '-davzwfLa5b2tRdgdEdV',
-          parentId: '-MavzwfLa5b2tRRgdE7V',
-          photoURL:
-            'https://firebasestorage.googleapis.com/v0/b/reventscourse-4cb6b.appspot.com/o/P3iCjGTF2fXZ7GVE0AKtUjzFWC83%2Fuser_images%2Fcklptb2zw00013g65hnflj36y.jpeg?alt=media&token=5a2c827b-69b2-4f5b-926f-498d319ae665',
-          text: 'tets',
-          uid: 'P3iCjGTF2fXZ7GVE0AKtUjzFWC83',
-        },
-      ],
-      date: 1622356773685,
-      displayName: 'Taiana',
-      id: '-davzwfLa5b2tRdgdE7V',
-      parentId: 0,
-      photoURL:
-        'https://firebasestorage.googleapis.com/v0/b/reventscourse-4cb6b.appspot.com/o/P3iCjGTF2fXZ7GVE0AKtUjzFWC83%2Fuser_images%2Fcklptb2zw00013g65hnflj36y.jpeg?alt=media&token=5a2c827b-69b2-4f5b-926f-498d319ae665',
-      text: 'tets',
-      uid: 'P3iCjGTF2fXZ7GVE0AKtUjzFWC83',
-    },
-  ];
+
+  useEffect(() => {
+    getShelfChatRef(shelfId).on('value', (snapshot) => {
+      if (!snapshot.exists()) return;
+      dispatch(
+        listenToShelfChat(firebaseObjectToArray(snapshot.val()).reverse())
+      );
+    });
+    return () => {
+      dispatch({ type: CLEAR_COMMENT });
+      getShelfChatRef().off();
+    };
+  }, [shelfId, dispatch]);
 
   return (
     <div style={{ gridColumnEnd: 'span 8' }}>
@@ -94,7 +79,7 @@ export default function ShelfDetailedChat({ shelfId }) {
               closeForm={handleCloseReplyForm}
             />
           </Box>
-          {sampleChat.map((comment) => (
+          {comments.map((comment) => (
             <Box p={2} key={comment.id}>
               <Grid
                 container

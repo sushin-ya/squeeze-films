@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 import { Box, Button, Grid, LinearProgress } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { toast } from 'react-toastify';
-import { addEventChatComment } from '../../../app/firestore/firebaseService';
+import { addShelfChatComment } from '../../../app/firestore/firebaseService';
 
 export default function ShelfDetailedChatForm({
   shelfId,
@@ -24,7 +24,7 @@ export default function ShelfDetailedChatForm({
       }}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         try {
-          await addEventChatComment(shelfId, { ...values, parentId });
+          await addShelfChatComment(shelfId, { ...values, parentId });
           resetForm();
         } catch (error) {
           toast.error(error.message);

@@ -4,10 +4,13 @@ import {
   UPDATE_SHELF,
   DELETE_SHELF,
   FETCH_SHELF,
+  LISTEN_TO_SHELF_CHAT,
+  CLEAR_COMMENT,
 } from './shelfConstants';
 
 const initialState = {
   shelfs: sampleData,
+  comments: [],
 };
 
 export default function shelfReducer(state = initialState, { type, payload }) {
@@ -34,6 +37,16 @@ export default function shelfReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         shelfs: payload,
+      };
+    case LISTEN_TO_SHELF_CHAT:
+      return {
+        ...state,
+        comments: payload,
+      };
+    case CLEAR_COMMENT:
+      return {
+        ...state,
+        comments: [],
       };
     default:
       return state;
