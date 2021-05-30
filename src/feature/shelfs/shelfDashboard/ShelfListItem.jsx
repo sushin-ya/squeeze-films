@@ -30,7 +30,7 @@ export default function ShelfListItem({ shelf, button }) {
                 <Box display='flex' flexDirection='row' alignItems='center'>
                   <Box mr={1}>
                     <Avatar
-                      alt='Frank'
+                      alt='avatar'
                       src={shelf.photoURL}
                       className={classes.avatar}
                     />

@@ -36,7 +36,7 @@ export default function ShelfDetailedPage() {
   const { error } = useSelector((state) => state.async);
 
   useFirestoreDoc({
-    query: () => listenToShelfFromFirestore(params.id),
+    query: () => listenToShelfFromFirestore(shelf.id),
     data: (shelf) => dispatch(listenToShelfs([shelf])),
     deps: [params.id, dispatch],
   });
@@ -47,10 +47,10 @@ export default function ShelfDetailedPage() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDetailedTitle
-          photoURL={shelf?.photoURL}
-          displayName={shelf?.displayName || 'No Name'}
+          photoURL={shelf.photoURL}
+          displayName={shelf.displayName || 'No Name'}
         />
-        <ShelfDetailedNotice button={classes.button} shelfId={shelf?.id} />
+        <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />
         <ShelfDetailedList shelf={shelf} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
