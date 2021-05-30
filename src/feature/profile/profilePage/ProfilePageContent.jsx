@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles, AppBar, Tabs, Tab } from '@material-ui/core';
 import AboutTab from './AboutTab';
 import PhotosTab from './PhotosTab';
-import FollowersTab from './FollowersTab';
 import FollowingTab from './FollowingTab';
 
 function a11yProps(index) {
@@ -20,10 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePageContent({ profile }) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    setActiveTab(newValue);
   };
 
   return (
@@ -38,8 +39,20 @@ export default function ProfilePageContent({ profile }) {
       </AppBar>
       <AboutTab value={value} index={0} profile={profile} />
       <PhotosTab value={value} index={1} profile={profile} />
-      <FollowersTab value={value} index={2} />
-      <FollowingTab value={value} index={3} />
+      <FollowingTab
+        value={value}
+        index={2}
+        profile={profile}
+        activeTab={activeTab}
+        setValue={setValue}
+      />
+      <FollowingTab
+        value={value}
+        index={3}
+        profile={profile}
+        activeTab={activeTab}
+        setValue={setValue}
+      />
     </div>
   );
 }

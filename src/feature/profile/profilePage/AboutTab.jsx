@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: `underline solid ${theme.palette.primary.main} 1px`,
     textUnderlineOffset: '4px',
   },
+  createAt: {
+    marginTop: theme.spacing(1),
+    fontSize: '14px',
+  },
 }));
 
 export default function AboutTab({ value, index, profile }) {
@@ -68,7 +72,11 @@ export default function AboutTab({ value, index, profile }) {
                     {profile.selfIntroduction}
                   </Typography>
                 </Box>
-                <Typography variant='body1'>
+                <Typography
+                  variant='body1'
+                  color='secondary'
+                  className={classes.createAt}
+                >
                   Member since : {profile.createdAt.toDateString()}
                 </Typography>
               </Box>
