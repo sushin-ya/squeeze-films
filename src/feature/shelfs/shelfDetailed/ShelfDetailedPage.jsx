@@ -33,11 +33,7 @@ export default function ShelfDetailedPage() {
   const shelf = useSelector((state) =>
     state.shelf.shelfs.find((s) => s.id === params.id)
   );
-  const shelfs = useSelector((state) => state.shelf.shelfs);
   const { error } = useSelector((state) => state.async);
-
-  console.log(shelfs);
-  console.log(params.id);
 
   useFirestoreDoc({
     query: () => listenToShelfFromFirestore(params.id),
