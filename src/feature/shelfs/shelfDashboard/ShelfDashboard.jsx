@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
@@ -26,8 +26,11 @@ export default function ShelfDashboard() {
   const classes = useStyles();
   const limit = 2;
   const dispatch = useDispatch();
-  const { shelfs, lastVisible } = useSelector((state) => state.shelf);
+  const { shelfs, moreShelfs, lastVisible } = useSelector(
+    (state) => state.shelf
+  );
   const [loadingInit, setLoadingInit] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
     setLoadingInit(true);
@@ -36,8 +39,15 @@ export default function ShelfDashboard() {
     });
   }, [dispatch]);
 
-  function handleFetchMoreShelfs() {
-    dispatch(fetchShelfs(limit, lastVisible));
+  async function handleFetchMoreShelfs() {
+    try {
+      setIsFetching(true);
+      await dispatch(fetchShelfs(limit, lastVisible));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFetching(false);
+    }
   }
 
   return (
@@ -45,8 +55,14 @@ export default function ShelfDashboard() {
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDashboardTitle />
         <ShelfDashboardNotice button={classes.button} />
-        <ShelfList shelfs={shelfs} button={classes.button} />
-        <Button onClick={handleFetchMoreShelfs}>More</Button>
+        <ShelfList
+          shelfs={shelfs}
+          button={classes.button}
+          getNextShelfs={handleFetchMoreShelfs}
+          loading={loadingInit}
+          moreShelfs={moreShelfs}
+          isFetching={isFetching}
+        />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />

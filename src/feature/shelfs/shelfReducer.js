@@ -37,9 +37,10 @@ export default function shelfReducer(state = initialState, { type, payload }) {
         shelfs: [...state.shelfs.filter((shelf) => shelf.id !== payload)],
       };
     case FETCH_SHELF:
+      console.log('state', state.shelfs);
+      console.log('payload', payload.shelfs);
       return {
         ...state,
-        // shelfs: payload.shelfs,
         shelfs: [...state.shelfs, ...payload.shelfs],
         moreShelfs: payload.moreShelfs,
         lastVisible: payload.lastVisible,

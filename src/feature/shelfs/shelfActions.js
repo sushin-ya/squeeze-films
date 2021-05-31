@@ -24,6 +24,7 @@ export function fetchShelfs(limit, lastDocSnapshot) {
         limit,
         lastDocSnapshot
       ).get();
+      console.log(snapshot.docs.length);
       const lastVisible = snapshot.docs[snapshot.docs.length - 1];
       const moreShelfs = snapshot.docs.length >= limit;
       const shelfs = snapshot.docs.map((doc) => dataFromSnapshot(doc));
