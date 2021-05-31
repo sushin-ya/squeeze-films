@@ -20,8 +20,12 @@ export function dataFromSnapshot(snapshot) {
   };
 }
 
-export function listenToShelfsFromFirestore() {
-  return db.collection('shelfs');
+export function fetchShelfsFromFirestore(limit, lastDocSnapshot = null) {
+  return db
+    .collection('shelfs')
+    .orderBy('uid')
+    .startAfter(lastDocSnapshot)
+    .limit(limit);
 }
 
 export function listenToShelfFromFirestore(shelfId) {

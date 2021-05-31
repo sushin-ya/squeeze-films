@@ -1,13 +1,12 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Button, makeStyles } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector, useDispatch } from 'react-redux';
-import { listenToShelfs } from '../shelfActions';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
-import { listenToShelfsFromFirestore } from '../../../app/firestore/firestoreService';
+import { fetchShelfs } from '../shelfActions';
+import { useEffect } from 'react/cjs/react.development';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,14 +24,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDashboard() {
   const classes = useStyles();
+  const limit = 2;
   const dispatch = useDispatch();
-  const { shelfs } = useSelector((state) => state.shelf);
+  const { shelfs, lastVisible } = useSelector((state) => state.shelf);
+  const [loadingInit, setLoadingInit] = useState(false);
 
-  useFirestoreCollection({
-    query: () => listenToShelfsFromFirestore(),
-    data: (shelfs) => dispatch(listenToShelfs(shelfs)),
-    deps: [dispatch],
-  });
+  useEffect(() => {
+    setLoadingInit(true);
+    dispatch(fetchShelfs(limit)).then(() => {
+      setLoadingInit(false);
+    });
+  }, [dispatch]);
+
+  function handleFetchMoreShelfs() {
+    dispatch(fetchShelfs(limit, lastVisible));
+  }
 
   return (
     <div className={classes.container}>
@@ -40,6 +46,7 @@ export default function ShelfDashboard() {
         <ShelfDashboardTitle />
         <ShelfDashboardNotice button={classes.button} />
         <ShelfList shelfs={shelfs} button={classes.button} />
+        <Button onClick={handleFetchMoreShelfs}>More</Button>
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />
