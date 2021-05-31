@@ -7,6 +7,7 @@ import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchShelfs } from '../shelfActions';
 import { useEffect } from 'react/cjs/react.development';
+import { RETAIN_STATE } from '../shelfConstants';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,18 +27,22 @@ export default function ShelfDashboard() {
   const classes = useStyles();
   const limit = 2;
   const dispatch = useDispatch();
-  const { shelfs, moreShelfs, lastVisible } = useSelector(
+  const { shelfs, moreShelfs, lastVisible, retainState } = useSelector(
     (state) => state.shelf
   );
   const [loadingInit, setLoadingInit] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
 
   useEffect(() => {
+    if (retainState) return;
     setLoadingInit(true);
     dispatch(fetchShelfs(limit)).then(() => {
       setLoadingInit(false);
     });
-  }, [dispatch]);
+    return () => {
+      dispatch({ type: RETAIN_STATE });
+    };
+  }, [dispatch, retainState]);
 
   async function handleFetchMoreShelfs() {
     try {
