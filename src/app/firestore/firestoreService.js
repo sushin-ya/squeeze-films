@@ -23,7 +23,7 @@ export function dataFromSnapshot(snapshot) {
 export function fetchShelfsFromFirestore(limit, lastDocSnapshot = null) {
   return db
     .collection('shelfs')
-    .orderBy('uid')
+    .orderBy('createdAt')
     .startAfter(lastDocSnapshot)
     .limit(limit);
 }
