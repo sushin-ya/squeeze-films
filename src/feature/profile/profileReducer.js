@@ -30,7 +30,7 @@ export default function profileReducer(
     case LISTEN_TO_CURRENT_USER_PROFILE:
       return {
         ...state,
-        currentUserProfile: [payload],
+        currentUserProfile: payload,
       };
     case LISTEN_TO_SELECTED_USER_PROFILE:
       return {

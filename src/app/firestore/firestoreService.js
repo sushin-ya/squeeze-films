@@ -39,6 +39,7 @@ export function addShelfToFirestore(shelf) {
     uid: user.uid,
     displayName: user.displayName,
     photoURL: user.photoURL,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });
 }
 
@@ -68,13 +69,44 @@ export function getUserProfile(userId) {
 
 export async function updateUserProfile(profile) {
   const user = firebase.auth().currentUser;
+  const shelfDocQuery = db.collection('shelfs');
+  const userFollowingRef = db
+    .collection('following')
+    .doc(user.uid)
+    .collection('userFollowing');
+
+  const batch = db.batch();
+
+  batch.update(db.collection('users').doc(user.uid), {
+    displayName: profile.displayName,
+  });
+
   try {
-    if (user.displayName !== profile.displayName) {
-      await user.updateProfile({
+    const shelfsQuerySnap = await shelfDocQuery.get();
+    for (let i = 0; i < shelfsQuerySnap.docs.length; i++) {
+      let shelfDoc = shelfsQuerySnap.docs[i];
+      if (shelfDoc.data().uid === user.uid) {
+        batch.update(shelfsQuerySnap.docs[i].ref, {
+          displayName: profile.displayName,
+        });
+      }
+    }
+    const userFollowingSnap = await userFollowingRef.get();
+    userFollowingSnap.docs.forEach((docRef) => {
+      let followingDocRef = db
+        .collection('following')
+        .doc(docRef.id)
+        .collection('userFollowers')
+        .doc(user.uid);
+      batch.update(followingDocRef, {
         displayName: profile.displayName,
       });
-    }
-    return await db.collection('users').doc(user.uid).update(profile);
+    });
+
+    await batch.commit();
+    return await user.updateProfile({
+      displayName: profile.displayName,
+    });
   } catch (error) {
     throw error;
   }
@@ -108,10 +140,41 @@ export function getUserPhotos(userUid) {
 
 export async function setMainPhoto(photo) {
   const user = firebase.auth().currentUser;
+  const shelfDocQuery = db.collection('shelfs');
+  const userFollowingRef = db
+    .collection('following')
+    .doc(user.uid)
+    .collection('userFollowing');
+
+  const batch = db.batch();
+
+  batch.update(db.collection('users').doc(user.uid), {
+    photoURL: photo.url,
+  });
+
   try {
-    await db.collection('users').doc(user.uid).update({
-      photoURL: photo.url,
+    const shelfsQuerySnap = await shelfDocQuery.get();
+    for (let i = 0; i < shelfsQuerySnap.docs.length; i++) {
+      let shelfDoc = shelfsQuerySnap.docs[i];
+      if (shelfDoc.data().uid === user.uid) {
+        batch.update(shelfsQuerySnap.docs[i].ref, {
+          photoURL: photo.url,
+        });
+      }
+    }
+    const userFollowingSnap = await userFollowingRef.get();
+    userFollowingSnap.docs.forEach((docRef) => {
+      let followingDocRef = db
+        .collection('following')
+        .doc(docRef.id)
+        .collection('userFollowers')
+        .doc(user.uid);
+      batch.update(followingDocRef, {
+        photoURL: photo.url,
+      });
     });
+
+    await batch.commit();
     return await user.updateProfile({
       photoURL: photo.url,
     });
