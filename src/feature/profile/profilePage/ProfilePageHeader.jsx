@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Box,
@@ -8,6 +8,16 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFollowUser, setUnfollowUser } from '../profileAction';
+import { useEffect } from 'react/cjs/react.development';
+import {
+  followUser,
+  getFollowingDoc,
+  unfollowUser,
+} from '../../../app/firestore/firestoreService';
+import { toast } from 'react-toastify';
+import { CLEAR_FOLLOWINGS } from '../profileConstents';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,7 +35,15 @@ const useStyles = makeStyles((theme) => ({
     height: '100px',
     width: '100px',
   },
-  button: {
+  follow: {
+    color: '#FFFFFF',
+    width: '100%',
+  },
+  unfollow: {
+    backgroundColor: '#F44336',
+    '&:hover': {
+      backgroundColor: '#C6382E',
+    },
     color: '#FFFFFF',
     width: '100%',
   },
@@ -33,6 +51,55 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePageHeader({ profile, isCurrentUser }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  // eslint-disable-next-line
+  const [loading, setLoading] = useState(false);
+  const { followingUser } = useSelector((state) => state.profile);
+
+  useEffect(() => {
+    if (isCurrentUser) return;
+    setLoading(true);
+    async function fetchFollowingDoc() {
+      try {
+        const followingDoc = await getFollowingDoc(profile.id);
+        if (followingDoc && followingDoc.exists) {
+          dispatch(setFollowUser());
+        } else {
+          dispatch(setUnfollowUser());
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+    fetchFollowingDoc().then(() => setLoading(false));
+    return () => {
+      dispatch({ type: CLEAR_FOLLOWINGS });
+    };
+  }, [dispatch, profile.id, isCurrentUser]);
+
+  async function handleFollowUesr() {
+    setLoading(true);
+    try {
+      await followUser(profile);
+      dispatch(setFollowUser());
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleUnFollowUesr() {
+    setLoading(true);
+    try {
+      await unfollowUser(profile);
+      dispatch(setUnfollowUser());
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <Paper>
@@ -67,7 +134,7 @@ export default function ProfilePageHeader({ profile, isCurrentUser }) {
                     alignItems='center'
                   >
                     <Typography variant='h3' color='textSecondary'>
-                      10
+                      {profile.followerCount || 0}
                     </Typography>
                     <Typography variant='subtitle1' color='textSecondary'>
                       Followers
@@ -83,7 +150,7 @@ export default function ProfilePageHeader({ profile, isCurrentUser }) {
                   alignItems='center'
                 >
                   <Typography variant='h3' color='textSecondary'>
-                    5
+                    {profile.followingCount || 0}
                   </Typography>
                   <Typography variant='subtitle1' color='textSecondary'>
                     Followings
@@ -94,13 +161,25 @@ export default function ProfilePageHeader({ profile, isCurrentUser }) {
             {!isCurrentUser && (
               <>
                 <Box mb={1} />
-                <Button
-                  variant='contained'
-                  className={classes.button}
-                  color='primary'
-                >
-                  <Box p={0.5}>Follow</Box>
-                </Button>
+                {followingUser ? (
+                  <Button
+                    variant='contained'
+                    className={classes.unfollow}
+                    color='primary'
+                    onClick={handleUnFollowUesr}
+                  >
+                    <Box p={0.5}>UnFollow</Box>
+                  </Button>
+                ) : (
+                  <Button
+                    variant='contained'
+                    className={classes.follow}
+                    color='primary'
+                    onClick={handleFollowUesr}
+                  >
+                    <Box p={0.5}>Follow</Box>
+                  </Button>
+                )}
               </>
             )}
           </Box>

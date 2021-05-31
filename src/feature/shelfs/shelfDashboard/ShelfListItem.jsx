@@ -15,6 +15,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  profile: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
 }));
 
 export default function ShelfListItem({ shelf, button }) {
@@ -35,7 +41,13 @@ export default function ShelfListItem({ shelf, button }) {
                       className={classes.avatar}
                     />
                   </Box>
-                  <Typography variant='subtitle1' color='textSecondary'>
+                  <Typography
+                    variant='subtitle1'
+                    color='textSecondary'
+                    component={Link}
+                    to={`/profile/${shelf.uid}`}
+                    className={classes.profile}
+                  >
                     {shelf.displayName}
                   </Typography>
                 </Box>
