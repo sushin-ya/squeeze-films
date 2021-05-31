@@ -27,7 +27,7 @@ exports.addFollowing = functions.firestore
         {
           displayName: userDoc.data().displayName,
           photoURL: userDoc.data().photoURL,
-          udi: userDoc.id,
+          uid: userDoc.id,
         }
       );
       batch.update(db.collection("users").doc(context.params.profileId), {
