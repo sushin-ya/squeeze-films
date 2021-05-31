@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector, useDispatch } from 'react-redux';
-import { listenToShelfs } from '../shelfActions';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
-import { listenToShelfsFromFirestore } from '../../../app/firestore/firestoreService';
+import { fetchShelfs } from '../shelfActions';
+import { useEffect } from 'react/cjs/react.development';
+import { RETAIN_STATE } from '../shelfConstants';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,21 +25,49 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDashboard() {
   const classes = useStyles();
+  const limit = 2;
   const dispatch = useDispatch();
-  const { shelfs } = useSelector((state) => state.shelf);
+  const { shelfs, moreShelfs, lastVisible, retainState } = useSelector(
+    (state) => state.shelf
+  );
+  const [loadingInit, setLoadingInit] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
 
-  useFirestoreCollection({
-    query: () => listenToShelfsFromFirestore(),
-    data: (shelfs) => dispatch(listenToShelfs(shelfs)),
-    deps: [dispatch],
-  });
+  useEffect(() => {
+    if (retainState) return;
+    setLoadingInit(true);
+    dispatch(fetchShelfs(limit)).then(() => {
+      setLoadingInit(false);
+    });
+    return () => {
+      dispatch({ type: RETAIN_STATE });
+    };
+  }, [dispatch, retainState]);
+
+  async function handleFetchMoreShelfs() {
+    try {
+      setIsFetching(true);
+      await dispatch(fetchShelfs(limit, lastVisible));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFetching(false);
+    }
+  }
 
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDashboardTitle />
         <ShelfDashboardNotice button={classes.button} />
-        <ShelfList shelfs={shelfs} button={classes.button} />
+        <ShelfList
+          shelfs={shelfs}
+          button={classes.button}
+          getNextShelfs={handleFetchMoreShelfs}
+          loading={loadingInit}
+          moreShelfs={moreShelfs}
+          isFetching={isFetching}
+        />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
         <SidePopularFilms />

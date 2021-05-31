@@ -5,11 +5,17 @@ import {
   FETCH_SHELF,
   LISTEN_TO_SHELF_CHAT,
   CLEAR_COMMENT,
+  LISTEN_TO_SELECTED_SHELF,
+  RETAIN_STATE,
 } from './shelfConstants';
 
 const initialState = {
   shelfs: [],
   comments: [],
+  moreShelfs: false,
+  selectedShelf: null,
+  lastVisible: null,
+  retainState: false,
 };
 
 export default function shelfReducer(state = initialState, { type, payload }) {
@@ -35,7 +41,9 @@ export default function shelfReducer(state = initialState, { type, payload }) {
     case FETCH_SHELF:
       return {
         ...state,
-        shelfs: payload,
+        shelfs: [...state.shelfs, ...payload.shelfs],
+        moreShelfs: payload.moreShelfs,
+        lastVisible: payload.lastVisible,
       };
     case LISTEN_TO_SHELF_CHAT:
       return {
@@ -46,6 +54,16 @@ export default function shelfReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         comments: [],
+      };
+    case LISTEN_TO_SELECTED_SHELF:
+      return {
+        ...state,
+        selectedShelf: payload,
+      };
+    case RETAIN_STATE:
+      return {
+        ...state,
+        retainState: true,
       };
     default:
       return state;

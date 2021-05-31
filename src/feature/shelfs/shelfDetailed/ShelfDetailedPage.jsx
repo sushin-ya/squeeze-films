@@ -6,7 +6,7 @@ import ShelfDetailedList from './ShelfDetailedList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { listenToShelfs } from '../shelfActions';
+import { listenToSelectedShelf } from '../shelfActions';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
 import { Redirect } from 'react-router-dom';
@@ -37,7 +37,7 @@ export default function ShelfDetailedPage() {
 
   useFirestoreDoc({
     query: () => listenToShelfFromFirestore(params.id),
-    data: (shelf) => dispatch(listenToShelfs([shelf])),
+    data: (shelf) => dispatch(listenToSelectedShelf([shelf])),
     deps: [params.id, dispatch],
   });
 

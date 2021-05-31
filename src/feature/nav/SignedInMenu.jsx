@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignedInMenu() {
   const classes = useStyles();
-  const { currentUser } = useSelector((state) => state.auth);
+  const { currentUserProfile } = useSelector((state) => state.profile);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const history = useHistory();
@@ -98,7 +98,7 @@ export default function SignedInMenu() {
       >
         <Avatar
           alt='avater'
-          src={currentUser.photoURL || '/assets/user.png'}
+          src={currentUserProfile?.photoURL || '/assets/user.png'}
           className={classes.avatar}
         />
         <Typography
@@ -106,7 +106,7 @@ export default function SignedInMenu() {
           color='textPrimary'
           className={classes.displayName}
         >
-          {currentUser.email}
+          {currentUserProfile?.displayName}
         </Typography>
         <KeyboardArrowDown />
       </Button>
@@ -134,7 +134,9 @@ export default function SignedInMenu() {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem
-                    onClick={() => history.push(`/shelfs/${currentUser.uid}`)}
+                    onClick={() =>
+                      history.push(`/shelfs/${currentUserProfile.id}`)
+                    }
                   >
                     <ListItemIcon
                       className={`${classes.icon} ${classes.filmIcon}`}
@@ -148,7 +150,9 @@ export default function SignedInMenu() {
                     <Typography variant='inherit'>My Films</Typography>
                   </MenuItem>
                   <MenuItem
-                    onClick={() => history.push(`/profile/${currentUser.uid}`)}
+                    onClick={() =>
+                      history.push(`/profile/${currentUserProfile.id}`)
+                    }
                   >
                     <ListItemIcon className={classes.icon}>
                       <Person />

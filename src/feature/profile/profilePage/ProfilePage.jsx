@@ -43,8 +43,7 @@ export default function ProfilePage() {
   });
 
   if (params.id === currentUser.uid) {
-    const temp = currentUserProfile;
-    profile = temp[0];
+    profile = currentUserProfile;
   } else {
     profile = selectedUserProfile;
   }
