@@ -3,11 +3,16 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './rootReducer';
 import thunk from 'redux-thunk';
 import { verifyAuth } from '../../feature/auth/authActions';
+import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
 
-export function configureStore() {
+export const history = createBrowserHistory();
+
+export function configureStore(preloadedState) {
   const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
+    rootReducer(history),
+    preloadedState,
+    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
   );
 
   store.dispatch(verifyAuth());

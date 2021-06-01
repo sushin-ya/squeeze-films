@@ -5,7 +5,7 @@ import 'firebase/auth';
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCXvN_QO0CqlCPtLHfcwNky26t9VakgX7U',
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: 'squeeze-films.firebaseapp.com',
   projectId: 'squeeze-films',
   storageBucket: 'squeeze-films.appspot.com',

@@ -7,6 +7,7 @@ import {
   CLEAR_COMMENT,
   LISTEN_TO_SELECTED_SHELF,
   RETAIN_STATE,
+  CLEAR_SHELFS,
 } from './shelfConstants';
 
 const initialState = {
@@ -65,6 +66,8 @@ export default function shelfReducer(state = initialState, { type, payload }) {
         ...state,
         retainState: true,
       };
+    case CLEAR_SHELFS:
+      return initialState;
     default:
       return state;
   }
