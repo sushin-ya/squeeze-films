@@ -32,7 +32,6 @@ export function fetchShelfs(limit, lastDocSnapshot) {
         payload: { shelfs, moreShelfs, lastVisible },
       });
       dispatch(asyncActionFinish());
-      return lastVisible;
     } catch (error) {
       dispatch(asyncActionError(error));
     }
