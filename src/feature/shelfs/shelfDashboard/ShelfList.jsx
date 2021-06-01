@@ -15,7 +15,9 @@ export default function ShelfList({
       {shelfs.length !== 0 && (
         <InfiniteScroll
           pageStart={0}
-          loadMore={!isFetching && getNextShelfs}
+          loadMore={
+            isFetching ? () => console.log('now fetching') : getNextShelfs
+          }
           hasMore={!loading && moreShelfs}
           initialLoad={false}
         >

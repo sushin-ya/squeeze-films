@@ -34,6 +34,7 @@ export default function ShelfDetailedPage() {
     state.shelf.shelfs.find((s) => s.id === params.id)
   );
   const { error } = useSelector((state) => state.async);
+  const { authenticated } = useSelector((state) => state.auth);
 
   useFirestoreDoc({
     query: () => listenToShelfFromFirestore(params.id),
@@ -52,7 +53,9 @@ export default function ShelfDetailedPage() {
           photoURL={shelf?.photoURL}
           displayName={shelf?.displayName || 'No Name'}
         />
-        <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />
+        {shelf.uid === authenticated.id && (
+          <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />
+        )}
         <ShelfDetailedList shelf={shelf} />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>

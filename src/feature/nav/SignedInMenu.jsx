@@ -90,12 +90,7 @@ export default function SignedInMenu() {
   }
   return (
     <div>
-      <Button
-        ref={anchorRef}
-        aria-controls={open ? 'menu-list-grow' : undefined}
-        aria-haspopup='true'
-        onClick={handleToggle}
-      >
+      <Button ref={anchorRef} onClick={handleToggle}>
         <Avatar
           alt='avater'
           src={currentUserProfile?.photoURL || '/assets/user.png'}

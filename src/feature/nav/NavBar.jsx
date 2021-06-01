@@ -15,8 +15,10 @@ import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { NavLink } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Add } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
+import { openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -51,86 +53,93 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const { authenticated } = useSelector((state) => state.auth);
 
   return (
-    <AppBar position='fixed' className={classes.appBar}>
-      <Container>
-        <Toolbar disableGutters>
-          <Box mr={2}>
-            <Link className={classes.top} component={NavLink} to='/'>
-              <Grid
-                container
-                direction='row'
-                justify='center'
-                alignItems='center'
-              >
-                <img
-                  src={squeezeFilmsIcon}
-                  alt=''
-                  className={classes.topButton}
-                />
-                <Typography variant='subtitle1' color='textPrimary'>
-                  Squeeze Films
-                </Typography>
-              </Grid>
-            </Link>
-          </Box>
-          <Divider
-            orientation='vertical'
-            flexItem
-            className={classes.marginRight}
-          />
-          <Link component={NavLink} to='/shelfs' className={classes.link}>
+    <>
+      <AppBar position='fixed' className={classes.appBar}>
+        <Container>
+          <Toolbar disableGutters>
             <Box mr={2}>
-              <Typography variant='subtitle1' className={classes.title}>
-                Squeezed Films List
-              </Typography>
-            </Box>
-          </Link>
-          <Divider
-            orientation='vertical'
-            flexItem
-            className={classes.marginRight}
-          />
-          {authenticated && (
-            <>
-              <Button
-                variant='contained'
-                className={classes.button}
-                startIcon={<Add />}
-                component={NavLink}
-                to={`/createShelf`}
-              >
-                Squeeze Films
-              </Button>
-              <Box mr={2} />
-              <Divider
-                orientation='vertical'
-                flexItem
-                className={classes.marginRight}
-              />
-              <Link
-                className={classes.link}
-                component={NavLink}
-                to={`/profile`}
-              >
-                <Box mr={2}>
-                  <Typography variant='subtitle1'>Users</Typography>
-                </Box>
+              <Link className={classes.top} component={NavLink} to='/'>
+                <Grid
+                  container
+                  direction='row'
+                  justify='center'
+                  alignItems='center'
+                >
+                  <img
+                    src={squeezeFilmsIcon}
+                    alt=''
+                    className={classes.topButton}
+                  />
+                  <Typography variant='subtitle1' color='textPrimary'>
+                    Squeeze Films
+                  </Typography>
+                </Grid>
               </Link>
-              <Divider
-                orientation='vertical'
-                flexItem
-                className={classes.marginRight}
-              />
-            </>
-          )}
-          <div className={classes.flexgrow}></div>
+            </Box>
+            <Divider
+              orientation='vertical'
+              flexItem
+              className={classes.marginRight}
+            />
+            <Link component={NavLink} to='/shelfs' className={classes.link}>
+              <Box mr={2}>
+                <Typography variant='subtitle1' className={classes.title}>
+                  Squeezed Films List
+                </Typography>
+              </Box>
+            </Link>
+            <Divider
+              orientation='vertical'
+              flexItem
+              className={classes.marginRight}
+            />
+            <Button
+              variant='contained'
+              className={classes.button}
+              startIcon={<Add />}
+              onClick={
+                authenticated
+                  ? () => history.push(`/createShelf`)
+                  : () => dispatch(openModal({ modalType: 'UnauthModal' }))
+              }
+            >
+              Squeeze Films
+            </Button>
+            <Box mr={2} />
+            <Divider
+              orientation='vertical'
+              flexItem
+              className={classes.marginRight}
+            />
+            {authenticated && (
+              <>
+                <Link
+                  className={classes.link}
+                  component={NavLink}
+                  to={`/profile`}
+                >
+                  <Box mr={2}>
+                    <Typography variant='subtitle1'>Users</Typography>
+                  </Box>
+                </Link>
+                <Divider
+                  orientation='vertical'
+                  flexItem
+                  className={classes.marginRight}
+                />
+              </>
+            )}
+            <div className={classes.flexgrow}></div>
 
-          {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
-        </Toolbar>
-      </Container>
-    </AppBar>
+            {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
   );
 }
