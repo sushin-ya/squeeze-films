@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
-import UnauthModal from '../../feature/auth/UnauthModal';
+import UnauthComponent from '../common/error/UnauthComponent';
 
 export default function PrivateRoute({
   component: Component,
@@ -9,11 +9,16 @@ export default function PrivateRoute({
   ...rest
 }) {
   const { authenticated } = useSelector((state) => state.auth);
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        authenticated ? <Component {...props} /> : <UnauthModal {...props} />
+        authenticated ? (
+          <Component {...props} />
+        ) : (
+          <UnauthComponent {...props} />
+        )
       }
     />
   );

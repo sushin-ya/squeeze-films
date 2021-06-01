@@ -44,11 +44,7 @@ export default function App() {
                 <Route exact path='/shelfs' component={ShelfDashboard} />
                 <Route path='/shelfs/:id' component={ShelfDetailedPage} />
                 <Route exact path='/profile' component={ProfileList} />
-                <PrivateRoute
-                  path={'/profile/:id'}
-                  component={ProfilePage}
-                  key={key}
-                />
+                <PrivateRoute path={'/profile/:id'} component={ProfilePage} />
                 <Route path='/popular' component={PopularPage} />
                 <PrivateRoute
                   path={['/createShelf', '/manage/:id']}

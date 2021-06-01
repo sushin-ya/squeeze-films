@@ -3,7 +3,7 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
-import { listenToSelectedShelf } from '../shelfActions';
+import { clearShelfs, listenToSelectedShelf } from '../shelfActions';
 import { useParams, useHistory } from 'react-router-dom';
 import templateData from './template-data';
 import FlimAutoCompleteForm from './FilmAutoCompleteForm';
@@ -146,6 +146,7 @@ export default function ShelfForm() {
         ? await updateShelfToFirestore(newMyShelf)
         : await addShelfToFirestore(newMyShelf);
       history.push('/shelfs');
+      dispatch(clearShelfs());
     } catch (error) {
       toast.error(error.message);
     }

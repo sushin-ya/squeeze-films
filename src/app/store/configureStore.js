@@ -4,13 +4,15 @@ import rootReducer from './rootReducer';
 import thunk from 'redux-thunk';
 import { verifyAuth } from '../../feature/auth/authActions';
 import { createBrowserHistory } from 'history';
+import { routerMiddleware } from 'connected-react-router';
 
 export const history = createBrowserHistory();
 
-export function configureStore() {
+export function configureStore(preloadedState) {
   const store = createStore(
     rootReducer(history),
-    composeWithDevTools(applyMiddleware(thunk))
+    preloadedState,
+    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
   );
 
   store.dispatch(verifyAuth());
