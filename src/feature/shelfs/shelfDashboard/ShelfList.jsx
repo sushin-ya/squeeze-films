@@ -18,7 +18,6 @@ export default function ShelfList({
           loadMore={!isFetching && getNextShelfs}
           hasMore={!loading && moreShelfs}
           initialLoad={false}
-          threshold={10}
         >
           {shelfs.map((shelf) => (
             <ShelfListItem shelf={shelf} key={shelf.id} button={button} />

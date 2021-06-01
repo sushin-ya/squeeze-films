@@ -43,7 +43,7 @@ export default function shelfReducer(state = initialState, { type, payload }) {
         ...state,
         shelfs: [...state.shelfs, ...payload.shelfs],
         moreShelfs: payload.moreShelfs,
-        lastVisible: payload.lastVisible,
+        lastVisible: payload.lastVisible ?? null,
       };
     case LISTEN_TO_SHELF_CHAT:
       return {
