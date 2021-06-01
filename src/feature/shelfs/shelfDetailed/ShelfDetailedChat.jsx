@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -11,7 +11,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import ShelfDetailedChatForm from './ShelfDetailedChatForm';
 import { formatDistance } from 'date-fns';
-import { useEffect } from 'react/cjs/react.development';
 import { getShelfChatRef } from '../../../app/firestore/firebaseService';
 import { listenToShelfChat } from '../shelfActions';
 import { CLEAR_COMMENT } from '../shelfConstants';

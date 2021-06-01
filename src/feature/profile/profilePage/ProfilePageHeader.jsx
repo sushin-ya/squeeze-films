@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Avatar,
   Box,
@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFollowUser, setUnfollowUser } from '../profileAction';
-import { useEffect } from 'react/cjs/react.development';
 import {
   followUser,
   getFollowingDoc,

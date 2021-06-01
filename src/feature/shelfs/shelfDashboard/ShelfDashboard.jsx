@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
@@ -6,7 +6,6 @@ import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchShelfs } from '../shelfActions';
-import { useEffect } from 'react/cjs/react.development';
 import { RETAIN_STATE } from '../shelfConstants';
 
 const useStyles = makeStyles((theme) => ({
