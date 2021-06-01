@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../app/common/modals/modalReducer';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import HelpIcon from '@material-ui/icons/Help';
@@ -28,9 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UnauthModal() {
+export default function UnauthModal({ history }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { prevLocation } = useSelector((state) => state.auth);
 
   const Wrapper = React.forwardRef(({ children }, ref) => {
     return (
@@ -55,6 +56,20 @@ export default function UnauthModal() {
   function handleOpenRegister() {
     dispatch(closeModal());
     dispatch(openModal({ modalType: 'RegisterForm' }));
+  }
+
+  function handleCancel() {
+    if (!history) {
+      dispatch(closeModal());
+      return;
+    }
+
+    if (history && prevLocation) {
+      history.push(prevLocation.pathname);
+    } else {
+      history.push('/shelfs');
+    }
+    dispatch(closeModal());
   }
 
   return (
@@ -102,7 +117,7 @@ export default function UnauthModal() {
               </Button>
               <Box mt={2} />
               <Button
-                onClick={() => dispatch(closeModal())}
+                onClick={() => handleCancel()}
                 variant='outlined'
                 fullWidth
               >

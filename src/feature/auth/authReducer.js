@@ -1,10 +1,12 @@
 import { APP_LOADED } from '../../app/async/asyncReducer';
 import { SIGN_IN_USER, SIGN_OUT_USER } from './authConstants';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 const initialState = {
   authenticated: false,
   currentUser: null,
   initialized: false,
+  prevLocation: null,
 };
 
 export default function authReducer(state = initialState, { type, payload }) {
@@ -31,6 +33,12 @@ export default function authReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         initialized: true,
+      };
+    case LOCATION_CHANGE:
+      return {
+        ...state,
+        prevLocation: state.currentLocation,
+        currentLocation: payload.location,
       };
     default:
       return state;

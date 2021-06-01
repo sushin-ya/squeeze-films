@@ -5,7 +5,7 @@ import ShelfDetailedPage from '../../feature/shelfs/shelfDetailed/ShelfDetailedP
 import ShelfForm from '../../feature/shelfs/shelfForm/ShelfForm';
 import FilmSuggestionForm from '../../feature/sandbox/FilmSuggestionForm';
 import { Box, Container, makeStyles } from '@material-ui/core';
-import { Route } from 'react-router-dom';
+import { Route, useLocation } from 'react-router-dom';
 import PopularPage from '../../feature/popular/PopularPage';
 import { ToastContainer } from 'react-toastify';
 import ErrorComponent from '../common/error/ErrorComponent';
@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import LoadingComponent from './LoadingComponent';
 import ProfileList from '../../feature/profile/profilePage/ProfileList';
 import ProfilePage from '../../feature/profile/profilePage/ProfilePage';
+import PrivateRoute from './PrivateRoute';
 
 const useStyles = makeStyles({
   background: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles({
 export default function App() {
   const classes = useStyles();
   const { initialized } = useSelector((state) => state.async);
+  const { key } = useLocation();
 
   if (!initialized) return <LoadingComponent content='Loading app...' />;
 
@@ -42,11 +44,16 @@ export default function App() {
                 <Route exact path='/shelfs' component={ShelfDashboard} />
                 <Route path='/shelfs/:id' component={ShelfDetailedPage} />
                 <Route exact path='/profile' component={ProfileList} />
-                <Route path='/profile/:id' component={ProfilePage} />
+                <PrivateRoute
+                  path={'/profile/:id'}
+                  component={ProfilePage}
+                  key={key}
+                />
                 <Route path='/popular' component={PopularPage} />
-                <Route
+                <PrivateRoute
                   path={['/createShelf', '/manage/:id']}
                   component={ShelfForm}
+                  key={key}
                 />
                 <Route path='/sandbox' component={FilmSuggestionForm} />
                 <Route path='/error' component={ErrorComponent} />
