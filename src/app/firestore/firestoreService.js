@@ -32,7 +32,7 @@ export function listenToShelfFromFirestore(shelfId) {
   return db.collection('shelfs').doc(shelfId);
 }
 
-export function addShelfToFirestore(shelf) {
+export async function addShelfToFirestore(shelf) {
   const user = firebase.auth().currentUser;
   const batch = db.batch();
 
@@ -48,7 +48,7 @@ export function addShelfToFirestore(shelf) {
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   });
 
-  return batch.commit();
+  return await batch.commit();
 }
 
 export function updateShelfToFirestore(shelf) {
@@ -233,9 +233,10 @@ export async function followUser(profile) {
     batch.update(db.collection('users').doc(user.uid), {
       followingCount: firebase.firestore.FieldValue.increment(1),
     });
-    batch.update(db.collection('users').doc(profile.id), {
-      followerCount: firebase.firestore.FieldValue.increment(1),
-    });
+    // firebase functions do this
+    // batch.update(db.collection('users').doc(profile.id), {
+    //   followerCount: firebase.firestore.FieldValue.increment(1),
+    // });
     return await batch.commit();
   } catch (error) {
     throw error;
@@ -263,9 +264,10 @@ export async function unfollowUser(profile) {
     batch.update(db.collection('users').doc(user.uid), {
       followingCount: firebase.firestore.FieldValue.increment(-1),
     });
-    batch.update(db.collection('users').doc(profile.id), {
-      followerCount: firebase.firestore.FieldValue.increment(-1),
-    });
+    // firebase functions do this
+    // batch.update(db.collection('users').doc(profile.id), {
+    //   followerCount: firebase.firestore.FieldValue.increment(-1),
+    // });
     return await batch.commit();
   } catch (error) {
     throw error;
