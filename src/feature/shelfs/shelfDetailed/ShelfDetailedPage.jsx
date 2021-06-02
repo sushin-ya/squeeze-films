@@ -30,11 +30,9 @@ export default function ShelfDetailedPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const params = useParams();
-  const shelf = useSelector((state) =>
-    state.shelf.shelfs.find((s) => s.id === params.id)
-  );
+  const shelf = useSelector((state) => state.shelf.selectedShelf);
   const { error } = useSelector((state) => state.async);
-  const { authenticated } = useSelector((state) => state.auth);
+  const { authenticated, currentUser } = useSelector((state) => state.auth);
 
   useFirestoreDoc({
     query: () => listenToShelfFromFirestore(params.id),
@@ -53,7 +51,7 @@ export default function ShelfDetailedPage() {
           photoURL={shelf?.photoURL}
           displayName={shelf?.displayName || 'No Name'}
         />
-        {shelf.uid === authenticated.id && (
+        {authenticated && shelf.uid === currentUser.uid && (
           <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />
         )}
         <ShelfDetailedList shelf={shelf} />

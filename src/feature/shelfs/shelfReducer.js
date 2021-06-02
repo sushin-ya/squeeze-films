@@ -6,6 +6,7 @@ import {
   LISTEN_TO_SHELF_CHAT,
   CLEAR_COMMENT,
   LISTEN_TO_SELECTED_SHELF,
+  CLEAR_SELECTED_SHELF,
   RETAIN_STATE,
   CLEAR_SHELFS,
 } from './shelfConstants';
@@ -60,6 +61,11 @@ export default function shelfReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         selectedShelf: payload,
+      };
+    case CLEAR_SELECTED_SHELF:
+      return {
+        ...state,
+        selectedShelf: null,
       };
     case RETAIN_STATE:
       return {

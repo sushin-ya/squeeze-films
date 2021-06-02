@@ -3,8 +3,12 @@ import { Box, Button, makeStyles } from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearShelfs, listenToSelectedShelf } from '../shelfActions';
-import { useParams, useHistory } from 'react-router-dom';
+import {
+  clearSelectedShelf,
+  clearShelfs,
+  listenToSelectedShelf,
+} from '../shelfActions';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import templateData from './template-data';
 import FlimAutoCompleteForm from './FilmAutoCompleteForm';
 import {
@@ -17,6 +21,7 @@ import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { toast } from 'react-toastify';
 import ConfirmDelete from './ConfirmDelete';
 import ConfirmCreate from './ConfirmCreate';
+import { useEffect } from 'react/cjs/react.development';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -73,27 +78,36 @@ function initialData(shelf) {
 
 export default function ShelfForm() {
   const classes = useStyles();
-  const [submitConfirmOpen, setSubmitConfirmOpen] = useState(false);
-  const [delteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const history = useHistory();
   const params = useParams();
+  const location = useLocation();
   const dispatch = useDispatch();
-  const selectedShelf = useSelector((state) =>
-    state.shelf.shelfs.find((s) => s.uid === params.id)
-  );
+  const [submitConfirmOpen, setSubmitConfirmOpen] = useState(false);
+  const [delteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const { selectedShelf } = useSelector((state) => state.shelf);
   const { currentUser } = useSelector((state) => state.auth);
 
-  const initialShelf = selectedShelf ?? {
+  const initialShelf = {
     uid: currentUser.uid,
     displayName: currentUser.displayName,
     photoURL: currentUser.photoURL,
     films: [],
   };
   const [myShelf, setMyShelf] = useState(initialShelf);
-  const [data, setData] = useState(initialData(selectedShelf));
+  const [data, setData] = useState(initialData(initialShelf));
+
+  useEffect(() => {
+    if (location.pathname !== '/createShelf') {
+      setMyShelf(selectedShelf);
+      setData(initialData(selectedShelf));
+    } else {
+      dispatch(clearSelectedShelf());
+    }
+  }, [dispatch, location.pathname, selectedShelf]);
 
   useFirestoreDoc({
-    shouldExecute: !!params.id,
+    shouldExecute:
+      params.id !== selectedShelf?.id && location.pathname !== '/createShelf',
     query: () => listenToShelfFromFirestore(params.id),
     data: (shelf) => dispatch(listenToSelectedShelf([shelf])),
     deps: [params.id, dispatch],
