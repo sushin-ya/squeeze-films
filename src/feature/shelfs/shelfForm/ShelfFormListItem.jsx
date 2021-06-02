@@ -1,12 +1,10 @@
 import React from 'react';
 import {
-  IconButton,
   ListItem,
   ListItemAvatar,
   ListItemText,
   makeStyles,
 } from '@material-ui/core';
-import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import { Draggable } from 'react-beautiful-dnd';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,9 +47,6 @@ export default function ShelfFormListItem({ film, index }) {
             <ListItemText className={classes.filmTitle}>
               {index + 1}. {film.title}({film.release})
             </ListItemText>
-            <IconButton>
-              <RemoveCircleOutlineIcon />
-            </IconButton>
           </ListItem>
         );
       }}
