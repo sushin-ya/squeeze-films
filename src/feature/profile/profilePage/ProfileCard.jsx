@@ -11,7 +11,7 @@ import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 120,
+    width: 120,
   },
   name: {
     textAlign: 'center',

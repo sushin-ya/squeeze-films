@@ -75,6 +75,14 @@ const theme = createMuiTheme({
         padding: 0,
       },
     },
+    MuiCardContent: {
+      root: {
+        padding: '8px',
+        '&:last-child': {
+          paddingBottom: '8px',
+        },
+      },
+    },
   },
 });
 

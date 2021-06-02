@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   CardActions,
+  CardContent,
   CardMedia,
   CircularProgress,
   Grid,
@@ -44,10 +45,7 @@ const useStyles = makeStyles((theme) => ({
     textUnderlineOffset: '4px',
   },
   card: {
-    maxWidth: 140,
-  },
-  media: {
-    height: 150,
+    width: 120,
   },
   success: {
     '& svg': {
@@ -149,40 +147,44 @@ export default function PhotosTab({ value, index, profile }) {
                   ) : (
                     <>
                       {photos.map((photo) => (
-                        <Grid item xs={2} sm={3} key={photo.id}>
+                        <Grid item key={photo.id}>
                           <Card className={classes.card}>
                             <CardMedia
-                              className={classes.media}
+                              component='img'
+                              alt=''
                               image={photo.url}
                               title={photo.id}
                             />
-                            <CardActions>
-                              <Grid
-                                container
-                                direction='row'
-                                justify='space-evenly'
-                                alignItems='center'
-                              >
-                                <IconButton
-                                  className={classes.success}
-                                  onClick={(e) =>
-                                    handleSetMainPhoto(photo, e.target.name)
-                                  }
-                                  disabled={photo.url === profile.photoURL}
+                            <CardContent>
+                              <CardActions>
+                                <Grid
+                                  container
+                                  direction='row'
+                                  justify='space-evenly'
+                                  alignItems='center'
+                                  wrap='nowrap'
                                 >
-                                  <CheckBoxIcon />
-                                </IconButton>
-                                <IconButton
-                                  className={classes.delete}
-                                  onClick={(e) =>
-                                    handleDeletePhoto(photo, e.target.name)
-                                  }
-                                  disabled={photo.url === profile.photoURL}
-                                >
-                                  <DeleteIcon />
-                                </IconButton>
-                              </Grid>
-                            </CardActions>
+                                  <IconButton
+                                    className={classes.success}
+                                    onClick={(e) =>
+                                      handleSetMainPhoto(photo, e.target.name)
+                                    }
+                                    disabled={photo.url === profile.photoURL}
+                                  >
+                                    <CheckBoxIcon />
+                                  </IconButton>
+                                  <IconButton
+                                    className={classes.delete}
+                                    onClick={(e) =>
+                                      handleDeletePhoto(photo, e.target.name)
+                                    }
+                                    disabled={photo.url === profile.photoURL}
+                                  >
+                                    <DeleteIcon />
+                                  </IconButton>
+                                </Grid>
+                              </CardActions>
+                            </CardContent>
                           </Card>
                         </Grid>
                       ))}

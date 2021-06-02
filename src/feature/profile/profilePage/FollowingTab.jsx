@@ -77,23 +77,28 @@ export default function FollowingTab({
               direction='row'
               justify='flex-start'
               alignItems='center'
+              spacing={1}
               style={{ gridColumnStart: 1, gridColumnEnd: 13 }}
             >
               {activeTab === 2 &&
                 followers.map((profile) => (
-                  <ProfileCard
-                    profile={profile}
-                    key={profile.id}
-                    setValue={setValue}
-                  />
+                  <Grid item>
+                    <ProfileCard
+                      profile={profile}
+                      key={profile.id}
+                      setValue={setValue}
+                    />
+                  </Grid>
                 ))}
               {activeTab === 3 &&
                 followings.map((profile) => (
-                  <ProfileCard
-                    profile={profile}
-                    key={profile.id}
-                    setValue={setValue}
-                  />
+                  <Grid item>
+                    <ProfileCard
+                      profile={profile}
+                      key={profile.id}
+                      setValue={setValue}
+                    />
+                  </Grid>
                 ))}
             </Grid>
           </div>
