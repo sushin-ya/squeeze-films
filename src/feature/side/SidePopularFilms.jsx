@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Button,
@@ -9,8 +9,9 @@ import {
 } from '@material-ui/core';
 import SidePopularFilmsList from './SidePopularFilmsList';
 import { ThumbUp } from '@material-ui/icons';
-import { popularFilms } from '../../app/api/sampleData';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPopularFilm } from '../../app/tmdb/tmdbReducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,8 +29,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SidePopularFilms() {
   const classes = useStyles();
-  const films = popularFilms.slice(0, 5);
+  const { tmdbFilms } = useSelector((state) => state.tmdb);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchPopularFilm(!!tmdbFilms.length));
+  }, [dispatch, tmdbFilms]);
   return (
     <Paper>
       <div className={classes.root}>
@@ -45,7 +50,7 @@ export default function SidePopularFilms() {
                 </Typography>
               </Box>
             </Grid>
-            <SidePopularFilmsList films={films} />
+            <SidePopularFilmsList films={tmdbFilms.slice(0, 5)} />
             <Grid item xs={12}>
               <Box display='flex' justifyContent='flex-end'>
                 <Button

@@ -28,8 +28,9 @@ function setNewFilms(films, directorName) {
   });
 }
 
-export function fetchPopularFilm() {
+export function fetchPopularFilm(hasFilms) {
   return async function (dispatch) {
+    if (hasFilms) return;
     dispatch(asyncActionStart());
     try {
       const films = await axios

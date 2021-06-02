@@ -17,8 +17,8 @@ export default function PopularPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPopularFilm());
-  }, [dispatch]);
+    dispatch(fetchPopularFilm(!!tmdbFilms.length));
+  }, [dispatch, tmdbFilms]);
 
   return (
     <div className={classes.container}>
