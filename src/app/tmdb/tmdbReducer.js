@@ -12,7 +12,8 @@ const FETCH_SUGGESTED_FILM = 'FETCH_SUGGESTED_FILM';
 const CLEAR_SUGGESTED_FILM = 'CLEAR_SUGGESTED_FILM';
 
 const initialState = {
-  tmdbFilms: [],
+  popularFilms: [],
+  suggestedFilm: [],
 };
 
 function setNewFilms(films, directorName) {
@@ -122,15 +123,18 @@ export default function tmdbReducer(state = initialState, { type, payload }) {
     case FETCH_POPULAR_FILM:
       return {
         ...state,
-        tmdbFilms: payload,
+        popularFilms: payload,
       };
     case FETCH_SUGGESTED_FILM:
       return {
         ...state,
-        tmdbFilms: payload,
+        suggestedFilm: payload,
       };
     case CLEAR_SUGGESTED_FILM:
-      return initialState;
+      return {
+        ...state,
+        suggestedFilm: [],
+      };
     default:
       return state;
   }

@@ -29,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SidePopularFilms() {
   const classes = useStyles();
-  const { tmdbFilms } = useSelector((state) => state.tmdb);
+  const { popularFilms } = useSelector((state) => state.tmdb);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPopularFilm(!!tmdbFilms.length));
-  }, [dispatch, tmdbFilms]);
+    dispatch(fetchPopularFilm(!!popularFilms.length));
+  }, [dispatch, popularFilms]);
+
   return (
     <Paper>
       <div className={classes.root}>
@@ -50,7 +51,7 @@ export default function SidePopularFilms() {
                 </Typography>
               </Box>
             </Grid>
-            <SidePopularFilmsList films={tmdbFilms.slice(0, 5)} />
+            <SidePopularFilmsList films={popularFilms.slice(0, 5)} />
             <Grid item xs={12}>
               <Box display='flex' justifyContent='flex-end'>
                 <Button

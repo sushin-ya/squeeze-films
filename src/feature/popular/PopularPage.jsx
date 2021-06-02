@@ -13,17 +13,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PopularPage() {
   const classes = useStyles();
-  const { tmdbFilms } = useSelector((state) => state.tmdb);
+  const { popularFilms } = useSelector((state) => state.tmdb);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPopularFilm(!!tmdbFilms.length));
-  }, [dispatch, tmdbFilms]);
+    dispatch(fetchPopularFilm(!!popularFilms.length));
+  }, [dispatch, popularFilms]);
 
   return (
     <div className={classes.container}>
       <PopularPageTitle />
-      <PopularFilmList shelf={tmdbFilms} />
+      <PopularFilmList shelf={popularFilms} />
     </div>
   );
 }

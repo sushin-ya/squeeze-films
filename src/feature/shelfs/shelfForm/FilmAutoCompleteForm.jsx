@@ -22,11 +22,11 @@ export default function FlimAutoCompleteForm({ setData }) {
 
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
-  const tmdbFilms = useSelector((state) => state.tmdb.tmdbFilms);
+  const { suggestedFilm } = useSelector((state) => state.tmdb);
 
   useEffect(() => {
-    setSuggestions(tmdbFilms);
-  }, [tmdbFilms]);
+    setSuggestions(suggestedFilm);
+  }, [suggestedFilm]);
 
   useEffect(() => {
     if (inputValue === '') {
