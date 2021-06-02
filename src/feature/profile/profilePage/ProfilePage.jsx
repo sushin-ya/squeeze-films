@@ -39,13 +39,13 @@ export default function ProfilePage() {
     query: () => getUserProfile(params.id),
     data: (profile) => dispatch(listenToSelectedUserProfile(profile)),
     deps: [dispatch, params.id],
-    // shouldExecute: params.id !== currentUser.uid,
+    shouldExecute: params.id !== currentUser.uid,
   });
 
-  if (params.id === currentUser.uid) {
-    profile = currentUserProfile;
-  } else {
+  if (params.id !== currentUser.uid) {
     profile = selectedUserProfile;
+  } else {
+    profile = currentUserProfile;
   }
 
   if ((loading && !profile) || (!profile && !error))
