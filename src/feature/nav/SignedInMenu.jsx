@@ -129,9 +129,10 @@ export default function SignedInMenu() {
                   onKeyDown={handleListKeyDown}
                 >
                   <MenuItem
-                    onClick={() =>
-                      history.push(`/shelfs/${currentUserProfile.id}`)
-                    }
+                    onClick={() => {
+                      history.push(`/shelfs/${currentUserProfile.id}`);
+                      setOpen(false);
+                    }}
                   >
                     <ListItemIcon
                       className={`${classes.icon} ${classes.filmIcon}`}
@@ -145,9 +146,10 @@ export default function SignedInMenu() {
                     <Typography variant='inherit'>My Films</Typography>
                   </MenuItem>
                   <MenuItem
-                    onClick={() =>
-                      history.push(`/profile/${currentUserProfile.id}`)
-                    }
+                    onClick={() => {
+                      history.push(`/profile/${currentUserProfile.id}`);
+                      setOpen(false);
+                    }}
                   >
                     <ListItemIcon className={classes.icon}>
                       <Person />
