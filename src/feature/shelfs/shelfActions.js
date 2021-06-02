@@ -14,6 +14,7 @@ import {
   FETCH_SHELF,
   LISTEN_TO_SHELF_CHAT,
   LISTEN_TO_SELECTED_SHELF,
+  CLEAR_SELECTED_SHELF,
   CLEAR_SHELFS,
 } from './shelfConstants';
 
@@ -42,7 +43,13 @@ export function fetchShelfs(limit, lastDocSnapshot) {
 export function listenToSelectedShelf(shelf) {
   return {
     type: LISTEN_TO_SELECTED_SHELF,
-    payload: shelf,
+    payload: shelf[0],
+  };
+}
+
+export function clearSelectedShelf() {
+  return {
+    type: CLEAR_SELECTED_SHELF,
   };
 }
 

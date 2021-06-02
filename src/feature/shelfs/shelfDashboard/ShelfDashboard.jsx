@@ -29,6 +29,7 @@ export default function ShelfDashboard() {
   const { shelfs, moreShelfs, lastVisible, retainState } = useSelector(
     (state) => state.shelf
   );
+  const { currentUserProfile } = useSelector((state) => state.profile);
   const [loadingInit, setLoadingInit] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const { authenticated } = useSelector((state) => state.auth);
@@ -59,7 +60,9 @@ export default function ShelfDashboard() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDashboardTitle />
-        {authenticated && <ShelfDashboardNotice button={classes.button} />}
+        {authenticated && !currentUserProfile.hasShelf && (
+          <ShelfDashboardNotice button={classes.button} />
+        )}
         <ShelfList
           shelfs={shelfs}
           button={classes.button}
