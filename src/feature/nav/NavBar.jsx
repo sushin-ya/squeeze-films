@@ -6,6 +6,7 @@ import {
   Container,
   Divider,
   Grid,
+  IconButton,
   Link,
   Toolbar,
   Typography,
@@ -19,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Add } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 import { openModal } from '../../app/common/modals/modalReducer';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -120,7 +122,11 @@ export default function NavBar() {
               className={classes.marginRight}
             />
             <div className={classes.flexgrow}></div>
-
+            <IconButton
+              onClick={() => dispatch(openModal({ modalType: 'MobileMenu' }))}
+            >
+              <MenuIcon />
+            </IconButton>
             {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
           </Toolbar>
         </Container>
