@@ -236,7 +236,7 @@ export default function ShelfForm() {
         confirmOpen={delteConfirmOpen}
         handleClose={handleDeleteConfirmClose}
         handleDelete={handleFormDelete}
-        myShelfId={myShelf.id}
+        myShelfId={myShelf?.id}
       />
       <ConfirmCreate
         confirmOpen={submitConfirmOpen}

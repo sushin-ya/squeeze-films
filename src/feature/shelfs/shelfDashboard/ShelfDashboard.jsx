@@ -60,7 +60,7 @@ export default function ShelfDashboard() {
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <ShelfDashboardTitle />
-        {authenticated && !currentUserProfile.hasShelf && (
+        {authenticated && !currentUserProfile?.hasShelf && (
           <ShelfDashboardNotice button={classes.button} />
         )}
         <ShelfList
