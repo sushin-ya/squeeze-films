@@ -56,6 +56,7 @@ export default function NavBar() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { authenticated } = useSelector((state) => state.auth);
+  const { currentUserProfile } = useSelector((state) => state.profile);
 
   return (
     <>
@@ -104,7 +105,9 @@ export default function NavBar() {
               startIcon={<Add />}
               onClick={
                 authenticated
-                  ? () => history.push(`/createShelf`)
+                  ? currentUserProfile?.hasShelf
+                    ? () => history.push(`/manage/${currentUserProfile.id}`)
+                    : () => history.push(`/createShelf`)
                   : () => dispatch(openModal({ modalType: 'UnauthModal' }))
               }
             >

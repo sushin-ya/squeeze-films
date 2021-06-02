@@ -34,16 +34,21 @@ export function listenToShelfFromFirestore(shelfId) {
 
 export function addShelfToFirestore(shelf) {
   const user = firebase.auth().currentUser;
-  return db
-    .collection('shelfs')
-    .doc(user.uid)
-    .set({
-      ...shelf,
-      uid: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+  const batch = db.batch();
+
+  batch.update(db.collection('users').doc(user.uid), {
+    hasShelf: true,
+  });
+
+  batch.set(db.collection('shelfs').doc(user.uid), {
+    ...shelf,
+    uid: user.uid,
+    displayName: user.displayName,
+    photoURL: user.photoURL,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+  });
+
+  return batch.commit();
 }
 
 export function updateShelfToFirestore(shelf) {
@@ -62,6 +67,7 @@ export function setUserProfileData(user) {
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL || null,
+      hasShelf: false,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
 }

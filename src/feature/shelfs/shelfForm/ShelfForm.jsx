@@ -88,7 +88,7 @@ export default function ShelfForm() {
   const { currentUser } = useSelector((state) => state.auth);
 
   const initialShelf = {
-    uid: currentUser.uid,
+    id: currentUser.uid,
     displayName: currentUser.displayName,
     photoURL: currentUser.photoURL,
     films: [],
