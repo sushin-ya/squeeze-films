@@ -25,12 +25,9 @@ export default function FlimAutoCompleteForm({ data, setData }) {
   const { suggestedFilm } = useSelector((state) => state.tmdb);
 
   useEffect(() => {
-    console.log(suggestedFilm);
-    console.log(data.films);
     const filteredSuggestion = suggestedFilm.filter(
       (s) => !Object.keys(data.films).includes(s.id)
     );
-    console.log(filteredSuggestion);
     setSuggestions(filteredSuggestion);
   }, [suggestedFilm, data.films]);
 
