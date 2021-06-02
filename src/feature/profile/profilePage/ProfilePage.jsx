@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, makeStyles } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import SideSimilarProfiles from '../../side/SideSimilarProfiles';
+import SidePopularFilms from '../../side/SidePopularFilms';
 import ProfilePageContent from './ProfilePageContent';
 import ProfilePageHeader from './ProfilePageHeader';
 import { useParams } from 'react-router-dom';
@@ -65,7 +65,7 @@ export default function ProfilePage() {
         />
       </div>
       <div style={{ gridColumnEnd: 'span 4' }}>
-        <SideSimilarProfiles />
+        <SidePopularFilms />
       </div>
     </div>
   );
