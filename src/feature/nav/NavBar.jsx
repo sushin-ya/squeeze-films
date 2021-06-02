@@ -119,24 +119,6 @@ export default function NavBar() {
               flexItem
               className={classes.marginRight}
             />
-            {authenticated && (
-              <>
-                <Link
-                  className={classes.link}
-                  component={NavLink}
-                  to={`/profile`}
-                >
-                  <Box mr={2}>
-                    <Typography variant='subtitle1'>Users</Typography>
-                  </Box>
-                </Link>
-                <Divider
-                  orientation='vertical'
-                  flexItem
-                  className={classes.marginRight}
-                />
-              </>
-            )}
             <div className={classes.flexgrow}></div>
 
             {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
