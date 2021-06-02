@@ -4,9 +4,16 @@ import LoginForm from '../../../feature/auth/LoginForm';
 import RegisterForm from '../../../feature/auth/RegisterForm';
 import AccountForm from '../../../feature/auth/AccountForm';
 import UnauthModal from '../../../feature/auth/UnauthModal';
+import MobileMenu from '../../../feature/nav/MobileMenu';
 
 export default function ModalManager() {
-  const modalLookup = { LoginForm, RegisterForm, AccountForm, UnauthModal };
+  const modalLookup = {
+    LoginForm,
+    RegisterForm,
+    AccountForm,
+    UnauthModal,
+    MobileMenu,
+  };
   const currentModal = useSelector((state) => state.modals);
   let renderModal;
   if (currentModal) {
