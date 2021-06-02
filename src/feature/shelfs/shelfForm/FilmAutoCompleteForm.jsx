@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FlimAutoCompleteForm({ setData }) {
+export default function FlimAutoCompleteForm({ data, setData }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -25,8 +25,11 @@ export default function FlimAutoCompleteForm({ setData }) {
   const { suggestedFilm } = useSelector((state) => state.tmdb);
 
   useEffect(() => {
-    setSuggestions(suggestedFilm);
-  }, [suggestedFilm]);
+    const filteredSuggestion = suggestedFilm.filter(
+      (s) => !Object.keys(data.films).includes(s.id)
+    );
+    setSuggestions(filteredSuggestion);
+  }, [suggestedFilm, data.films]);
 
   useEffect(() => {
     if (inputValue === '') {

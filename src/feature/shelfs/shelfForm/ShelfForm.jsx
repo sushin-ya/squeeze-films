@@ -21,6 +21,7 @@ import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
 import { toast } from 'react-toastify';
 import ConfirmDelete from './ConfirmDelete';
 import ConfirmCreate from './ConfirmCreate';
+import ConfirmTooMany from './ConfirmTooMany';
 import { useEffect } from 'react/cjs/react.development';
 import ShelfDescriptionForm from './ShelfDescriptionForm';
 
@@ -85,6 +86,7 @@ export default function ShelfForm() {
   const dispatch = useDispatch();
   const [submitConfirmOpen, setSubmitConfirmOpen] = useState(false);
   const [delteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [tooManyFilmsOpen, setTooManyFilmsOpen] = useState(false);
   const [description, setDesciption] = useState('');
   const { selectedShelf } = useSelector((state) => state.shelf);
   const { currentUser } = useSelector((state) => state.auth);
@@ -185,6 +187,7 @@ export default function ShelfForm() {
   };
 
   const handleSubmitConfirmOpen = () => {
+    if (Object.keys(data.films).length > 10) return handleTooManyFilmsOpen();
     setSubmitConfirmOpen(true);
   };
 
@@ -192,11 +195,19 @@ export default function ShelfForm() {
     setSubmitConfirmOpen(false);
   };
 
+  const handleTooManyFilmsOpen = () => {
+    setTooManyFilmsOpen(true);
+  };
+
+  const handleTooManyFilmsClose = () => {
+    setTooManyFilmsOpen(false);
+  };
+
   return (
     <div className={classes.container}>
       <div style={{ gridColumnEnd: 'span 8' }}>
         <Box mr={1}>
-          <FlimAutoCompleteForm setData={handleSetData} />
+          <FlimAutoCompleteForm data={data} setData={handleSetData} />
           <ShelfFormFragAndDrop data={data} setData={setData} />
           <Box mt={2} />
           <ShelfDescriptionForm
@@ -255,6 +266,10 @@ export default function ShelfForm() {
         data={data}
         myShelf={myShelf}
         isUpdate={!!selectedShelf}
+      />
+      <ConfirmTooMany
+        confirmOpen={tooManyFilmsOpen}
+        handleClose={handleTooManyFilmsClose}
       />
     </div>
   );
