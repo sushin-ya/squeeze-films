@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ShelfDetailedTitle({ photoURL, displayName }) {
+export default function ShelfDetailedTitle({
+  photoURL,
+  displayName,
+  description,
+}) {
   const classes = useStyles();
 
   return (
@@ -49,9 +53,7 @@ export default function ShelfDetailedTitle({ photoURL, displayName }) {
             variant='body1'
             style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
           >
-            ホラー、ドラマ、アクション映画などいろいろなジャンルが好きです。
-            特に好きな監督はクエンティン・タランティーノとマーティンス・コセッシ。
-            古い映画から最新の映画まで、年間６００本ほど鑑賞しています。
+            {description}
           </Typography>
         </div>
       </Box>

@@ -46,7 +46,6 @@ export default function ShelfDetailedChatForm({
               component={TextField}
               type='text'
               label='Comment'
-              placeholder='Enter your comment (Enter to submit,  SHIFT + Enter for new line)'
               name='comment'
               variant='outlined'
               fullWidth

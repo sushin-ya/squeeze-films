@@ -50,6 +50,7 @@ export default function ShelfDetailedPage() {
         <ShelfDetailedTitle
           photoURL={shelf?.photoURL}
           displayName={shelf?.displayName || 'No Name'}
+          description={shelf?.description || 'No Description'}
         />
         {authenticated && shelf.uid === currentUser.uid && (
           <ShelfDetailedNotice button={classes.button} shelfId={shelf.id} />

@@ -22,6 +22,7 @@ import { toast } from 'react-toastify';
 import ConfirmDelete from './ConfirmDelete';
 import ConfirmCreate from './ConfirmCreate';
 import { useEffect } from 'react/cjs/react.development';
+import ShelfDescriptionForm from './ShelfDescriptionForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -84,6 +85,7 @@ export default function ShelfForm() {
   const dispatch = useDispatch();
   const [submitConfirmOpen, setSubmitConfirmOpen] = useState(false);
   const [delteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [description, setDesciption] = useState('');
   const { selectedShelf } = useSelector((state) => state.shelf);
   const { currentUser } = useSelector((state) => state.auth);
 
@@ -92,6 +94,7 @@ export default function ShelfForm() {
     displayName: currentUser.displayName,
     photoURL: currentUser.photoURL,
     films: [],
+    description: '',
   };
   const [myShelf, setMyShelf] = useState(initialShelf);
   const [data, setData] = useState(initialData(initialShelf));
@@ -100,6 +103,7 @@ export default function ShelfForm() {
     if (location.pathname !== '/createShelf') {
       setMyShelf(selectedShelf);
       setData(initialData(selectedShelf));
+      setDesciption(selectedShelf.description);
     } else {
       dispatch(clearSelectedShelf());
     }
@@ -154,6 +158,7 @@ export default function ShelfForm() {
       const newMyShelf = {
         ...myShelf,
         films: [...myFilmList],
+        description: description,
       };
       setMyShelf(newMyShelf);
       selectedShelf
@@ -193,6 +198,11 @@ export default function ShelfForm() {
         <Box mr={1}>
           <FlimAutoCompleteForm setData={handleSetData} />
           <ShelfFormFragAndDrop data={data} setData={setData} />
+          <Box mt={2} />
+          <ShelfDescriptionForm
+            description={description}
+            setDesciption={setDesciption}
+          />
           <Box
             mt={2}
             mb={2}
