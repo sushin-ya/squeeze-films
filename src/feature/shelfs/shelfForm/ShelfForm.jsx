@@ -103,7 +103,7 @@ export default function ShelfForm() {
     if (location.pathname !== '/createShelf') {
       setMyShelf(selectedShelf);
       setData(initialData(selectedShelf));
-      setDesciption(selectedShelf.description);
+      setDesciption(selectedShelf?.description);
     } else {
       dispatch(clearSelectedShelf());
     }
