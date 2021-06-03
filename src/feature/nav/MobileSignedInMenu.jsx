@@ -62,6 +62,11 @@ export default function MobileSignedInMenu() {
     dispatch(closeModal());
   }
 
+  function handleToPopular() {
+    history.push('/popular');
+    dispatch(closeModal());
+  }
+
   function handleToMyFilms() {
     history.push(`/shelfs/${user.uid}`);
     dispatch(closeModal());
@@ -113,6 +118,11 @@ export default function MobileSignedInMenu() {
             <Grid item>
               <Link to='/shelfs' onClick={handleToShelfs}>
                 Squeeze Films List
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link to={`/popular`} onClick={handleToPopular}>
+                Popular Films
               </Link>
             </Grid>
             <Grid item>

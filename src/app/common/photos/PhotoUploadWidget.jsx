@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { Grid, IconButton, makeStyles, Typography } from '@material-ui/core';
+import {
+  Grid,
+  IconButton,
+  makeStyles,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import cuid from 'cuid';
 import { uploadToFirebaseStorage } from '../../firestore/firebaseService';
 import { getFileExtention } from '../utility';
@@ -31,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PhotoUploadWidget({ setEditMode }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [files, setFiles] = useState([]);
   const [image, setImage] = useState(null);
 
@@ -70,18 +79,18 @@ export default function PhotoUploadWidget({ setEditMode }) {
   return (
     <Grid
       container
-      direction='row'
-      justify='flex-start'
-      alignItems='center'
+      direction={!matches ? 'row' : 'column'}
+      justify={!matches ? 'flex-start' : 'center'}
+      alignItems={!matches ? 'center' : 'flex-start'}
       spacing={1}
     >
-      <Grid item xs={4}>
+      <Grid item md={4} sm={12}>
         <Typography variant='subtitle1' color='secondary'>
           Step 1 - Add Photo
         </Typography>
         <PhotoWidgetDropzone setFiles={setFiles} />
       </Grid>
-      <Grid item xs={4}>
+      <Grid item md={4} sm={12}>
         <Typography variant='subtitle1' color='secondary'>
           Step 2 - Resize
         </Typography>
@@ -92,7 +101,7 @@ export default function PhotoUploadWidget({ setEditMode }) {
           />
         )}
       </Grid>
-      <Grid item xs={4}>
+      <Grid item md={4} sm={12}>
         <Typography variant='subtitle1' color='secondary'>
           Step 3 - Preview &amp; upload
         </Typography>

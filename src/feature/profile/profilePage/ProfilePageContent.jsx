@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePageContent({ profile }) {
+export default function ProfilePageContent({ profile, isCurrentUser }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
@@ -37,8 +37,18 @@ export default function ProfilePageContent({ profile }) {
           <Tab label='Following' {...a11yProps(3)} />
         </Tabs>
       </AppBar>
-      <AboutTab value={value} index={0} profile={profile} />
-      <PhotosTab value={value} index={1} profile={profile} />
+      <AboutTab
+        value={value}
+        index={0}
+        profile={profile}
+        isCurrentUser={isCurrentUser}
+      />
+      <PhotosTab
+        value={value}
+        index={1}
+        profile={profile}
+        isCurrentUser={isCurrentUser}
+      />
       <FollowingTab
         value={value}
         index={2}
