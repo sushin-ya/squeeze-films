@@ -21,7 +21,7 @@ import {
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { singOutFirebase } from '../../app/firestore/firebaseService';
+import { signOutFirebase } from '../../app/firestore/firebaseService';
 import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../app/common/modals/modalReducer';
 
@@ -80,10 +80,10 @@ export default function SignedInMenu() {
     prevOpen.current = open;
   }, [open]);
 
-  async function handleSingOut() {
+  async function handleSignOut() {
     try {
       history.push('/');
-      await singOutFirebase();
+      await signOutFirebase();
     } catch (error) {
       toast.error(error.message);
     }
@@ -167,7 +167,7 @@ export default function SignedInMenu() {
                     </ListItemIcon>
                     <Typography variant='inherit'>My account</Typography>
                   </MenuItem>
-                  <MenuItem onClick={handleSingOut}>
+                  <MenuItem onClick={handleSignOut}>
                     <ListItemIcon className={classes.icon}>
                       <PowerSettingsNew />
                     </ListItemIcon>

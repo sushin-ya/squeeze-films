@@ -10,8 +10,9 @@ import {
   Link,
   Toolbar,
   Typography,
+  useMediaQuery,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { NavLink } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
@@ -55,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
   const dispatch = useDispatch();
   const { authenticated } = useSelector((state) => state.auth);
@@ -84,50 +87,67 @@ export default function NavBar() {
                 </Grid>
               </Link>
             </Box>
-            <Divider
-              orientation='vertical'
-              flexItem
-              className={classes.marginRight}
-            />
-            <Link component={NavLink} to='/shelfs' className={classes.link}>
-              <Box mr={2}>
-                <Typography variant='subtitle1' className={classes.title}>
-                  Squeezed Films List
-                </Typography>
-              </Box>
-            </Link>
-            <Divider
-              orientation='vertical'
-              flexItem
-              className={classes.marginRight}
-            />
-            <Button
-              variant='contained'
-              className={classes.button}
-              startIcon={<Add />}
-              onClick={
-                authenticated
-                  ? currentUserProfile?.hasShelf
-                    ? () => history.push(`/manage/${currentUserProfile.id}`)
-                    : () => history.push(`/createShelf`)
-                  : () => dispatch(openModal({ modalType: 'UnauthModal' }))
-              }
-            >
-              Squeeze Films
-            </Button>
-            <Box mr={2} />
-            <Divider
-              orientation='vertical'
-              flexItem
-              className={classes.marginRight}
-            />
-            <div className={classes.flexgrow}></div>
-            <IconButton
-              onClick={() => dispatch(openModal({ modalType: 'MobileMenu' }))}
-            >
-              <MenuIcon />
-            </IconButton>
-            {authenticated ? <SignedInMenu /> : <SignedOutMenu />}
+            {!matches ? (
+              <>
+                <Divider
+                  orientation='vertical'
+                  flexItem
+                  className={classes.marginRight}
+                />
+                <Link component={NavLink} to='/shelfs' className={classes.link}>
+                  <Box mr={2}>
+                    <Typography variant='subtitle1' className={classes.title}>
+                      Squeezed Films List
+                    </Typography>
+                  </Box>
+                </Link>
+                <Divider
+                  orientation='vertical'
+                  flexItem
+                  className={classes.marginRight}
+                />
+                <Button
+                  variant='contained'
+                  className={classes.button}
+                  startIcon={<Add />}
+                  onClick={
+                    authenticated
+                      ? currentUserProfile?.hasShelf
+                        ? () => history.push(`/manage/${currentUserProfile.id}`)
+                        : () => history.push(`/createShelf`)
+                      : () => dispatch(openModal({ modalType: 'UnauthModal' }))
+                  }
+                >
+                  Squeeze Films
+                </Button>
+                <Box mr={2} />
+                <Divider
+                  orientation='vertical'
+                  flexItem
+                  className={classes.marginRight}
+                />
+                <div className={classes.flexgrow}></div>
+              </>
+            ) : (
+              <div className={classes.flexgrow}></div>
+            )}
+            {!matches ? (
+              <> {authenticated ? <SignedInMenu /> : <SignedOutMenu />}</>
+            ) : (
+              <IconButton
+                onClick={
+                  authenticated
+                    ? () =>
+                        dispatch(openModal({ modalType: 'MobileSignedInMenu' }))
+                    : () =>
+                        dispatch(
+                          openModal({ modalType: 'MobileSignedOutMenu' })
+                        )
+                }
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

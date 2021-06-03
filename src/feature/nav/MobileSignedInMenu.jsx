@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { closeModal, openModal } from '../../app/common/modals/modalReducer';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { useHistory } from 'react-router-dom';
-import { singOutFirebase } from '../../app/firestore/firebaseService';
+import { signOutFirebase } from '../../app/firestore/firebaseService';
 import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MobileMenu() {
+export default function MobileSignedInMenu() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -77,11 +77,11 @@ export default function MobileMenu() {
     dispatch(openModal({ modalType: 'AccountForm' }));
   }
 
-  async function handleSingOut() {
+  async function handleSignOut() {
     try {
       dispatch(closeModal());
       history.push('/');
-      await singOutFirebase();
+      await signOutFirebase();
     } catch (error) {
       toast.error(error.message);
     }
@@ -131,7 +131,7 @@ export default function MobileMenu() {
               </Link>
             </Grid>
             <Grid item>
-              <Link to='/' onClick={handleSingOut}>
+              <Link to='/' onClick={handleSignOut}>
                 Logout
               </Link>
             </Grid>
