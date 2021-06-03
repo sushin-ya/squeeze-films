@@ -18,7 +18,6 @@ import {
   Settings,
   PowerSettingsNew,
 } from '@material-ui/icons';
-import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { signOutFirebase } from '../../app/firestore/firebaseService';
@@ -138,7 +137,7 @@ export default function SignedInMenu() {
                       className={`${classes.icon} ${classes.filmIcon}`}
                     >
                       <img
-                        src={squeezeFilmsIcon}
+                        src='/assets/logo.svg'
                         alt=''
                         className={classes.squeezeFilmsIcon}
                       />

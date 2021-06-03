@@ -1,6 +1,6 @@
 import firebase from '../config/firebase';
-import { setUserProfileData } from './firestoreService';
 import { toast } from 'react-toastify';
+import { setUserProfileData } from './firestoreService';
 
 export function firebaseObjectToArray(snapshot) {
   if (snapshot) {

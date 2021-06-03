@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import UnauthComponent from '../common/error/UnauthComponent';
 
 export default function PrivateRoute({

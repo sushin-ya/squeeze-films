@@ -1,9 +1,8 @@
-import React from 'react';
-import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { openModal } from '../modals/modalReducer';
-import { useEffect } from 'react/cjs/react.development';
 import { Link } from 'react-router-dom';
+import { Box, Button, Grid, makeStyles, Typography } from '@material-ui/core';
+import { openModal } from '../modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -16,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UnauthComponent() {
-  const { error } = useSelector((state) => state.async);
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.async);
 
   console.log('UnauthModal');
   useEffect(() => {

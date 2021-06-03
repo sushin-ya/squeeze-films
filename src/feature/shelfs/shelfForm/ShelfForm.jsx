@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
@@ -28,7 +28,6 @@ import { toast } from 'react-toastify';
 import ConfirmDelete from './ConfirmDelete';
 import ConfirmCreate from './ConfirmCreate';
 import ConfirmTooMany from './ConfirmTooMany';
-import { useEffect } from 'react/cjs/react.development';
 import ShelfDescriptionForm from './ShelfDescriptionForm';
 
 const useStyles = makeStyles((theme) => ({

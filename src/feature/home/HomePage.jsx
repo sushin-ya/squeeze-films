@@ -49,28 +49,33 @@ export default function HomePage() {
             className={classes.squeezeFilmsIcon}
           />
         </Grid>
-        <Grid
-          item
-          container={!matches ? false : true}
-          direction='column'
-          justify='center'
-          alignItems={!matches ? 'flex-start' : 'center'}
-        >
-          <Typography variant={!matches ? 'h1' : 'h2'} className={classes.h1}>
-            Squeeze Films
-          </Typography>
-          {!matches ? (
+        {!matches ? (
+          <Grid item>
+            <Typography variant={!matches ? 'h1' : 'h2'} className={classes.h1}>
+              Squeeze Films
+            </Typography>
             <Typography variant='body1'>
               あなたにとっての最高の映画、１０本にしぼってみませんか
             </Typography>
-          ) : (
+          </Grid>
+        ) : (
+          <Grid
+            item
+            container
+            direction='column'
+            justify='center'
+            alignItems={!matches ? 'flex-start' : 'center'}
+          >
+            <Typography variant={!matches ? 'h1' : 'h2'} className={classes.h1}>
+              Squeeze Films
+            </Typography>
             <Typography variant='body1'>
               あなたにとっての最高の映画、
               <br />
               １０本にしぼってみませんか
             </Typography>
-          )}
-        </Grid>
+          </Grid>
+        )}
       </Grid>
       <Grid item>
         <Button

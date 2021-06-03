@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import rootReducer from './rootReducer';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { verifyAuth } from '../../feature/auth/authActions';
-import { createBrowserHistory } from 'history';
+import rootReducer from './rootReducer';
+
 import { routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
 

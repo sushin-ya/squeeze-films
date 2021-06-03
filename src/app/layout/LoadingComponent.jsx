@@ -1,10 +1,10 @@
+import React from 'react';
 import {
   CircularProgress,
   Grid,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -13,7 +13,6 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { NavLink } from 'react-router-dom';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
@@ -77,7 +76,7 @@ export default function NavBar() {
                   alignItems='center'
                 >
                   <img
-                    src={squeezeFilmsIcon}
+                    src='/assets/logo.svg'
                     alt=''
                     className={classes.topButton}
                   />
