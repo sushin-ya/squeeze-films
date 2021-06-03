@@ -68,11 +68,11 @@ export default function ShelfDetailedPage() {
         )}
         <ShelfDetailedList shelf={shelf} />
       </div>
-      {!matches ? (
+      {!matches && (
         <div style={{ gridColumnEnd: 'span 4' }}>
           <SidePopularFilms />
         </div>
-      ) : null}
+      )}
       <ShelfDetailedChat shelfId={shelf.id} />
     </div>
   );
