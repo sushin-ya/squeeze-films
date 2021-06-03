@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '440px',
+    width: '360px',
     pointerEvents: 'auto',
   },
   form: {

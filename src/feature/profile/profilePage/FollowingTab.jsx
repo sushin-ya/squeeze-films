@@ -82,22 +82,14 @@ export default function FollowingTab({
             >
               {activeTab === 2 &&
                 followers.map((profile) => (
-                  <Grid item>
-                    <ProfileCard
-                      profile={profile}
-                      key={profile.id}
-                      setValue={setValue}
-                    />
+                  <Grid item key={profile.id}>
+                    <ProfileCard profile={profile} setValue={setValue} />
                   </Grid>
                 ))}
               {activeTab === 3 &&
                 followings.map((profile) => (
-                  <Grid item>
-                    <ProfileCard
-                      profile={profile}
-                      key={profile.id}
-                      setValue={setValue}
-                    />
+                  <Grid item key={profile.id}>
+                    <ProfileCard profile={profile} setValue={setValue} />
                   </Grid>
                 ))}
             </Grid>

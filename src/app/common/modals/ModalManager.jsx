@@ -4,7 +4,8 @@ import LoginForm from '../../../feature/auth/LoginForm';
 import RegisterForm from '../../../feature/auth/RegisterForm';
 import AccountForm from '../../../feature/auth/AccountForm';
 import UnauthModal from '../../../feature/auth/UnauthModal';
-import MobileMenu from '../../../feature/nav/MobileMenu';
+import MobileSignedInMenu from '../../../feature/nav/MobileSignedInMenu';
+import MobileSignedOutMenu from '../../../feature/nav/MobileSignedOutMenu';
 
 export default function ModalManager() {
   const modalLookup = {
@@ -12,7 +13,8 @@ export default function ModalManager() {
     RegisterForm,
     AccountForm,
     UnauthModal,
-    MobileMenu,
+    MobileSignedInMenu,
+    MobileSignedOutMenu,
   };
   const currentModal = useSelector((state) => state.modals);
   let renderModal;

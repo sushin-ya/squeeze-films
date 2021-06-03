@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Button, makeStyles } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
 import { useSelector, useDispatch } from 'react-redux';
@@ -80,6 +86,8 @@ function initialData(shelf) {
 
 export default function ShelfForm() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
   const params = useParams();
   const location = useLocation();
@@ -205,7 +213,11 @@ export default function ShelfForm() {
 
   return (
     <div className={classes.container}>
-      <div style={{ gridColumnEnd: 'span 8' }}>
+      <div
+        style={
+          !matches ? { gridColumnEnd: 'span 8' } : { gridColumnEnd: 'span 13' }
+        }
+      >
         <Box mr={1}>
           <FlimAutoCompleteForm data={data} setData={handleSetData} />
           <ShelfFormFragAndDrop data={data} setData={setData} />
@@ -250,9 +262,11 @@ export default function ShelfForm() {
           </Box>
         </Box>
       </div>
-      <div style={{ gridColumnEnd: 'span 4' }}>
-        <SidePopularFilms />
-      </div>
+      {!matches && (
+        <div style={{ gridColumnEnd: 'span 4' }}>
+          <SidePopularFilms />
+        </div>
+      )}
       <ConfirmDelete
         confirmOpen={delteConfirmOpen}
         handleClose={handleDeleteConfirmClose}

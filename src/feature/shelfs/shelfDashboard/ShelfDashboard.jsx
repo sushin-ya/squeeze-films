@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDashboard() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const limit = 2;
   const dispatch = useDispatch();
   const { shelfs, moreShelfs, lastVisible, retainState } = useSelector(
@@ -58,7 +60,11 @@ export default function ShelfDashboard() {
 
   return (
     <div className={classes.container}>
-      <div style={{ gridColumnEnd: 'span 8' }}>
+      <div
+        style={
+          !matches ? { gridColumnEnd: 'span 8' } : { gridColumnEnd: 'span 13' }
+        }
+      >
         <ShelfDashboardTitle />
         {authenticated && !currentUserProfile?.hasShelf && (
           <ShelfDashboardNotice button={classes.button} />
@@ -72,9 +78,11 @@ export default function ShelfDashboard() {
           isFetching={isFetching}
         />
       </div>
-      <div style={{ gridColumnEnd: 'span 4' }}>
-        <SidePopularFilms />
-      </div>
+      {!matches ? (
+        <div style={{ gridColumnEnd: 'span 4' }}>
+          <SidePopularFilms />
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1,4 +1,11 @@
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import {
+  useMediaQuery,
+  Box,
+  Button,
+  makeStyles,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 import React, { useState } from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import ProfileForm from './ProfileForm';
@@ -26,8 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AboutTab({ value, index, profile }) {
+export default function AboutTab({ value, index, profile, isCurrentUser }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const [editMode, setEditMode] = useState(false);
 
   return (
@@ -45,18 +54,28 @@ export default function AboutTab({ value, index, profile }) {
             />
             <Typography
               variant='h5'
-              style={{ gridColumnStart: 2, gridColumnEnd: 11 }}
+              style={
+                !matches
+                  ? { gridColumnStart: 2, gridColumnEnd: 11 }
+                  : { gridColumnStart: 2, gridColumnEnd: 9 }
+              }
               color='textSecondary'
             >
               About {profile.displayName}
             </Typography>
-            <Button
-              variant='outlined'
-              onClick={() => setEditMode(!editMode)}
-              style={{ gridColumnStart: 11, gridColumnEnd: 13 }}
-            >
-              {editMode ? 'Cancel' : 'Edit'}
-            </Button>
+            {isCurrentUser && (
+              <Button
+                variant='outlined'
+                onClick={() => setEditMode(!editMode)}
+                style={
+                  !matches
+                    ? { gridColumnStart: 11, gridColumnEnd: 13 }
+                    : { gridColumnStart: 9, gridColumnEnd: 11 }
+                }
+              >
+                {editMode ? 'Cancel' : 'Edit'}
+              </Button>
+            )}
             {editMode ? (
               <Box style={{ gridColumnStart: 1, gridColumnEnd: 13 }}>
                 <ProfileForm profile={profile} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ProfilePageContent from './ProfilePageContent';
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: 'repeat(12, 1fr)',
     gridColumnGap: theme.spacing(1),
     gridRowGap: theme.spacing(2),
+    height: '100vh',
   },
   button: {
     color: '#FFFFFF',
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePage() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
   const params = useParams();
   const { currentUserProfile, selectedUserProfile } = useSelector(
@@ -53,7 +56,11 @@ export default function ProfilePage() {
 
   return (
     <div className={classes.container}>
-      <div style={{ gridColumnEnd: 'span 8' }}>
+      <div
+        style={
+          !matches ? { gridColumnEnd: 'span 8' } : { gridColumnEnd: 'span 13' }
+        }
+      >
         <ProfilePageHeader
           profile={profile}
           isCurrentUser={currentUser.uid === profile.id}
@@ -64,9 +71,11 @@ export default function ProfilePage() {
           isCurrentUser={currentUser.uid === profile.id}
         />
       </div>
-      <div style={{ gridColumnEnd: 'span 4' }}>
-        <SidePopularFilms />
-      </div>
+      {!matches ? (
+        <div style={{ gridColumnEnd: 'span 4' }}>
+          <SidePopularFilms />
+        </div>
+      ) : null}
     </div>
   );
 }

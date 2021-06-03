@@ -3,11 +3,6 @@ import orange from '@material-ui/core/colors/orange';
 import cyan from '@material-ui/core/colors/cyan';
 
 const theme = createMuiTheme({
-  breakpoints: {
-    values: {
-      lg: 1200,
-    },
-  },
   palette: {
     primary: {
       main: orange[500],

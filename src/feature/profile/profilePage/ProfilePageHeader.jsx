@@ -7,6 +7,8 @@ import {
   makeStyles,
   Paper,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFollowUser, setUnfollowUser } from '../profileAction';
@@ -33,6 +35,10 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     height: '100px',
     width: '100px',
+    [theme.breakpoints.down('sm')]: {
+      height: '60px',
+      width: '60px',
+    },
   },
   follow: {
     color: '#FFFFFF',
@@ -50,6 +56,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfilePageHeader({ profile, isCurrentUser }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
   // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
@@ -110,31 +118,45 @@ export default function ProfilePageHeader({ profile, isCurrentUser }) {
             className={classes.avatar}
           />
           <Typography
-            variant='h3'
-            style={{ gridColumnStart: 2, gridColumnEnd: 9 }}
+            variant={!matches ? 'h3' : 'h4'}
+            style={
+              !matches
+                ? { gridColumnStart: 2, gridColumnEnd: 9 }
+                : { gridColumnStart: 2, gridColumnEnd: 13 }
+            }
             className={classes.displayName}
             color='textSecondary'
           >
             {profile.displayName}
           </Typography>
-          <Box style={{ gridColumnStart: 9, gridColumnEnd: 13 }}>
+          <Box
+            style={
+              !matches
+                ? { gridColumnStart: 9, gridColumnEnd: 13 }
+                : { gridColumnStart: 2, gridColumnEnd: 13 }
+            }
+          >
             <Grid
               container
-              direction='row'
+              direction={!matches ? 'row' : 'column'}
               justify='center'
-              alignItems='center'
+              alignItems={!matches ? 'center' : 'flex-start'}
             >
               <Grid item>
                 <Box mr={2}>
                   <Grid
                     container
-                    direction='column'
+                    direction={!matches ? 'column' : 'row'}
                     justify='center'
-                    alignItems='center'
+                    alignItems={!matches ? 'center' : 'flex-end'}
                   >
-                    <Typography variant='h3' color='textSecondary'>
+                    <Typography
+                      variant={!matches ? 'h3' : 'h5'}
+                      color='textSecondary'
+                    >
                       {profile.followerCount || 0}
                     </Typography>
+                    {!matches ? null : <Box mr={1} />}
                     <Typography variant='subtitle1' color='textSecondary'>
                       Followers
                     </Typography>
@@ -144,13 +166,17 @@ export default function ProfilePageHeader({ profile, isCurrentUser }) {
               <Grid item>
                 <Grid
                   container
-                  direction='column'
+                  direction={!matches ? 'column' : 'row'}
                   justify='center'
-                  alignItems='center'
+                  alignItems={!matches ? 'center' : 'flex-end'}
                 >
-                  <Typography variant='h3' color='textSecondary'>
+                  <Typography
+                    variant={!matches ? 'h3' : 'h5'}
+                    color='textSecondary'
+                  >
                     {profile.followingCount || 0}
                   </Typography>
+                  {!matches ? null : <Box mr={1} />}
                   <Typography variant='subtitle1' color='textSecondary'>
                     Followings
                   </Typography>

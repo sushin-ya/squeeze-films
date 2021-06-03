@@ -1,5 +1,13 @@
 import React from 'react';
-import { Avatar, Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import {
+  useMediaQuery,
+  Avatar,
+  Box,
+  makeStyles,
+  Paper,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -28,6 +36,8 @@ export default function ShelfDetailedTitle({
   description,
 }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Paper>
@@ -35,7 +45,7 @@ export default function ShelfDetailedTitle({
         <div className={classes.container}>
           <Avatar alt='avatar' src={photoURL} className={classes.avatar} />
           <Typography
-            variant='h3'
+            variant={!matches ? 'h3' : 'h4'}
             style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
             className={classes.title}
             color='textSecondary'
