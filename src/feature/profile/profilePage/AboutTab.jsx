@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   useMediaQuery,
   Box,
@@ -6,7 +7,6 @@ import {
   Typography,
   useTheme,
 } from '@material-ui/core';
-import React, { useState } from 'react';
 import PersonIcon from '@material-ui/icons/Person';
 import ProfileForm from './ProfileForm';
 

@@ -9,7 +9,6 @@ import NavBar from '../../feature/nav/NavBar';
 import ShelfDashboard from '../../feature/shelfs/shelfDashboard/ShelfDashboard';
 import ShelfDetailedPage from '../../feature/shelfs/shelfDetailed/ShelfDetailedPage';
 import ShelfForm from '../../feature/shelfs/shelfForm/ShelfForm';
-import FilmSuggestionForm from '../../feature/sandbox/FilmSuggestionForm';
 import PopularPage from '../../feature/popular/PopularPage';
 import ErrorComponent from '../common/error/ErrorComponent';
 import ModalManager from '../common/modals/ModalManager';
@@ -50,7 +49,6 @@ export default function App() {
                   component={ShelfForm}
                   key={key}
                 />
-                <Route path='/sandbox' component={FilmSuggestionForm} />
                 <Route path='/error' component={ErrorComponent} />
               </Container>
             </Box>

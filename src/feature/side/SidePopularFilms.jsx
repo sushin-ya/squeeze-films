@@ -7,11 +7,11 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import SidePopularFilmsList from './SidePopularFilmsList';
 import { ThumbUp } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPopularFilm } from '../../app/tmdb/tmdbReducer';
+import SidePopularFilmsList from './SidePopularFilmsList';
 
 const useStyles = makeStyles((theme) => ({
   root: {

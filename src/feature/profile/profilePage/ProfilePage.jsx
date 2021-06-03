@@ -1,14 +1,14 @@
 import React from 'react';
 import { Box, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { getUserProfile } from '../../../app/firestore/firestoreService';
+import useFirestoreHook from '../../../app/hooks/useFirestoreDoc';
+import { listenToSelectedUserProfile } from '../profileAction';
 import SidePopularFilms from '../../side/SidePopularFilms';
 import ProfilePageContent from './ProfilePageContent';
 import ProfilePageHeader from './ProfilePageHeader';
-import { useParams } from 'react-router-dom';
-import useFirestoreHook from '../../../app/hooks/useFirestoreDoc';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
-import { getUserProfile } from '../../../app/firestore/firestoreService';
-import { listenToSelectedUserProfile } from '../profileAction';
 
 const useStyles = makeStyles((theme) => ({
   container: {

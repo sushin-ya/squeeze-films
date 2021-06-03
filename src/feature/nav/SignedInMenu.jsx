@@ -19,9 +19,9 @@ import {
   PowerSettingsNew,
 } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { signOutFirebase } from '../../app/firestore/firebaseService';
-import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({

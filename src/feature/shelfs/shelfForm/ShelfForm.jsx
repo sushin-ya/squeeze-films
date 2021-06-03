@@ -6,17 +6,9 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
-import SidePopularFilms from '../../side/SidePopularFilms';
-import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  clearSelectedShelf,
-  clearShelfs,
-  listenToSelectedShelf,
-} from '../shelfActions';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import templateData from './template-data';
-import FlimAutoCompleteForm from './FilmAutoCompleteForm';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import {
   addShelfToFirestore,
   deleteShelfInFirestore,
@@ -24,11 +16,19 @@ import {
   updateShelfToFirestore,
 } from '../../../app/firestore/firestoreService';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { toast } from 'react-toastify';
+import {
+  clearSelectedShelf,
+  clearShelfs,
+  listenToSelectedShelf,
+} from '../shelfActions';
+import templateData from './template-data';
+import ShelfFormFragAndDrop from './ShelfFormFragAndDrop';
+import FlimAutoCompleteForm from './FilmAutoCompleteForm';
 import ConfirmDelete from './ConfirmDelete';
 import ConfirmCreate from './ConfirmCreate';
 import ConfirmTooMany from './ConfirmTooMany';
 import ShelfDescriptionForm from './ShelfDescriptionForm';
+import SidePopularFilms from '../../side/SidePopularFilms';
 
 const useStyles = makeStyles((theme) => ({
   container: {
