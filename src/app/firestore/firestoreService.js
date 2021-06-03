@@ -88,6 +88,7 @@ export async function updateUserProfile(profile) {
 
   batch.update(db.collection('users').doc(user.uid), {
     displayName: profile.displayName,
+    selfIntroduction: profile.selfIntroduction,
   });
 
   try {
