@@ -1,7 +1,9 @@
 import React from 'react';
-import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { useDispatch } from 'react-redux';
+import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { Formik, Form, Field } from 'formik';
+import { TextField } from 'formik-material-ui';
+import { signInWithEmail } from '../../app/firestore/firebaseService';
 import {
   Avatar,
   Box,
@@ -12,10 +14,8 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import { TextField } from 'formik-material-ui';
 import { Lock } from '@material-ui/icons';
 import { closeModal } from '../../app/common/modals/modalReducer';
-import { signInWithEmail } from '../../app/firestore/firebaseService';
 import SocialLogin from './SocialLogin';
 
 const useStyles = makeStyles((theme) => ({

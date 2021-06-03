@@ -1,10 +1,9 @@
-import { Box, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Box, Grid, makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { closeModal, openModal } from '../../app/common/modals/modalReducer';
+import { Link, useHistory } from 'react-router-dom';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
-import { useHistory } from 'react-router-dom';
+import { closeModal, openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   grid: {

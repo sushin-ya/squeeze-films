@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 export default function FlimAutoCompleteForm({ data, setData }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const [inputValue, setInputValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const { suggestedFilm } = useSelector((state) => state.tmdb);

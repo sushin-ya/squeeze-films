@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import ShelfDashboardTitle from './ShelfDashboardTitle';
 import ShelfDashboardNotice from './ShelfDashboardNotice';
 import ShelfList from './ShelfList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { useSelector, useDispatch } from 'react-redux';
 import { fetchShelfs } from '../shelfActions';
 import { RETAIN_STATE } from '../shelfConstants';
 

@@ -17,16 +17,16 @@ import {
 import PersonIcon from '@material-ui/icons/Person';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
 import PhotoUploadWidget from '../../../app/common/photos/PhotoUploadWidget';
 import {
   deletePhotoFromCollection,
   getUserPhotos,
   setMainPhoto,
 } from '../../../app/firestore/firestoreService';
-import { useDispatch, useSelector } from 'react-redux';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
 import { listenToUserPhotos } from '../profileAction';
-import { toast } from 'react-toastify';
 import { deleteFromFirebaseStorage } from '../../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({

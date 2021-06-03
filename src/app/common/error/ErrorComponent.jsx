@@ -21,7 +21,7 @@ export default function ErrorComponent() {
     <Grid
       container
       direction='column'
-      // justify='center'
+      justify='center'
       alignItems='center'
       className={classes.grid}
     >

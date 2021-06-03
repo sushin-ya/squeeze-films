@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { Box, makeStyles, Typography } from '@material-ui/core';
-import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { useDropzone } from 'react-dropzone';
 
 const useStyles = makeStyles((theme) => ({
   dropzoneStyles: {

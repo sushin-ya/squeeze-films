@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import {
   Box,
@@ -12,9 +12,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
-import { closeModal } from '../../app/common/modals/modalReducer';
 import { updateUserPassword } from '../../app/firestore/firebaseService';
-import { useSelector } from 'react-redux';
+import { closeModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   grid: {

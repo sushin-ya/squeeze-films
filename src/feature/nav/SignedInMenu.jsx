@@ -18,11 +18,10 @@ import {
   Settings,
   PowerSettingsNew,
 } from '@material-ui/icons';
-import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { signOutFirebase } from '../../app/firestore/firebaseService';
-import { useDispatch, useSelector } from 'react-redux';
 import { openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
@@ -138,7 +137,7 @@ export default function SignedInMenu() {
                       className={`${classes.icon} ${classes.filmIcon}`}
                     >
                       <img
-                        src={squeezeFilmsIcon}
+                        src='/assets/logo.svg'
                         alt=''
                         className={classes.squeezeFilmsIcon}
                       />

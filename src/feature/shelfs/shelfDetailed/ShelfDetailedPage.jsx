@@ -5,16 +5,15 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
+import { useParams, Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
+import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
+import { listenToSelectedShelf } from '../shelfActions';
 import ShelfDetailedTitle from './ShelfDetailedTitle';
 import ShelfDetailedNotice from './ShelfDetailedNotice';
 import ShelfDetailedList from './ShelfDetailedList';
 import SidePopularFilms from '../../side/SidePopularFilms';
-import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { listenToSelectedShelf } from '../shelfActions';
-import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { listenToShelfFromFirestore } from '../../../app/firestore/firestoreService';
-import { Redirect } from 'react-router-dom';
 import ShelfDetailedChat from './ShelfDetailedChat';
 
 const useStyles = makeStyles((theme) => ({

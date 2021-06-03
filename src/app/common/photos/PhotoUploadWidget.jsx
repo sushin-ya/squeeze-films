@@ -7,15 +7,15 @@ import {
   useMediaQuery,
   useTheme,
 } from '@material-ui/core';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import DeleteIcon from '@material-ui/icons/Delete';
 import cuid from 'cuid';
+import { toast } from 'react-toastify';
 import { uploadToFirebaseStorage } from '../../firestore/firebaseService';
+import { updateUserProfilePhoto } from '../../firestore/firestoreService';
 import { getFileExtention } from '../utility';
 import PhotoWidgetCropper from './PhotoWidgetCropper';
 import PhotoWidgetDropzone from './PhotoWidgetDropzone';
-import { toast } from 'react-toastify';
-import { updateUserProfilePhoto } from '../../firestore/firestoreService';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
   success: {

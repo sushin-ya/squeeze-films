@@ -11,13 +11,13 @@ import {
   useTheme,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { setFollowUser, setUnfollowUser } from '../profileAction';
 import {
   followUser,
   getFollowingDoc,
   unfollowUser,
 } from '../../../app/firestore/firestoreService';
-import { toast } from 'react-toastify';
 import { CLEAR_FOLLOWINGS } from '../profileConstents';
 
 const useStyles = makeStyles((theme) => ({

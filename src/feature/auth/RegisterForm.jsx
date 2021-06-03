@@ -2,6 +2,7 @@ import React from 'react';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
 import { useDispatch } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
+import { TextField } from 'formik-material-ui';
 import {
   Avatar,
   Button,
@@ -11,7 +12,6 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import { TextField } from 'formik-material-ui';
 import { Lock } from '@material-ui/icons';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { registerInFirebase } from '../../app/firestore/firebaseService';

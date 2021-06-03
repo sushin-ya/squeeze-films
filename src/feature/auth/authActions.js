@@ -1,5 +1,5 @@
-import { SIGN_IN_USER, SIGN_OUT_USER } from './authConstants';
 import firebase from '../../app/config/firebase';
+import { SIGN_IN_USER, SIGN_OUT_USER } from './authConstants';
 import { APP_LOADED } from '../../app/async/asyncReducer';
 import {
   dataFromSnapshot,

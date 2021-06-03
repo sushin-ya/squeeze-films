@@ -11,13 +11,15 @@ import {
   useTheme,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import ShelfDetailedChatForm from './ShelfDetailedChatForm';
 import { formatDistance } from 'date-fns';
-import { getShelfChatRef } from '../../../app/firestore/firebaseService';
+import { createDataTree } from '../../../app/common/utility';
+import {
+  getShelfChatRef,
+  firebaseObjectToArray,
+} from '../../../app/firestore/firebaseService';
 import { listenToShelfChat } from '../shelfActions';
 import { CLEAR_COMMENT } from '../shelfConstants';
-import { firebaseObjectToArray } from '../../../app/firestore/firebaseService';
-import { createDataTree } from '../../../app/common/utility';
+import ShelfDetailedChatForm from './ShelfDetailedChatForm';
 
 const useStyles = makeStyles((theme) => ({
   title: {

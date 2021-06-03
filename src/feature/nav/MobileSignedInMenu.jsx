@@ -1,12 +1,12 @@
-import { Box, Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Box, Grid, makeStyles } from '@material-ui/core';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { closeModal, openModal } from '../../app/common/modals/modalReducer';
-import ModalWrapper from '../../app/common/modals/ModalWrapper';
-import { useHistory } from 'react-router-dom';
-import { signOutFirebase } from '../../app/firestore/firebaseService';
 import { toast } from 'react-toastify';
+import { signOutFirebase } from '../../app/firestore/firebaseService';
+
+import ModalWrapper from '../../app/common/modals/ModalWrapper';
+import { closeModal, openModal } from '../../app/common/modals/modalReducer';
 
 const useStyles = makeStyles((theme) => ({
   grid: {

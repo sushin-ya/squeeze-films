@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import PopularPageTitle from './PopularPageTitle';
-import PopularFilmList from './PopularFilmList';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPopularFilm } from '../../app/tmdb/tmdbReducer';
+import PopularPageTitle from './PopularPageTitle';
+import PopularFilmList from './PopularFilmList';
 
 const useStyles = makeStyles((theme) => ({
   container: {

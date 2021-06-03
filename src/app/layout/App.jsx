@@ -1,19 +1,19 @@
+import { Box, Container, makeStyles } from '@material-ui/core';
+import { Route, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import PrivateRoute from './PrivateRoute';
+
 import HomePage from '../../feature/home/HomePage';
 import NavBar from '../../feature/nav/NavBar';
 import ShelfDashboard from '../../feature/shelfs/shelfDashboard/ShelfDashboard';
 import ShelfDetailedPage from '../../feature/shelfs/shelfDetailed/ShelfDetailedPage';
 import ShelfForm from '../../feature/shelfs/shelfForm/ShelfForm';
-import FilmSuggestionForm from '../../feature/sandbox/FilmSuggestionForm';
-import { Box, Container, makeStyles } from '@material-ui/core';
-import { Route, useLocation } from 'react-router-dom';
 import PopularPage from '../../feature/popular/PopularPage';
-import { ToastContainer } from 'react-toastify';
 import ErrorComponent from '../common/error/ErrorComponent';
 import ModalManager from '../common/modals/ModalManager';
-import { useSelector } from 'react-redux';
 import LoadingComponent from './LoadingComponent';
 import ProfilePage from '../../feature/profile/profilePage/ProfilePage';
-import PrivateRoute from './PrivateRoute';
 
 const useStyles = makeStyles({
   background: {
@@ -49,7 +49,6 @@ export default function App() {
                   component={ShelfForm}
                   key={key}
                 />
-                <Route path='/sandbox' component={FilmSuggestionForm} />
                 <Route path='/error' component={ErrorComponent} />
               </Container>
             </Box>

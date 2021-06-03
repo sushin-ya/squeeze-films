@@ -12,16 +12,15 @@ import {
   Typography,
   useMediaQuery,
 } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
+import { Menu } from '@material-ui/icons';
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import squeezeFilmsIcon from '../../app/images/squeezeFilmsIcon.svg';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import SignedOutMenu from './SignedOutMenu';
 import SignedInMenu from './SignedInMenu';
-import { useDispatch, useSelector } from 'react-redux';
-import { Add } from '@material-ui/icons';
-import { useHistory } from 'react-router-dom';
 import { openModal } from '../../app/common/modals/modalReducer';
-import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -77,7 +76,7 @@ export default function NavBar() {
                   alignItems='center'
                 >
                   <img
-                    src={squeezeFilmsIcon}
+                    src='/assets/logo.svg'
                     alt=''
                     className={classes.topButton}
                   />
@@ -145,7 +144,7 @@ export default function NavBar() {
                         )
                 }
               >
-                <MenuIcon />
+                <Menu />
               </IconButton>
             )}
           </Toolbar>

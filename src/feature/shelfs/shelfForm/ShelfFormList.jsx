@@ -1,7 +1,7 @@
 import { Box, List, makeStyles, Paper, Typography } from '@material-ui/core';
-import ShelfFormListItem from './ShelfFormListItem';
-import { Droppable } from 'react-beautiful-dnd';
 import ListIcon from '@material-ui/icons/List';
+import { Droppable } from 'react-beautiful-dnd';
+import ShelfFormListItem from './ShelfFormListItem';
 
 const useStyles = makeStyles((theme) => ({
   container: {

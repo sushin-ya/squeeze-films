@@ -1,14 +1,14 @@
-import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import ProfileCard from './ProfileCard';
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getFollowersCollection,
   getFollowingCollection,
 } from '../../../app/firestore/firestoreService';
+import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection';
 import { listenToFollowers, listenToFollowings } from '../profileAction';
-import { useDispatch, useSelector } from 'react-redux';
+import ProfileCard from './ProfileCard';
 
 const useStyles = makeStyles((theme) => ({
   container: {

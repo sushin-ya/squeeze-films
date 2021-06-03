@@ -1,9 +1,8 @@
-import { Button, makeStyles } from '@material-ui/core';
 import React from 'react';
+import { Button, makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../../app/common/modals/modalReducer';
 import { socialLogin } from '../../app/firestore/firebaseService';
-// import { socialLogin } from '../../app/firestore/firebaseService';
 
 const useStyles = makeStyles((theme) => ({
   button: {

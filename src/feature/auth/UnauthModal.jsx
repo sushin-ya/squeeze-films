@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Button,
@@ -6,11 +7,10 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import React from 'react';
+import HelpIcon from '@material-ui/icons/Help';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../app/common/modals/modalReducer';
 import ModalWrapper from '../../app/common/modals/ModalWrapper';
-import HelpIcon from '@material-ui/icons/Help';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
