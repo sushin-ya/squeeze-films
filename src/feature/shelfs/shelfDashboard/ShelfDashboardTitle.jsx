@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import {
+  useMediaQuery,
+  Box,
+  makeStyles,
+  Paper,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
 import { Stars } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDashboardTitle() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Paper>
@@ -29,7 +38,7 @@ export default function ShelfDashboardTitle() {
         <div className={classes.container}>
           <Stars style={{ gridColumnStart: 1 }} className={classes.stars} />
           <Typography
-            variant='h3'
+            variant={!matches ? 'h3' : 'h4'}
             style={{ gridColumnStart: 2, gridColumnEnd: 12 }}
             className={classes.title}
             color='textSecondary'
