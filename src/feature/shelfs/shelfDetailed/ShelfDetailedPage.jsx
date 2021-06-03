@@ -1,5 +1,10 @@
 import React from 'react';
-import { CircularProgress, makeStyles } from '@material-ui/core';
+import {
+  CircularProgress,
+  makeStyles,
+  useMediaQuery,
+  useTheme,
+} from '@material-ui/core';
 import ShelfDetailedTitle from './ShelfDetailedTitle';
 import ShelfDetailedNotice from './ShelfDetailedNotice';
 import ShelfDetailedList from './ShelfDetailedList';
@@ -28,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDetailedPage() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
   const params = useParams();
   const shelf = useSelector((state) => state.shelf.selectedShelf);
@@ -46,7 +53,11 @@ export default function ShelfDetailedPage() {
 
   return (
     <div className={classes.container}>
-      <div style={{ gridColumnEnd: 'span 8' }}>
+      <div
+        style={
+          !matches ? { gridColumnEnd: 'span 8' } : { gridColumnEnd: 'span 13' }
+        }
+      >
         <ShelfDetailedTitle
           photoURL={shelf?.photoURL}
           displayName={shelf?.displayName || 'No Name'}
@@ -57,9 +68,11 @@ export default function ShelfDetailedPage() {
         )}
         <ShelfDetailedList shelf={shelf} />
       </div>
-      <div style={{ gridColumnEnd: 'span 4' }}>
-        <SidePopularFilms />
-      </div>
+      {!matches ? (
+        <div style={{ gridColumnEnd: 'span 4' }}>
+          <SidePopularFilms />
+        </div>
+      ) : null}
       <ShelfDetailedChat shelfId={shelf.id} />
     </div>
   );

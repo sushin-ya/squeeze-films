@@ -7,6 +7,8 @@ import {
   makeStyles,
   Paper,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import ShelfDetailedChatForm from './ShelfDetailedChatForm';
@@ -38,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ShelfDetailedChat({ shelfId }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
   const { comments } = useSelector((state) => state.shelf);
   const { authenticated } = useSelector((state) => state.auth);
@@ -64,7 +68,11 @@ export default function ShelfDetailedChat({ shelfId }) {
   }, [shelfId, dispatch]);
 
   return (
-    <div style={{ gridColumnEnd: 'span 8' }}>
+    <div
+      style={
+        !matches ? { gridColumnEnd: 'span 8' } : { gridColumnEnd: 'span 13' }
+      }
+    >
       <Paper>
         <Typography variant='h5' className={classes.title}>
           {authenticated ? 'Chat about this shelf' : 'Sign in to view comment'}
