@@ -194,7 +194,8 @@ export default function ShelfForm() {
   };
 
   const handleSubmitConfirmOpen = () => {
-    if (Object.keys(data.films).length > 10) return handleTooManyFilmsOpen();
+    if (data.columns.allTimeBest.filmIds.length > 10)
+      return handleTooManyFilmsOpen();
     setSubmitConfirmOpen(true);
   };
 
