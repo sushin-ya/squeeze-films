@@ -9,11 +9,15 @@ import { createBrowserHistory } from 'history';
 
 export const history = createBrowserHistory();
 
+const enhancer = applyMiddleware(routerMiddleware(history), thunk);
+
 export function configureStore(preloadedState) {
   const store = createStore(
     rootReducer(history),
     preloadedState,
-    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
+    process.env.NODE_ENV !== 'production'
+      ? composeWithDevTools(enhancer)
+      : enhancer
   );
 
   store.dispatch(verifyAuth());

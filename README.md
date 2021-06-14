@@ -36,6 +36,14 @@ Squeeze Films はオール・タイム・ベスト映画１０本を共有する
 
 <br>
 
+テストユーザ  
+ID : test1@test.com  
+PASS: password
+
+<p>※ユーザは作成可能です。</p>
+
+<br>
+
 ## 💬 Usage
 
 <br>
